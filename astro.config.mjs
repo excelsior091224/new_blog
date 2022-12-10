@@ -13,5 +13,6 @@ export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap()],
   output: "server",
-  adapter: netlify()
+  adapter: cloudflare()
+  // adapter: netlify()
 });
