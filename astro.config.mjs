@@ -9,9 +9,11 @@ import cloudflare from "@astrojs/cloudflare";
 import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
+
+// https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap()],
   output: "server",
-  adapter: cloudflare({ mode: "directory" })
+  adapter: cloudflare()
   // adapter: netlify()
 });
