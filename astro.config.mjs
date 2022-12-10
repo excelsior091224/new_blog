@@ -10,6 +10,7 @@ import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
+  integrations: [mdx(), sitemap()],
   output: "server",
   adapter: cloudflare({ mode: "directory" })
   // adapter: netlify()
