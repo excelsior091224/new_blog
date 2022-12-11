@@ -1,4 +1,6 @@
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
+console.log(import.meta.env.MICROCMS_API_KEY);
+console.log(import.meta.env.MICROCMS_SERVICE_DOMAIN);
 const client = createClient({
   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: import.meta.env.MICROCMS_API_KEY,
