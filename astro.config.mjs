@@ -12,6 +12,6 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   integrations: [mdx(), sitemap()],
   output: "server",
-  // adapter: cloudflare()
-  adapter: netlify()
+  adapter: cloudflare()
+  // adapter: netlify()
 });
