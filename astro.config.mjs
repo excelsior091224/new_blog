@@ -11,6 +11,7 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap()],
+  site: 'https://new-blog-81t.pages.dev',
   // output: "server",
   // adapter: cloudflare(),
   // vite: {
