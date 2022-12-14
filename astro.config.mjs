@@ -11,8 +11,8 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap()],
-  output: "server",
-  adapter: cloudflare(),
+  // output: "server",
+  // adapter: cloudflare(),
   // vite: {
   //   define: {
   //     "import.meta.env.MICROCMS_SERVICE_DOMAIN": JSON.stringify(

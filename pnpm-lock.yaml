@@ -8,16 +8,18 @@ specifiers:
   '@astrojs/sitemap': ^1.0.0
   astro: ^1.6.14
   microcms-js-sdk: ^2.3.2
+  rollup: ^3.7.4
   wrangler: ^2.6.2
 
 dependencies:
   '@astrojs/cloudflare': 4.1.1_astro@1.6.14
-  '@astrojs/mdx': 0.12.1
+  '@astrojs/mdx': 0.12.1_rollup@3.7.4
   '@astrojs/netlify': 1.2.2
   '@astrojs/rss': 1.1.0
   '@astrojs/sitemap': 1.0.0
   astro: 1.6.14
   microcms-js-sdk: 2.3.2
+  rollup: 3.7.4
 
 devDependencies:
   wrangler: 2.6.2
@@ -99,13 +101,13 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx/0.12.1:
+  /@astrojs/mdx/0.12.1_rollup@3.7.4:
     resolution: {integrity: sha512-d41ariAR7VMHb+4ALiXPbYXMPSqjpGqTAZBSp40sRam084r/4Vwr6F1mwRKWFDwbwgN6iLN+fczSQDvqoOD2JQ==}
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
       '@astrojs/prism': 1.0.2
       '@mdx-js/mdx': 2.1.5
-      '@mdx-js/rollup': 2.1.5
+      '@mdx-js/rollup': 2.1.5_rollup@3.7.4
       acorn: 8.8.1
       es-module-lexer: 0.10.5
       estree-util-visit: 1.2.0
@@ -545,13 +547,14 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/rollup/2.1.5:
+  /@mdx-js/rollup/2.1.5_rollup@3.7.4:
     resolution: {integrity: sha512-l90rSiwnEf6PnjH8uRXjZ1W0rR8p1fp1YIiDuA3uF7SOfxMQ98uymaIwI6BsX+8BC2dcWij7Racwp++JkvdOLQ==}
     peerDependencies:
       rollup: '>=2'
     dependencies:
       '@mdx-js/mdx': 2.1.5
       '@rollup/pluginutils': 4.2.1
+      rollup: 3.7.4
       source-map: 0.7.4
       vfile: 5.3.6
     transitivePeerDependencies:
@@ -3694,6 +3697,14 @@ packages:
   /rollup/2.79.1:
     resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
+
+  /rollup/3.7.4:
+    resolution: {integrity: sha512-jN9rx3k5pfg9H9al0r0y1EYKSeiRANZRYX32SuNXAnKzh6cVyf4LZVto1KAuDnbHT03E1CpsgqDKaqQ8FZtgxw==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2

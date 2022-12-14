@@ -17,7 +17,8 @@
     "@astrojs/rss": "^1.0.3",
     "@astrojs/sitemap": "^1.0.0",
     "astro": "^1.6.14",
-    "microcms-js-sdk": "^2.3.2"
+    "microcms-js-sdk": "^2.3.2",
+    "rollup": "^3.7.4"
   },
   "devDependencies": {
     "wrangler": "^2.6.2"
