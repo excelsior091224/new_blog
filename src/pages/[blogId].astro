@@ -22,8 +22,8 @@ const blog = await getBlogDetail(blogId as string);
     title: blog.title,
     description: '',
     heroImage: blog.eyecatch?.url ?? '',
-    pubDate: new Date(blog.publishedAt).toLocaleDateString('ja-JP'),
-    updatedDate: new Date(blog.updatedAt).toLocaleDateString('ja-JP'),
+    pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP'),
+    updatedDate: new Date(blog.updatedAt).toLocaleString('ja-JP'),
 }}>
   <main set:html={blog.content} />
 </Layout>
