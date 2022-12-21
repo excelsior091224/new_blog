@@ -7,7 +7,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 //microCMS呼び出し
 import { getBlogs } from "../library/microcms";
 // import { getBlogs } from "./microcms";
-const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch"] });
+const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
 
 // // Use Astro.glob() to fetch all posts, and then sort them by date.
 // const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
@@ -24,7 +24,6 @@ const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedA
 				list-style-type: none;
 				padding: unset;
 			}
-<<<<<<< HEAD
 			ul li {
 				display: flex;
 			}
@@ -36,10 +35,9 @@ const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedA
 			ul li a:visited {
 				color: #8e32dc;
 			}
-=======
->>>>>>> bc22316c415044f2ef2e1b1badf84531dd93ba90
-			div a {
-				display: block;
+
+			div a div {
+				margin:1em auto;
 			}
 			div a div time {
 				flex: 0 0 130px;
@@ -49,26 +47,40 @@ const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedA
 			div a:visited {
 				color: #8e32dc;
 			}
+
+			.published_time_span {
+				font-size: 12px;
+			}
+
+			.category {
+				font-size: 13px;
+				margin:auto 0.5em;
+			}
+
+			div a div h2 {
+				margin-top: 0;
+			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main>			
 			<section>
 				<div>
 					{
 						posts.map((post) => (
-							<a href={`/${post.id}`}>
-								<div>
-									{post.eyecatch && <img width={720} height={360} src={post.eyecatch.url} alt="" />}
+							<div>
+								{post.eyecatch && <a href={`/${post.id}`}><img width={720} height={360} src={post.eyecatch.url} alt="" /></a>}
+								<span class="published_time_span">
 									<time datetime={post.publishedAt}>
 										{new Date(post.publishedAt).toLocaleString('ja-JP')}
 									</time>
-									<h3>
-										{post.title}
-									</h3>
-								</div>
-							</a>
+								</span>
+								{post.category && <span class="category"><a href="#">{post.category.name}</a></span>}							
+								<a href={`/${post.id}`}>
+									<h2>{post.title}</h2>
+								</a>
+							</div>
 						))
 					}
 				</div>
