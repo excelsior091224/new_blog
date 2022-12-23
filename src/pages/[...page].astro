@@ -83,7 +83,7 @@ const { page } = Astro.props;
 								{post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
 								<a href={`/posts/${post.id}`}>
 									<h2>{post.title}</h2>
-									<div>{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,200) + '...'}</div>
+									<div class="description">{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : post.content}</div>
 								</a>
 							</div>
 						))
