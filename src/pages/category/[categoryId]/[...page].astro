@@ -11,7 +11,7 @@ export async function getStaticPaths({paginate}:any) {
   const { contents: categories } = await getCategories({ fields: ["id"] });
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "description", "eyecatch","category"] });
+  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "content", "eyecatch","category"] });
   // console.log(posts);
   // すべてのタグに対して、paginate() の結果を返す。
   // 必ず、`{params: {tag}} を `paginate()` に渡してください。
@@ -96,7 +96,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 								{post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
 								<a href={`/posts/${post.id}`}>
 									<h2>{post.title}</h2>
-									<p>{post.description}</p>
+									<div>{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,200) + '...'}</div>
 								</a>
 							</div>
 						))

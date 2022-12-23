@@ -10,7 +10,7 @@ import { getBlogs } from "../library/microcms";
 // const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
 
 export async function getStaticPaths({ paginate }:any) {
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","description","eyecatch","category"] });
+  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","content","eyecatch","category"] });
   // 記事の配列から、1ページに10個づつ入るようにページを生成する
   return paginate(posts, { pageSize: 10 });
 }
@@ -83,7 +83,7 @@ const { page } = Astro.props;
 								{post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
 								<a href={`/posts/${post.id}`}>
 									<h2>{post.title}</h2>
-									<p>{post.description}</p>
+									<div>{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,200) + '...'}</div>
 								</a>
 							</div>
 						))

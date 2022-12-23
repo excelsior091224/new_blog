@@ -20,7 +20,7 @@ const blog = await getBlogDetail(blogId as string);
 
 <Layout content={{
     title: blog.title,
-    description: blog.description? blog.description : '',
+    description: blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,200) + '...',
     heroImage: blog.eyecatch?.url ?? '',
     pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP'),
     updatedDate: new Date(blog.updatedAt).toLocaleString('ja-JP'),
