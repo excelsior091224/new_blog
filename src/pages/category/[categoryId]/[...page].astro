@@ -5,9 +5,7 @@ import Footer from '../../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../../config';
 
 //microCMS呼び出し
-import { getBlogs, getCategories } from "../../../library/microcms";
-// // import { getBlogs } from "./microcms";
-// const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
+import { getBlogs, getCategories, getCategoryDetail } from "../../../library/microcms";
 
 export async function getStaticPaths({paginate}) {
   const { contents: categories } = await getCategories({ fields: ["id"] });
@@ -28,11 +26,8 @@ export async function getStaticPaths({paginate}) {
 }
 const { page } = Astro.props;
 const params = Astro.params;
+const category = await getCategoryDetail(params.categoryId as string);
 
-// // Use Astro.glob() to fetch all posts, and then sort them by date.
-// const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-// 	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-// );
 ---
 
 <!DOCTYPE html>
@@ -86,6 +81,7 @@ const params = Astro.params;
 		<Header />
 		<main>			
 			<section>
+				<h1>{category.name}</h1>
 				<div>
 					{
 						page.data.map((post:any) => (

@@ -75,3 +75,17 @@ export const getCategories = async (queries?: MicroCMSQueries) => {
   // });
   return await client.get<CategoryResponse>({ endpoint: "categories", queries });
 };
+export const getCategoryDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  // const client = createClient({
+  //   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
+  //   apiKey: import.meta.env.MICROCMS_API_KEY,
+  // });
+  return await client.getListDetail<Category>({
+    endpoint: "categories",
+    contentId,
+    queries,
+  });
+};
