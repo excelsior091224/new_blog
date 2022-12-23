@@ -7,11 +7,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../../config';
 //microCMS呼び出し
 import { getBlogs, getCategories, getCategoryDetail } from "../../../library/microcms";
 
-export async function getStaticPaths({paginate}) {
+export async function getStaticPaths({paginate}:any) {
   const { contents: categories } = await getCategories({ fields: ["id"] });
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
+  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "description", "eyecatch","category"] });
   // console.log(posts);
   // すべてのタグに対して、paginate() の結果を返す。
   // 必ず、`{params: {tag}} を `paginate()` に渡してください。
@@ -96,6 +96,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 								{post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
 								<a href={`/posts/${post.id}`}>
 									<h2>{post.title}</h2>
+									<p>{post.description}</p>
 								</a>
 							</div>
 						))
@@ -105,26 +106,6 @@ const category = await getCategoryDetail(params.categoryId as string);
 				{page.url.next ? <a href={page.url.next}>Next</a> : null}
 			</section>
 		</main>
-		<!-- <main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<time datetime={post.frontmatter.pubDate}>
-									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
-										year: 'numeric',
-										month: 'short',
-										day: 'numeric',
-									})}
-								</time>
-								<a href={post.url}>{post.frontmatter.title}</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main> -->
 		<Footer />
 	</body>
 </html>

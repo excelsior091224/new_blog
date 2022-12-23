@@ -11,6 +11,7 @@ export type Blog = {
   publishedAt: string;
   revisedAt: string;
   title: string;
+  description:string;
   content: string;
   eyecatch: {
     url: string;
