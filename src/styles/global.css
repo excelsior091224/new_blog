@@ -65,6 +65,9 @@ blockquote {
 	margin: 0px;
 	font-style: italic;
 }
+section a {
+              text-decoration: none;
+}
 a div.description {
 	color: #444;
 	text-decoration: none;
