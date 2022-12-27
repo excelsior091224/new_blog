@@ -12,6 +12,11 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 		<h2 class="site_title">
 			{SITE_TITLE}
 		</h2>
+		<div class="hamburger">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+		</div>
 		<nav>
 			<div class="nav-links">
 				<span class="close"></span>
@@ -33,11 +38,6 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 				</details>
 			</div>
 		</nav>
-		<div class="hamburger">
-			<span class="line"></span>
-			<span class="line"></span>
-			<span class="line"></span>
-		</div>
 	</div>
 </header>
 <style>
