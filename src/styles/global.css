@@ -29,7 +29,7 @@ a {
 	color: #3273dc;
 }
 nav a {
-	margin-right: 10px;
+	/* margin-right: 10px; */
 }
 textarea {
 	width: 100%;
@@ -74,8 +74,7 @@ a div.description {
 }
 
 .hamburger {
-  position: absolute;
-  top: 10px;
+  position: relative;
   right: 10px;
   padding-right: 20px;
   margin-top: 0;
@@ -105,7 +104,7 @@ a div.description {
   background-color: #fff;
   display: none;
   margin: 0;
-  position: fixed;
+  position: relative;
 }
 
 .nav-links a {
@@ -120,6 +119,10 @@ a div.description {
 
 .nav-links a:hover, a:focus {
   background-color: #8f8f8f;
+}
+
+.sidebar {
+  display: none;
 }
 
 .categories_link {
@@ -145,6 +148,31 @@ a div.description {
   text-transform: uppercase;
 }
 
+.post {
+  margin-bottom: 2em;
+}
+.post h2 {
+  margin: 0;
+}
+
+.published_time_span {
+  font-size: 12px;
+}
+
+.published_time_span time {
+  font-style: italic;
+  color: #595959;
+}
+
+.category {
+  font-size: 13px;
+  margin:auto 0.5em;
+}
+
+.description {
+  margin: 0;
+}
+
 .expanded {
   display: unset;
 }
@@ -152,7 +180,7 @@ a div.description {
 .close {
   display: block;
   position: relative;
-  width: 30px;
+  /* width: 30px; */
   height: 30px;
 }
 
@@ -212,5 +240,41 @@ a div.description {
 
   .expanded {
     display: unset;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  main {
+    display: flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .sidebar {
+    display: unset;
+    width: 40vw;
+  }
+
+  .sidebar ul {
+    padding-inline-start: unset;
+    list-style-type: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .sidebar {
+    width: 25vw;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .sidebar {
+    width: 15vw;
   }
 }

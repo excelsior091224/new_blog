@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 //microCMS呼び出し
@@ -42,38 +43,18 @@ const { page } = Astro.props;
 			div a div {
 				margin:1em auto;
 			}
-			div a div time {
-				flex: 0 0 130px;
-				font-style: italic;
-				color: #595959;
-			}
-			div a:visited {
-				color: #8e32dc;
-			}
-
-			.published_time_span {
-				font-size: 12px;
-			}
-
-			.category {
-				font-size: 13px;
-				margin:auto 0.5em;
-			}
-
-			div a div h2 {
-				margin-top: 0;
-			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>			
+		<main>
+			<Sidebar></Sidebar>
 			<section>
 				<div>
 					{
 						page.data.map((post:any) => (
 						// posts.map((post) => (
-							<div>
+							<div class="post">
 								{post.eyecatch && <a href={`/posts/${post.id}`}><img width={720} height={360} src={post.eyecatch.url} alt="" /></a>}
 								<span class="published_time_span">
 									<time datetime={post.publishedAt}>

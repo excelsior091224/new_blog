@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 
 export interface Props {
 	content: {
@@ -36,6 +37,7 @@ const {
 	<body>
 		<Header />
 		<main>
+			<Sidebar></Sidebar>
 			<article>
 				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 				<h1 class="title">{title}</h1>
