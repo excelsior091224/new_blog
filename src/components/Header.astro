@@ -8,7 +8,7 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 ---
 
 <header>
-	<nav class="navbar">
+	<div class="navbar">
 		<h2 class="site_title">
 			{SITE_TITLE}
 		</h2>
@@ -17,30 +17,32 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 			<span class="line"></span>
 			<span class="line"></span>
 		</div>
-		<div class="nav-links">
-			<span class="close"></span>
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-			<details class="categories_link">
-				<summary class="categories_button">
-					Categories
-				</summary>
-					<ul>
-						{
-							categories.map((category:any) => (
-								<li>
-									<HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
-								</li>	
-							))
-						}
-					</ul>
-			</details>
-		</div>
-	</nav>
+		<nav>
+			<div class="nav-links">
+				<span class="close"></span>
+				<HeaderLink href="/">Home</HeaderLink>
+				<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
+				<details class="categories_link">
+					<summary class="categories_button">
+						Categories
+					</summary>
+						<ul>
+							{
+								categories.map((category:any) => (
+									<li>
+										<HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
+									</li>	
+								))
+							}
+						</ul>
+				</details>
+			</div>
+		</nav>
+	</div>
 </header>
 <style>
 	header {
-		margin: 0em 0 2em;
+		/* margin: 0em 0 2em; */
 		position: fixed;
 		background-color: #fff;
 	}
