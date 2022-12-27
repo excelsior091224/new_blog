@@ -189,9 +189,9 @@ a div.description {
     padding: 15px 20px;
   }*/
 
-  /*.hamburger {
-    display: none;
-  }*/
+  .hamburger {
+    padding-right: 0;
+  }
 
   .close {
     display: none;
