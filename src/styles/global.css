@@ -74,8 +74,13 @@ a div.description {
 }
 
 .hamburger {
+  position: fixed;
+  top: 10px;
+  right: 10px;
   padding-right: 20px;
+  margin-top: 0;
   cursor: pointer;
+  background-color: #fff;
 }
 
 .hamburger .line {
@@ -83,16 +88,20 @@ a div.description {
   width: 40px;
   height: 5px;
   margin-bottom: 10px;
-  background-color: #ff9776;
+  background-color: #444;
 }
 
 .nav-links {
   width: 100%;
-  top: 5rem;
-  left: 48px;
-  background-color: #ff9776;
+  height: 100%;
+  /* top: 5rem; */
+  top: -0rem;
+  /* left: 48px; */
+  left: 0;
+  background-color: #fff;
   display: none;
   margin: 0;
+  position: fixed;
 }
 
 .nav-links a {
@@ -106,12 +115,61 @@ a div.description {
 }
 
 .nav-links a:hover, a:focus {
-  background-color: #ff9776;
+  background-color: #8f8f8f;
+}
+
+.categories_link {
+  display: block;
+  text-align: center;
+}
+
+.categories_link ul {
+  padding-left:0;
+}
+
+.categories_link li {
+  list-style:none;
+}
+
+.categories_button {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .expanded {
   display: unset;
 }
+
+.close {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.close::before, .close::after { /* 共通設定 */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px; /* 棒の幅（太さ） */
+  height: 30px; /* 棒の高さ */
+  background: #333;
+}
+
+.close::before {
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+
+.close::after {
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+
 
 @media screen and (min-width: 636px) {
   .nav-links {
@@ -131,4 +189,24 @@ a div.description {
     display: none;
   }
 
+  .close {
+    display: none;
+  }
+  
+  .categories_button {
+    padding: 15px 20px;
+    display: inline-block;
+    position: static;
+    width: auto;
+    background: none;
+  }
+
+  .categories_link {
+    display: block;
+    text-align: center;
+  }
+
+  .expanded {
+    display: unset;
+  }
 }

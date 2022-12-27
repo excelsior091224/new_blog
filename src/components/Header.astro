@@ -1,29 +1,53 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../config';
+
+//microCMS呼び出し
+import { getCategories } from "../library/microcms";
+const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
 ---
 
 <header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
+	<nav class="navbar">
+		<h2 class="site_title">
+			{SITE_TITLE}
+		</h2>
 		<div class="hamburger">
 			<span class="line"></span>
 			<span class="line"></span>
 			<span class="line"></span>
 		</div>
 		<div class="nav-links">
+			<span class="close"></span>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
+			<details class="categories_link">
+				<summary class="categories_button">
+					Categories
+				</summary>
+					<ul>
+						{
+							categories.map((category:any) => (
+								<li>
+									<HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
+								</li>	
+							))
+						}
+					</ul>
+			</details>
 		</div>
 	</nav>
 </header>
 <style>
 	header {
 		margin: 0em 0 2em;
+		position: fixed;
+		background-color: #fff;
 	}
 	h2 {
 		margin: 0.5em 0;
+	}
+	.site_title {
+		display: inline;
 	}
 </style>
