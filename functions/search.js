@@ -19,16 +19,11 @@ export function onRequest(context) {
   return client
     .get({
       endpoint: 'blogs',
-      queries: { q: 'test' }
+      queries: { q: q },
     })
-    .then((res) => console.log(res))
-    // .get({
-    //   endpoint: 'blogs',
-    //   queries: { q: q },
-    // })
-    // .then((data) => {
-    //   return new Response(JSON.stringify(data), {status:200})
-    // })
+    .then((data) => {
+      return new Response(JSON.stringify(data), {status:200})
+    })
     .catch((error) => (
       // new Response(String(error), {status:400})
       new Response(JSON.stringify({error:String(error),query:q}), {status:400})
