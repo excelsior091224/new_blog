@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <body>
+  <main>
+  {contents}
+  </main>
+  <script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      contents: this.contents || [], // 検索結果の配列
+      totalCount: this.totalCount || 0, // 検索結果件数の表示用
+      q: this.$route.query.q, // SearchForm.vueから渡されるクエリ
+      searchable: true, // この画面から検索した際の制御
+    };
+  },
+
+  async created() {
+    const query = this.$route.query;
+    if (query.q === undefined) {
+      return;
+    }
+    // 検索可能ならsearchメソッド実行
+    this.search(query.q);
+  },
+  methods: {
+    setSearchable() {
+      this.searchable = true;
+    },
+    async search(q = '') {
+      if (!q.trim() || !this.searchable) {
+        return;
+      }
+
+      const { data, error } = await axios
+        // search.jsにクエリを渡して呼び出す
+        .get(`/search?q=${q}`)
+        .catch((error) => ({
+          error
+        }));
+      if (error) {
+        return;
+      }
+      this.contents = data.contents;
+      this.totalCount = data.totalCount;
+      this.searchable = false;
+    }
+  }
+}
+  </script>
+  </body>
+</html>
