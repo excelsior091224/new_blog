@@ -1,5 +1,5 @@
 // functions/search.js
-import { createClient, MicroCMSQueries } from "microcms-js-sdk";
+import { createClient } from "microcms-js-sdk";
 
 export function onRequest(context) {
   //const { client } = require('../src/library/microcms');
