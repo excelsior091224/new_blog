@@ -16,8 +16,8 @@ export default defineConfig({
   adapter: cloudflare(),
   vite: {
     define: {
-      "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
-      "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
+        "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
+        "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
     },
   },
   // adapter: netlify()
