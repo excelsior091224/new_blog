@@ -1,56 +1,75 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+
+//const serviceDomain="import.meta.env.MICROCMS_SERVICE_DOMAIN";
+const serviceDomain=process.env.MICROCMS_SERVICE_DOMAIN;
+const node_version=process.env.NODE_VERSION;
+const node_version_2=import.meta.env.NODE_VERSION;
+
+//microCMS呼び出し
+//import { getBlogs } from "../library/microcms";
+//import { getBlogs } from "../../functions/microcms";
+
+//const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt"] });
+
+
+// // Use Astro.glob() to fetch all posts, and then sort them by date.
+// const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+// 	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+// );
+---
+
 <!DOCTYPE html>
 <html lang="ja">
-  <body>
-  <main>
-  <div class="test"></div>
-  </main>
-  <script>
-import axios from 'axios'
-
-export default {
-  data() {
-    return {
-      contents: this.contents || [], // 検索結果の配列
-      totalCount: this.totalCount || 0, // 検索結果件数の表示用
-      q: this.$route.query.q, // SearchForm.vueから渡されるクエリ
-      searchable: true, // この画面から検索した際の制御
-    };
-  },
-
-  async created() {
-    const query = this.$route.query;
-    if (query.q === undefined) {
-      return;
-    }
-    // 検索可能ならsearchメソッド実行
-    this.search(query.q);
-  },
-  methods: {
-    setSearchable() {
-      this.searchable = true;
-    },
-    async search(q = '') {
-      if (!q.trim() || !this.searchable) {
-        return;
-      }
-
-      const { data, error } = await axios
-        // search.jsにクエリを渡して呼び出す
-        .get(`/search?q=${q}`)
-        .catch((error) => ({
-          error
-        }));
-      if (error) {
-        return;
-      }
-      this.contents = data.contents;
-      this.totalCount = data.totalCount;
-      this.searchable = false;
-    }
-  }
-}
-let test_div = document.querySelector('.test');
-test_div.innerHTML = contents;
-  </script>
-  </body>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			ul {
+				list-style-type: none;
+				padding: unset;
+			}
+			ul li {
+				display: flex;
+			}
+			ul li time {
+				flex: 0 0 130px;
+				font-style: italic;
+				color: #595959;
+			}
+			ul li a:visited {
+				color: #8e32dc;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			{serviceDomain}
+			{node_version}
+		</main>
+		<!-- <main>
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li>
+								<time datetime={post.frontmatter.pubDate}>
+									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
+										year: 'numeric',
+										month: 'short',
+										day: 'numeric',
+									})}
+								</time>
+								<a href={post.url}>{post.frontmatter.title}</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main> -->
+		<Footer />
+	</body>
 </html>
