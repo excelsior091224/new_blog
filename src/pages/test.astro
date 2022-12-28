@@ -2,7 +2,7 @@
 <html lang="ja">
   <body>
   <main>
-  {contents}
+  <div class="test"></div>
   </main>
   <script>
 import axios from 'axios'
@@ -49,6 +49,8 @@ export default {
     }
   }
 }
+let test_div = document.querySelector('.test');
+test_div.innerHTML = contents;
   </script>
   </body>
 </html>
