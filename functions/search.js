@@ -5,32 +5,32 @@ export function onRequest(context) {
   //const { client } = require('../src/library/microcms');
   
   const client = createClient({
-    serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-    apiKey: import.meta.env.MICROCMS_API_KEY,
+    serviceDomain: "process.env.MICROCMS_SERVICE_DOMAIN",
+    apiKey: "process.env.MICROCMS_API_KEY",
   });
 
-  const { q } = context.queryStringParameters;
+  const url = context.request.url;
+  const q = new URL(url).searchParams.get('q');
   if (!q) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
+    return new Response(JSON.stringify({
         error: 'Missing "q" query parameter',
-      }),
-    };
+      }), {status:400});
   }
   return client
     .get({
       endpoint: 'blogs',
-      queries: { q },
+      queries: { q: 'test' }
     })
-    .then((data) => {
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data),
-      };
-    })
-    .catch((error) => ({
-      statusCode: 400,
-      body: String(error),
-    }));
+    .then((res) => console.log(res))
+    // .get({
+    //   endpoint: 'blogs',
+    //   queries: { q: q },
+    // })
+    // .then((data) => {
+    //   return new Response(JSON.stringify(data), {status:200})
+    // })
+    .catch((error) => (
+      // new Response(String(error), {status:400})
+      new Response(JSON.stringify({error:String(error),query:q}), {status:400})
+    ));
 };
