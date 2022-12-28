@@ -1,22 +1,22 @@
 // functions/search.js
 import { createClient } from "microcms-js-sdk";
 
-export function onRequest(context) {
-  //const { client } = require('../src/library/microcms');
-  
+export async function onRequest({ request }) {
   const client = createClient({
-    serviceDomain: "process.env.MICROCMS_SERVICE_DOMAIN",
-    apiKey: "process.env.MICROCMS_API_KEY",
+    serviceDomain: "import.meta.env.MICROCMS_SERVICE_DOMAIN",
+    apiKey: "import.meta.env.MICROCMS_API_KEY",
   });
 
-  const url = context.request.url;
-  const q = new URL(url).searchParams.get('q');
+  const url = request.url;
+  // const { q } = request.query;
+  const q  = new URL(url).searchParams.get('q');
   if (!q) {
     return new Response(JSON.stringify({
         error: 'Missing "q" query parameter',
+        request:request
       }), {status:400});
   }
-  return client
+  return await client
     .get({
       endpoint: 'blogs',
       queries: { q: q },
