@@ -9,16 +9,19 @@ import cloudflare from "@astrojs/cloudflare";
 import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
+import vue from "@astrojs/vue";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), sitemap()],
-  site: 'https://new-blog-81t.pages.dev',
+  integrations: [mdx(), sitemap(), vue()],
+  site: 'https://new-blog-81t.pages.dev'
   // output: "server",
   // adapter: cloudflare(),
-  vite: {
-    define: {
-        "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
-        "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
-    },
-  },
+  // vite: {
+  //   define: {
+  //       "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
+  //       "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
+  //   },
+  // },
   // adapter: netlify()
 });

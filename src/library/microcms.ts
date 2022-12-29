@@ -1,11 +1,11 @@
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 export const client = createClient({
-  // serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-  // apiKey: import.meta.env.MICROCMS_API_KEY,
+  serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
+  apiKey: import.meta.env.MICROCMS_API_KEY,
   // serviceDomain: "import.meta.env.MICROCMS_SERVICE_DOMAIN",
   // apiKey: "import.meta.env.MICROCMS_API_KEY",
-  serviceDomain: "process.env.MICROCMS_SERVICE_DOMAIN",
-  apiKey: "process.env.MICROCMS_API_KEY",
+  // serviceDomain: "process.env.MICROCMS_SERVICE_DOMAIN",
+  // apiKey: "process.env.MICROCMS_API_KEY",
 });
 
 export type Blog = {
@@ -52,20 +52,12 @@ export type CategoryResponse = {
 };
 
 export const getBlogs = async (queries?: MicroCMSQueries) => {
-//  const client = createClient({
-//    serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-//    apiKey: import.meta.env.MICROCMS_API_KEY,
-//  });
   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
 };
 export const getBlogDetail = async (
   contentId: string,
   queries?: MicroCMSQueries
 ) => {
-//  const client = createClient({
-//    serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-//    apiKey: import.meta.env.MICROCMS_API_KEY,
-//  });
   return await client.getListDetail<Blog>({
     endpoint: "blogs",
     contentId,
@@ -73,20 +65,12 @@ export const getBlogDetail = async (
   });
 };
 export const getCategories = async (queries?: MicroCMSQueries) => {
-  // const client = createClient({
-  //   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-  //   apiKey: import.meta.env.MICROCMS_API_KEY,
-  // });
   return await client.get<CategoryResponse>({ endpoint: "categories", queries });
 };
 export const getCategoryDetail = async (
   contentId: string,
   queries?: MicroCMSQueries
 ) => {
-  // const client = createClient({
-  //   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-  //   apiKey: import.meta.env.MICROCMS_API_KEY,
-  // });
   return await client.getListDetail<Category>({
     endpoint: "categories",
     contentId,
