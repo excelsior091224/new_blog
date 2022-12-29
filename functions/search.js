@@ -1,5 +1,6 @@
 // functions/search.js
 import { createClient } from "microcms-js-sdk";
+// import { client } from "../src/library/microcms";
 
 export async function onRequest({ request, env }) {
   const client = createClient({
@@ -12,7 +13,6 @@ export async function onRequest({ request, env }) {
   if (!q) {
     return new Response(JSON.stringify({
         error: 'Missing "q" query parameter',
-        request:request
       }), {status:400});
   }
   return await client

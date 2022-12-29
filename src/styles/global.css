@@ -28,9 +28,6 @@ b {
 a {
 	color: #3273dc;
 }
-nav a {
-	/* margin-right: 10px; */
-}
 textarea {
 	width: 100%;
 	font-size: 16px;
@@ -76,7 +73,6 @@ a div.description {
 .hamburger {
   position: relative;
   right: 10px;
-  padding-right: 20px;
   margin-top: 0;
   cursor: pointer;
   background-color: #fff;
@@ -217,9 +213,9 @@ a div.description {
     padding: 15px 20px;
   }*/
 
-  .hamburger {
+  /* .hamburger {
     padding-right: 0;
-  }
+  } */
 
   /*.close {
     display: none;
@@ -244,8 +240,16 @@ a div.description {
 }
 
 @media screen and (min-width: 1024px) {
+  body {
+    max-width: 80ch;
+  }
+
   main {
     display: flex;
+  }
+
+  .contents {
+    width:80%;
   }
 
   .hamburger {
@@ -258,7 +262,7 @@ a div.description {
 
   .sidebar {
     display: unset;
-    width: 40vw;
+    width: 20%;
   }
 
   .sidebar ul {
@@ -268,13 +272,13 @@ a div.description {
 }
 
 @media screen and (min-width: 1440px) {
-  .sidebar {
-    width: 25vw;
+  body {
+    max-width: 90ch;
   }
 }
 
-@media screen and (min-width: 2560px) {
-  .sidebar {
-    width: 15vw;
+/* @media screen and (min-width: 2560px) {
+  body {
+    max-width: 90ch;
   }
-}
+} */
