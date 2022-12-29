@@ -7,7 +7,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 //microCMS呼び出し
 import { getBlogs } from "../library/microcms";
-// // import { getBlogs } from "./microcms";
 // const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
 
 export async function getStaticPaths({ paginate }:any) {
