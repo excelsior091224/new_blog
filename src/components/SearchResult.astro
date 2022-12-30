@@ -1,0 +1,30 @@
+<script>
+    import axios from 'axios'
+
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    document.querySelector(".test").innerHTML = q;
+    const { data, error } = await axios
+    // search.jsにクエリを渡して呼び出す
+    .get(`/search?q=${q}`)
+    .catch((error) => ({
+        error
+    }));
+    const contents = data.contents;
+    document.querySelector(".test").innerHTML = JSON.stringify(contents);
+    // document.querySelector(".test").innerHTML = contents.map((post:any) =>{
+    //     return `<div class="post">
+    //         <a href="/posts/${post.id}"><img width="720" height="360" src="${post.eyecatch.url}" alt="" /></a>
+    //         <span class="published_time_span">
+    //             <time datetime=${post.publishedAt}>${new Date(post.publishedAt).toLocaleString('ja-JP')}</time>
+    //         </span>
+    //         <span class="category"><a href="/category/${post.category.id}">${post.category.name}</a></span>
+    //         <a href="/posts/${post.id}">
+    //             <h2>${post.title}</h2>
+    //             <div class="description">${post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</div>
+    //         </a>
+    //     </div>`
+    // });
+    // document.querySelector(".test").innerHTML = posts;
+</script>
+<div class="test"></div>

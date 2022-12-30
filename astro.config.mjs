@@ -12,8 +12,11 @@ import netlify from "@astrojs/netlify/functions";
 import vue from "@astrojs/vue";
 
 // https://astro.build/config
+import react from "@astrojs/react";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), sitemap(), vue()],
+  integrations: [mdx(), sitemap(), vue(), react()],
   site: 'https://new-blog-81t.pages.dev'
   // output: "server",
   // adapter: cloudflare(),
