@@ -1,9 +1,6 @@
 <template>
     <h1>「{{ q }}」の検索結果:{{ totalCount }}件</h1>
-    <div v-if="contents.length < 0">
-        <p>検索結果はありませんでした</p>
-    </div>
-    <div>
+    <div v-if="contents.length >= 1">
         <div class="post" v-for="post in contents">
             <template v-if="post.eyecatch">
                 <a v-bind:href="`/posts/${post.id}`">
@@ -29,7 +26,10 @@
                 </div>
             </a>
         </div>
-    </div>  
+    </div>
+    <div v-else>
+        <p>検索結果はありませんでした</p>
+    </div>
 </template>
 
 <script lang="ts">
