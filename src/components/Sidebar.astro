@@ -1,11 +1,13 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import SearchForm from './SearchForm.astro';
 //microCMS呼び出し
 import { getCategories } from "../library/microcms";
 const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
 ---
 <div class="sidebar">
     <nav>
+        <SearchForm />
         <div class="">
             <ul class="">
                 <li><a href="https://twitter.com/astrodotbuild" target="_blank" class="">Twitter</a></li>

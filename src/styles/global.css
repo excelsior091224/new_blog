@@ -269,6 +269,10 @@ a div.description {
     padding-inline-start: unset;
     list-style-type: none;
   }
+
+  .searchform-text {
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 1440px) {

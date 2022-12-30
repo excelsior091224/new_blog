@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import SearchForm from './SearchForm.astro';
 import { SITE_TITLE } from '../config';
 
 //microCMS呼び出し
@@ -22,6 +23,7 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 	</div>
 	<nav>
 		<div class="nav-links">
+			<SearchForm />
 			<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
 			<details class="categories_link">
 				<summary class="categories_button">
