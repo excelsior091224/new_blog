@@ -3,7 +3,8 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Sidebar from '../../components/Sidebar.astro';
-import SearchResult from '../../components/SearchResult';
+// import SearchResult from '../../components/SearchResult';
+import SearchResult from '../../components/SearchResult.vue';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
 
 //microCMS呼び出し
@@ -50,9 +51,7 @@ const { page } = Astro.props;
 		<main>
 			<Sidebar></Sidebar>
 			<section class="contents">
-				<SearchResult />
-				{page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
-				{page.url.next ? <a href={page.url.next}>Next</a> : null}
+				<SearchResult client:only="vue"/>
 			</section>
 		</main>
 		<Footer />

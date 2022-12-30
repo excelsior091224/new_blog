@@ -18,7 +18,7 @@ export async function onRequest({ request, env }) {
   return await client
     .get({
       endpoint: 'blogs',
-      queries: { q: q },
+      queries: { q: q, orders: '-createdAt' },
     })
     .then((data) => {
       return new Response(JSON.stringify(data), {status:200})
