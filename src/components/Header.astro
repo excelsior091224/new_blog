@@ -24,7 +24,10 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 	<nav>
 		<div class="nav-links">
 			<SearchForm />
-			<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
+			{import.meta.env.TWITTER ? <HeaderLink href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer">Twitter</HeaderLink> : null}
+			{import.meta.env.PIXIV ? <HeaderLink href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer">pixiv</HeaderLink> : null}
+			{import.meta.env.FANBOX ? <HeaderLink href={import.meta.env.FANBOX} target="_blank" rel="noopener noreferrer">FANBOX</HeaderLink> : null}
+			{import.meta.env.OLD_SITE ? <HeaderLink href={import.meta.env.OLD_SITE} target="_blank" rel="noopener noreferrer">旧サイト</HeaderLink> : null}
 			<details class="categories_link">
 				<summary class="categories_button">
 					Categories

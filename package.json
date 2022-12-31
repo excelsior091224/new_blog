@@ -27,7 +27,9 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
     "rollup": "^3.9.0",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue-paginate": "^3.6.0",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "wrangler": "^2.6.2"

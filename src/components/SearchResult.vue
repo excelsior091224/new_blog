@@ -54,10 +54,10 @@ export default {
         this.search(query.get("q"));
     },
     methods: {
-        setSearchable() {
+        setSearchable(): void {
             this.searchable = true;
         },
-        async search(q = '') {
+        async search(q = ''): Promise<void> {
             if (!q.trim() || !this.searchable) {
                 return;
             }
@@ -71,15 +71,11 @@ export default {
             if (error) {
                 return;
             }
-            // this.contents = async function getStaticPaths({ paginate }:any) {
-            //     // 記事の配列から、1ページに10個づつ入るようにページを生成する
-            //     return paginate(data.contents, { pageSize: 10 });
-            // };
             this.q = q;
             this.contents = data.contents;
             this.totalCount = data.totalCount;
             this.searchable = false;
-        }
-    }
+        },
+    },
 }
 </script>

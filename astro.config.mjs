@@ -17,7 +17,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap(), vue(), react()],
-  site: 'https://new-blog-81t.pages.dev'
+  site: 'https://new-blog-81t.pages.dev',
   // output: "server",
   // adapter: cloudflare(),
   // vite: {

@@ -10,7 +10,10 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
         <SearchForm />
         <div class="">
             <ul class="">
-                <li><a href="https://twitter.com/astrodotbuild" target="_blank" class="">Twitter</a></li>
+                {import.meta.env.TWITTER ? <li><a href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer" class="">Twitter</a></li> : null}
+                {import.meta.env.PIXIV ? <li><a href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer" class="">pixiv</a></li> : null}
+                {import.meta.env.FANBOX ? <li><a href={import.meta.env.FANBOX} target="_blank" rel="noopener noreferrer" class="">FANBOX</a></li> : null}
+                {import.meta.env.OLD_SITE ? <li><a href={import.meta.env.OLD_SITE} target="_blank" rel="noopener noreferrer" class="">旧サイト</a></li> : null}
             </ul>
         </div>
         <div class="">
