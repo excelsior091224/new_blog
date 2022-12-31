@@ -50,6 +50,21 @@ export type CategoryResponse = {
   limit: number;
   contents: Category[];
 };
+export type Link = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  title: string;
+  url: string;
+};
+export type LinkResponse = {
+  totalCount: number;
+  offset: number;
+  limit: number;
+  contents: Link[];
+};
 
 export const getBlogs = async (queries?: MicroCMSQueries) => {
   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
@@ -73,6 +88,19 @@ export const getCategoryDetail = async (
 ) => {
   return await client.getListDetail<Category>({
     endpoint: "categories",
+    contentId,
+    queries,
+  });
+};
+export const getLinks = async (queries?: MicroCMSQueries) => {
+  return await client.get<LinkResponse>({ endpoint: "links", queries });
+};
+export const getLinkDetail = async (
+  contentId: string,
+  queries?: MicroCMSQueries
+) => {
+  return await client.getListDetail<Link>({
+    endpoint: "links",
     contentId,
     queries,
   });

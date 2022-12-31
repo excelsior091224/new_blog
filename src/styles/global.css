@@ -137,6 +137,7 @@ a div.description {
 }
 
 .categories_link ul {
+  margin: 0;
   padding-left:0;
 }
 
@@ -145,6 +146,30 @@ a div.description {
 }
 
 .categories_button {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.external_link {
+  display: block;
+  text-align: center;
+}
+
+.external_link ul {
+  margin: 0;
+  padding-left:0;
+}
+
+.external_link li {
+  list-style:none;
+}
+
+.external_link_button {
   display: block;
   text-align: center;
   padding: 10px 0;
@@ -278,6 +303,10 @@ a div.description {
   .sidebar ul {
     padding-inline-start: unset;
     list-style-type: none;
+  }
+
+  .sidebar a {
+    text-decoration: none;
   }
 
   .searchform-text {

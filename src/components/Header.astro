@@ -4,8 +4,9 @@ import SearchForm from './SearchForm.astro';
 import { SITE_TITLE } from '../config';
 
 //microCMS呼び出し
-import { getCategories } from "../library/microcms";
+import { getCategories, getLinks } from "../library/microcms";
 const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
+const { contents: links } = await getLinks({fields: ["createdAt","title","url"],orders: 'createdAt'});
 ---
 
 <header>
@@ -24,6 +25,7 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 	<nav>
 		<div class="nav-links">
 			<SearchForm />
+			<HeaderLink href="/about">プライバシーポリシー</HeaderLink>
 			{import.meta.env.TWITTER ? <HeaderLink href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer">Twitter</HeaderLink> : null}
 			{import.meta.env.PIXIV ? <HeaderLink href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer">pixiv</HeaderLink> : null}
 			{import.meta.env.FANBOX ? <HeaderLink href={import.meta.env.FANBOX} target="_blank" rel="noopener noreferrer">FANBOX</HeaderLink> : null}
@@ -37,6 +39,20 @@ const { contents: categories } = await getCategories({ fields: ["id","name"],ord
 							categories.map((category:any) => (
 								<li>
 									<HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
+								</li>	
+							))
+						}
+					</ul>
+			</details>
+			<details class="external_link">
+				<summary class="external_link_button">
+					Link
+				</summary>
+					<ul>
+						{
+							links.map((link:any) => (
+								<li>
+									<HeaderLink href={link.url}>{link.title}</HeaderLink>
 								</li>	
 							))
 						}
