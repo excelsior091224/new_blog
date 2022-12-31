@@ -279,7 +279,7 @@ a div.description {
     max-width: 80ch;
   }
 
-  main {
+  .main {
     display: flex;
   }
 
