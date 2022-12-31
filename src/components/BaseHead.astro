@@ -13,7 +13,10 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
 const card_img = import.meta.env.CARD_IMAGE;
 ---
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0M4H6RV722"></script>
+<script
+ type="text/partytown"
+  src="https://www.googletagmanager.com/gtag/js?id=G-0M4H6RV722">
+</script>
 <script type="text/partytown">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
