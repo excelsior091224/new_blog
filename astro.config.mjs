@@ -25,7 +25,7 @@ export default defineConfig({
       },
     }),
   ],
-  site: 'https://new-blog-81t.pages.dev',
+  site: 'https://www.vermilion3.xyz',
   // output: "server",
   // adapter: cloudflare(),
   // vite: {
