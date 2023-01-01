@@ -16,8 +16,6 @@ import react from "@astrojs/react";
 
 import partytown from "@astrojs/partytown";
 
-import preact from "@astrojs/preact";
-
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap(), vue(), react(),partytown({
@@ -25,8 +23,7 @@ export default defineConfig({
       config: {
         forward: ["dataLayer.push"],
       },
-    }),
-    preact({ compat: true })
+    })
   ],
   site: 'https://www.vermilion3.xyz',
   // output: "server",
