@@ -57,7 +57,7 @@ const { page } = Astro.props;
 								{post.eyecatch && <a href={`/posts/${post.id}`}><img width={720} height={360} src={post.eyecatch.url} alt="" /></a>}
 								<span class="published_time_span">
 									<time datetime={post.publishedAt}>
-										{new Date(post.publishedAt).toLocaleString('ja-JP')}
+										{new Date(post.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' })}
 									</time>
 								</span>
 								{post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
