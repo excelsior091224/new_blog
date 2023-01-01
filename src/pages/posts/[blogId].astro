@@ -24,6 +24,8 @@ const blog = await getBlogDetail(blogId as string);
     heroImage: blog.eyecatch?.url ?? '',
     pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
     updatedDate: new Date(blog.updatedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
+    categoryId: blog.category.id ?? '',
+    categoryName: blog.category.name ?? '',
 }}>
   <main set:html={blog.content} />
   <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
