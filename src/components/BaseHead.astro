@@ -9,8 +9,7 @@ export interface Props {
 	image?: string;
 }
 
-const { title, description, image = '/placeholder-social.jpg' } = Astro.props;
-const card_img = import.meta.env.CARD_IMAGE;
+const { title, description, image = import.meta.env.CARD_IMAGE } = Astro.props;
 ---
 <!-- Google tag (gtag.js) -->
 <script
@@ -42,7 +41,7 @@ const card_img = import.meta.env.CARD_IMAGE;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
-<meta property="og:image" content={card_img} />
+<meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -50,4 +49,4 @@ const card_img = import.meta.env.CARD_IMAGE;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <!-- <meta property="twitter:image" content={new URL(image, Astro.url)} /> -->
-<meta property="twitter:image" content={card_img} />
+<meta property="twitter:image" content={image} />
