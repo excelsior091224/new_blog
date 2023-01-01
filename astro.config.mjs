@@ -11,10 +11,9 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 import vue from "@astrojs/vue";
 
-// https://astro.build/config
-import react from "@astrojs/react";
-
 import partytown from "@astrojs/partytown";
+
+import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,7 +22,8 @@ export default defineConfig({
       config: {
         forward: ["dataLayer.push"],
       },
-    })
+    }),
+    preact({ compat: true })
   ],
   site: 'https://www.vermilion3.xyz',
   // output: "server",
