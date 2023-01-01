@@ -25,6 +25,7 @@ const BlogPreview = () => {
         <div>
             Last updated on <time class="updatedAt">{data?.updatedAt ?? data?.createdAt}</time>
         </div>
+        { data?.category && <span class="category"><a href={`/category/${data?.category?.id}`}>{data?.category?.name}</a></span> }
         <hr />
         <main class="post" dangerouslySetInnerHTML={{ __html: data?.content ?? "" }}/>
         {isValidating && <div>更新中...</div>}
