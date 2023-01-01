@@ -19,7 +19,7 @@ const BlogPreview = () => {
 
   return (
     <article class="contents">
-        <img class="heroImage" width="720" height="360" src={data?.eyecatch?.url} alt="" />
+        {data?.eyecatch && <img class="heroImage" width="720" height="360" src={data?.eyecatch?.url} alt="" />}
         <h1 class="title">{data?.title}</h1>
         <time class="publishedAt">{data?.publishedAt ?? data?.createdAt}</time>			
         <div>

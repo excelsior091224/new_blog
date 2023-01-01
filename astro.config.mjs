@@ -17,7 +17,7 @@ import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), sitemap(), vue(), react(),partytown({
+  integrations: [mdx(), sitemap(), vue(), partytown({
       // Adds dataLayer.push as a forwarding-event.
       config: {
         forward: ["dataLayer.push"],
