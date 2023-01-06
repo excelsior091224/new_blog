@@ -15,6 +15,8 @@ import partytown from "@astrojs/partytown";
 
 import preact from "@astrojs/preact";
 
+import robotsTxt from 'astro-robots-txt';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [mdx(), sitemap(), vue(), partytown({
@@ -23,7 +25,8 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    preact({ compat: true })
+    preact({ compat: true }),
+    robotsTxt()
   ],
   site: 'https://www.vermilion3.xyz',
   // output: "server",
