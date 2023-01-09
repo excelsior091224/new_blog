@@ -12,7 +12,7 @@ export async function getStaticPaths({paginate}:any) {
   const { contents: categories } = await getCategories({ fields: ["id"] });
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "content", "eyecatch","category"] });
+  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "content", "eyecatch","category"],orders:'-publishedAt' });
   // console.log(posts);
   // すべてのタグに対して、paginate() の結果を返す。
   // 必ず、`{params: {tag}} を `paginate()` に渡してください。

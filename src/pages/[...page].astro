@@ -10,7 +10,7 @@ import { getBlogs } from "../library/microcms";
 // const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","eyecatch","category"] });
 
 export async function getStaticPaths({ paginate }:any) {
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","content","eyecatch","category"] });
+  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","content","eyecatch","category"],orders:'-publishedAt'});
   // 記事の配列から、1ページに10個づつ入るようにページを生成する
   return paginate(posts, { pageSize: 10 });
 }
