@@ -80,7 +80,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 						page.data.map((post:any) => (
 						// posts.map((post) => (
 							<div class="post">
-								{post.eyecatch && <a href={`/posts/${post.id}`}><img width={720} height={360} src={post.eyecatch.url} alt="" /></a>}
+								{post.eyecatch && <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fit=fill&w=720&h=360`} alt="" /></a>}
 								<span class="published_time_span">
 									<time datetime={post.publishedAt}>
 										{new Date(post.publishedAt).toLocaleString('ja-JP')}
