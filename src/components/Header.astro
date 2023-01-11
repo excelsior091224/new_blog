@@ -24,7 +24,7 @@ const { contents: links } = await getLinks({fields: ["createdAt","title","url"],
 	</div>
 	<nav>
 		<div class="nav-links">
-			<SearchForm />
+			<SearchForm searchform_text_id="header_searchform_text"/>
 			<HeaderLink href="/about">プライバシーポリシー</HeaderLink>
 			{import.meta.env.TWITTER ? <HeaderLink href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer">Twitter</HeaderLink> : null}
 			{import.meta.env.PIXIV ? <HeaderLink href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer">pixiv</HeaderLink> : null}
