@@ -197,8 +197,12 @@ a div.description {
 
 .category {
   font-size: 13px;
-  margin:auto 0.5em;
-  padding: 8px;
+  margin:auto;
+}
+
+.category a {
+  margin: 8px;
+  /* padding: 8px; */
 }
 
 .description {
