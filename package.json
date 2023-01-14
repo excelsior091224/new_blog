@@ -26,6 +26,7 @@
     "astro-robots-txt": "^0.3.10",
     "axios": "^1.2.1",
     "microcms-js-sdk": "^2.3.2",
+    "microcms-richedit-processer": "^1.1.0",
     "preact": "^10.11.3",
     "rollup": "^3.9.0",
     "swr": "^2.0.0",
