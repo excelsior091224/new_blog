@@ -1,6 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import SearchForm from './SearchForm.astro';
+import GoogleResponsiveAd from './GoogleResponsiveAd';
 //microCMS呼び出し
 import { getCategories, getLinks } from "../library/microcms";
 const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
@@ -43,4 +44,5 @@ const { contents: links } = await getLinks({fields: ["createdAt","title","url"],
             </ul>
         </div>
     </nav>
+    <GoogleResponsiveAd client:only="preact"/>
 </div>
