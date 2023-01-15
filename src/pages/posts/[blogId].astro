@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/BlogPost.astro";
 import { getBlogs, getBlogDetail } from "../../library/microcms";
+import { processer } from "microcms-richedit-processer";
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
@@ -25,9 +26,12 @@ const blog = await getBlogDetail(blogId as string);
     categoryId: blog.category.id ?? '',
     categoryName: blog.category.name ?? '',
 }}>
-  <main set:html={blog.content} />
+  <main set:html={processer(blog.content, { img: { parameters: { fm: 'webp' } } })} />
   <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
     Tweet
   </a>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </Layout>
+<script>
+  import "lazysizes";
+</script>
