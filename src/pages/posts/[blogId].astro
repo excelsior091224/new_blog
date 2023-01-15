@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/BlogPost.astro";
 import { getBlogs, getBlogDetail } from "../../library/microcms";
-import { processer } from "microcms-richedit-processer";
+import pkg from 'microcms-richedit-processer';
+const { processer } = pkg;
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
