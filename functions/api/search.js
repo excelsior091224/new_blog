@@ -8,6 +8,23 @@ export async function onRequest({ request, env }) {
     apiKey: env.MICROCMS_API_KEY,
   });
 
+  const getBlogs = async (queries) => {
+    const data = await client.get({ endpoint: "blogs", queries});
+    data.q = queries.q;
+
+    if (data.offset + data.limit < data.totalCount) {
+      const result = await getBlogs({q:q,limit:data.limit, offset:data.offset + data.limit})
+      return {
+          q:q,
+          offset:result.offset,
+          limit:result.limit,
+          contents: [...data.contents, ...result.contents],
+          totalCount: result.totalCount,
+        };
+    }
+    return data
+  };
+
   const url = request.url;
   const q  = new URL(url).searchParams.get('q');
   if (!q) {
@@ -15,11 +32,12 @@ export async function onRequest({ request, env }) {
         error: 'Missing "q" query parameter',
       }), {status:400});
   }
-  return await client
-    .get({
-      endpoint: 'blogs',
-      queries: { q: q, orders: '-createdAt' },
-    })
+  return await getBlogs({ q: q, orders: '-publishedAt' })
+  // client
+  //   .get({
+  //     endpoint: 'blogs',
+  //     queries: { q: q, orders: '-createdAt' },
+  //   })
     .then((data) => {
       return new Response(JSON.stringify(data), {status:200})
     })

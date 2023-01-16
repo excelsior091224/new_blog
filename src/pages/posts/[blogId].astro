@@ -23,7 +23,8 @@ const blog = await getBlogDetail(blogId as string);
 <Layout content={{
     title: blog.title,
     description: blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,''),
-    heroImage: blog.eyecatch && `${blog.eyecatch?.url}?fit=crop&crop=top&w=720&h=360&fm=webp`,    pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
+    heroImage: blog.eyecatch && `${blog.eyecatch?.url}?fit=crop&crop=top&w=720&h=360&fm=webp`,
+    pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
     updatedDate: new Date(blog.updatedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
     categoryId: blog.category.id ?? '',
     categoryName: blog.category.name ?? '',
