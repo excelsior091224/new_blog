@@ -147,3 +147,21 @@ export const getLinkDetail = async (
     queries,
   });
 };
+
+
+export const test = async (queries?: MicroCMSQueries) => {
+  const data = await client.get<BlogResponse>({ endpoint: "blogs", queries});
+  console.log(data.contents);
+
+  if (data.offset + data.limit < data.totalCount) {
+    const result:BlogResponse = await test({limit:data.limit, offset:data.offset + data.limit});
+    console.log(result.contents);
+    return {
+        offset:result.offset,
+        limit:result.limit,
+        contents: [...data.contents, ...result.contents],
+        totalCount: result.totalCount,
+      };
+  }
+  return data
+};

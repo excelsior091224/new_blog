@@ -1,0 +1,75 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Posts from '../components/Posts.astro';
+import GoogleResponsiveAd from '../components/GoogleResponsiveAd';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+
+//microCMS呼び出し
+import { getBlogs } from "../library/microcms";
+
+const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","content","eyecatch","category"],orders:'-publishedAt',limit:10,offset:0});
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			ul {
+				list-style-type: none;
+				padding: unset;
+			}
+			ul li {
+				display: flex;
+			}
+			ul li time {
+				flex: 0 0 130px;
+				font-style: italic;
+				color: #595959;
+			}
+			ul li a:visited {
+				color: #8e32dc;
+			}
+
+			div a div {
+				margin:1em auto;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="main">
+			<Sidebar></Sidebar>
+			<section class="contents">
+				<div>
+    {
+        posts.map((post:any,index:number) => (
+            <div class="post">
+                {post.eyecatch && index === 0 ? <link rel="preload" as="image" href={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} /><a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" /></a> : post.eyecatch ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} data-src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" class="lazyload"/></a> : null }
+                <span class="published_time_span">
+                    <time datetime={post.publishedAt}>
+                        {new Date(post.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' })}
+                    </time>
+                </span>
+                {post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}							
+                <a href={`/posts/${post.id}`}>
+                    <h2>{post.title}</h2>
+                    <div class="description">{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</div>
+                </a>
+            </div>
+        ))
+    }
+</div>
+				<!-- <GoogleResponsiveAd client:only="preact"/> -->
+			</section>
+		</main>
+		<Footer />
+<script>
+import { test } from "../library/microcms";
+const { contents: test_posts } = await test({ fields: ["id", "title", "publishedAt","content","eyecatch","category"],orders:'-publishedAt',limit:10,offset:0});
+</script>
+	</body>
+</html>
