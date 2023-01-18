@@ -73,7 +73,8 @@ export const getBlogs = async (queries?: MicroCMSQueries) => {
   const data = await client.get<BlogResponse>({ endpoint: "blogs", queries});
 
   if (data.offset + data.limit < data.totalCount) {
-    const result:BlogResponse = await getBlogs({limit:data.limit, offset:data.offset + data.limit})
+    queries.offset = data.offset + data.limit;
+    const result:BlogResponse = await getBlogs(queries);
     return {
         offset:result.offset,
         limit:result.limit,
@@ -100,7 +101,8 @@ export const getCategories = async (queries?: MicroCMSQueries) => {
   const data = await client.get<CategoryResponse>({ endpoint: "categories", queries });
 
   if (data.offset + data.limit < data.totalCount) {
-    const result:CategoryResponse = await getCategories({limit:data.limit, offset:data.offset + data.limit})
+    queries.offset = data.offset + data.limit;
+    const result:CategoryResponse = await getCategories(queries);
     return {
         offset:result.offset,
         limit:result.limit,
@@ -127,7 +129,8 @@ export const getLinks = async (queries?: MicroCMSQueries) => {
   const data = await client.get<LinkResponse>({ endpoint: "links", queries });
 
   if (data.offset + data.limit < data.totalCount) {
-    const result:LinkResponse = await getLinks({limit:data.limit, offset:data.offset + data.limit})
+    queries.offset = data.offset + data.limit;
+    const result:LinkResponse = await getLinks(queries);
     return {
         offset:result.offset,
         limit:result.limit,
@@ -146,23 +149,4 @@ export const getLinkDetail = async (
     contentId,
     queries,
   });
-};
-
-
-export const test = async (queries?: MicroCMSQueries) => {
-  const data = await client.get<BlogResponse>({ endpoint: "blogs", queries});
-  console.log(data.contents);
-
-  if (data.offset + data.limit < data.totalCount) {
-    queries.offset = data.offset + data.limit;
-    const result:BlogResponse = await test(queries);
-    console.log(result.contents);
-    return {
-        offset:result.offset,
-        limit:result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
-  }
-  return data
 };
