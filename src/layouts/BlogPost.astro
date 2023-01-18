@@ -41,7 +41,7 @@ const {
 		<main class="main">
 			<Sidebar></Sidebar>
 			<article class="contents">
-				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+				{heroImage && <img width={720} height={360} data-src={heroImage} alt="" class="lazyload"/>}
 				<h1 class="title">{title}</h1>
 				{pubDate && <time>{pubDate}</time>}
 				{
@@ -64,5 +64,8 @@ const {
 			</article>
 		</main>
 		<Footer />
+		<script>
+		  import "lazysizes";
+		</script>
 	</body>
 </html>
