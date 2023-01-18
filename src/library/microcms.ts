@@ -154,7 +154,8 @@ export const test = async (queries?: MicroCMSQueries) => {
   console.log(data.contents);
 
   if (data.offset + data.limit < data.totalCount) {
-    const result:BlogResponse = await test({limit:data.limit, offset:data.offset + data.limit});
+    queries.offset = data.offset + data.limit;
+    const result:BlogResponse = await test(queries);
     console.log(result.contents);
     return {
         offset:result.offset,
