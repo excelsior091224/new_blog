@@ -4,6 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import Sidebar from '../../../components/Sidebar.astro';
 import Posts from '../../../components/Posts.astro';
+import PreloadFirstPostEyecatch from '../../../components/PreloadFirstPostEyecatch.astro';
 import GoogleResponsiveAd from '../../../components/GoogleResponsiveAd';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../../config';
 
@@ -70,6 +71,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 				margin-top: 0;
 			}
 		</style>
+		<PreloadFirstPostEyecatch posts={page.data}/>
 	</head>
 	<body>
 		<Header />
@@ -77,7 +79,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 			<Sidebar></Sidebar>
 			<section class="contents">
 				<h1>{category.name}</h1>
-				<Posts posts={page}/>
+				<Posts posts={page.data}/>
 				{page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
 				{page.url.next ? <a href={page.url.next}>Next</a> : null}
 				<!-- <GoogleResponsiveAd client:only="preact"/> -->

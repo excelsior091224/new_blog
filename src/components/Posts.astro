@@ -3,9 +3,9 @@ const { posts } = Astro.props;
 ---
 <div>
     {
-        posts.data.map((post:any,index:number) => (
+        posts.map((post:any,index:number) => (
             <div class="post">
-                {post.eyecatch && index === 0 ? <link rel="preload" as="image" href={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} /><a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" /></a> : post.eyecatch ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} data-src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" class="lazyload"/></a> : null }
+                {post.eyecatch && index === 0 ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" /></a> : post.eyecatch ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} data-src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" class="lazyload"/></a> : null }
                 <span class="published_time_span">
                     <time datetime={post.publishedAt}>
                         {new Date(post.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' })}

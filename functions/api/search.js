@@ -13,7 +13,8 @@ export async function onRequest({ request, env }) {
     data.q = queries.q;
 
     if (data.offset + data.limit < data.totalCount) {
-      const result = await getBlogs({q:q,limit:data.limit, offset:data.offset + data.limit})
+      queries ? queries.offset = data.offset + data.limit : '';
+      const result = await getBlogs(queries)
       return {
           q:q,
           offset:result.offset,

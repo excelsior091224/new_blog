@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Posts from '../components/Posts.astro';
+import PreloadFirstPostEyecatch from '../components/PreloadFirstPostEyecatch.astro';
 import GoogleResponsiveAd from '../components/GoogleResponsiveAd';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
@@ -45,13 +46,14 @@ const { page } = Astro.props;
 				margin:1em auto;
 			}
 		</style>
+		<PreloadFirstPostEyecatch posts={page.data}/>
 	</head>
 	<body>
 		<Header />
 		<main class="main">
 			<Sidebar></Sidebar>
 			<section class="contents">
-				<Posts posts={page}/>
+				<Posts posts={page.data}/>
 				{page.url.prev ? <a href={page.url.prev}>Previous</a> : page.url.current === '' ? null : <a href="/">Previous</a>}
 				{page.url.next ? <a href={page.url.next}>Next</a> : null}
 				<!-- <GoogleResponsiveAd client:only="preact"/> -->
