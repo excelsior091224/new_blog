@@ -10,7 +10,9 @@ const BlogSearch = () => {
   const params = new URLSearchParams(window.location.search);
   const q = params.get("q");
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
+
+  const [page, setPage] = useState(params.get("page") ? Number(params.get("page")) : 1);
 
   const getBlogs = async (queries?: MicroCMSQueries) => {
     return await client.get<BlogResponse>({ endpoint: "blogs", queries });
@@ -54,18 +56,48 @@ const BlogSearch = () => {
           {data?.totalCount !== undefined && (
             <nav>
               <ul style={{ display: "flex", gap: "8px" }}>
+                {page >= 2
+                ?
+                <li style={{ listStyle: "none" }}>
+                  <a href={page - 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${page - 1}`}>
+                    Prev
+                  </a>
+                </li>
+                :
+                null
+                }
                 {Array.from({
                   length: Math.ceil(data.totalCount / LIMIT),
                 }).map((_, i) => (
                   <li key={i} style={{ listStyle: "none" }}>
-                    <button
+                    {/* <button
                       onClick={() => setPage(i + 1)}
-                      disabled={page === i + 1}
-                    >
-                      {i + 1}
-                    </button>
+                      disabled={page === i + 1 }
+                    > */}
+                      {/* {i + 1} */}
+                    {/* </button> */}
+                    {page === i + 1 ?
+                      <span>
+                        {i + 1}
+                      </span>
+                      :
+                      <a 
+                      href={i + 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${i + 1}`}
+                      >
+                        {i + 1}
+                      </a>
+                    }
                   </li>
                 ))}
+                {page != Math.ceil(data.totalCount / LIMIT) ?
+                  <li style={{ listStyle: "none" }}>
+                  <a href={`/search?q=${q}&page=${page + 1}`}>
+                    Next
+                  </a>
+                  </li>
+                  :
+                  null
+                }
               </ul>
             </nav>
           )}
