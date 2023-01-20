@@ -40,7 +40,7 @@ const BlogSearch = () => {
         <>
           {data?.contents.map((post:any) => (
           <div class="post">
-            {post.eyecatch && <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" /></a>}
+            {post.eyecatch && <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a>}
             <span class="published_time_span">
               <time dateTime={post.publishedAt}>
                 {new Date(post.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' })}
