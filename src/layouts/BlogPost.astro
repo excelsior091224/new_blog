@@ -51,10 +51,12 @@ const {
 						</div>
 					)
 				}
-				{ categoryId && categoryName && <span class="category"><a href={`/category/${categoryId}`}>{categoryName}</a></span> }
-				<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
-					Tweet
-				</a>
+				<div class="spans">
+					{ categoryId && categoryName && <span class="category"><a href={`/category/${categoryId}`}>{categoryName}</a></span> }
+					<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
+						Tweet
+					</a>
+				</div>
 				<hr />
 				<slot />
 				<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">

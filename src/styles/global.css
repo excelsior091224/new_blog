@@ -238,6 +238,9 @@ a div.description {
   transform: translate(-50%,-50%) rotate(-45deg);
 }
 
+.spans {
+  margin: 8px 0px;
+}
 
 @media screen and (min-width: 636px) {
   /*.nav-links {
