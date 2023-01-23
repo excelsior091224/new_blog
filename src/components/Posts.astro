@@ -5,7 +5,7 @@ const { posts } = Astro.props;
     {
         posts.map((post:any,index:number) => (
             <div class="post">
-                {post.eyecatch && index === 0 ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a> : post.eyecatch ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} data-src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" class="lazyload"/></a> : null }
+                {post.eyecatch && index === 0 || index === 1 ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a> : post.eyecatch ? <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} data-src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" class="lazyload"/></a> : null }
                 <div class="spans">
                     <span class="published_time_span">
                         <time datetime={post.publishedAt}>
