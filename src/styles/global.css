@@ -187,7 +187,7 @@ a div.description {
 }
 
 .published_time_span {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .published_time_span time {
@@ -196,7 +196,7 @@ a div.description {
 }
 
 .category {
-  font-size: 13px;
+  font-size: 15px;
   margin:auto;
 }
 
@@ -239,7 +239,7 @@ a div.description {
 }
 
 .spans {
-  margin: 8px 0px;
+  padding: 8px 0px;
 }
 
 @media screen and (min-width: 636px) {
