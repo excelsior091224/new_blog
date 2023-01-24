@@ -37,7 +37,7 @@ const category = await getCategoryDetail(params.categoryId as string);
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${category}|${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			ul {
 				list-style-type: none;
