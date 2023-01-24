@@ -4,6 +4,7 @@ import GoogleResponsiveAd from '../../components/GoogleResponsiveAd';
 import { getBlogs, getBlogDetail } from "../../library/microcms";
 import pkg from 'microcms-richedit-processer';
 const { processer } = pkg;
+import { SITE_TITLE } from '../config';
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ const blog = await getBlogDetail(blogId as string);
 ---
 
 <Layout content={{
-    title: blog.title,
+    title: `${blog.title}|${SITE_TITLE}`,
     description: blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,''),
     heroImage: blog.eyecatch && `${blog.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`,
     pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
