@@ -40,7 +40,7 @@ const BlogSearch = () => {
         <>
           {data?.contents.map((post:any) => (
           <div class="post">
-            {post.eyecatch && <a href={`/posts/${post.id}`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a>}
+            {post.eyecatch && <a href={`/posts/${post.id}/`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a>}
             <div class="spans">
                 <span class="published_time_span">
                     <time dateTime={post.publishedAt}>
@@ -49,7 +49,7 @@ const BlogSearch = () => {
                 </span>
                 {post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}
             </div>
-            <a href={`/posts/${post.id}`}>
+            <a href={`/posts/${post.id}/`}>
               <h2>{post.title}</h2>
               <div class="description">{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</div>
             </a>

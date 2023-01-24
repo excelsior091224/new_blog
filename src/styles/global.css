@@ -242,6 +242,39 @@ a div.description {
   padding: 8px 0px;
 }
 
+.newer_home_older {
+  width: 100%;
+}
+
+.newer_home_older ul {
+  padding-inline-start:0;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.newer_home_older ul li{
+  display: inline-block;
+  width:33%;
+  text-align: center;
+}
+
+.newer_home_older ul li div {
+  display: flex;
+}
+
+.newer_home_older ul li div > a {
+  margin: 0 auto;
+}
+
+.newer > span {
+  margin: 0 0 0 auto;
+}
+
+.older > span {
+  margin: 0 auto 0 0;
+}
+
 @media screen and (min-width: 636px) {
   /*.nav-links {
     margin-left: 5em;
