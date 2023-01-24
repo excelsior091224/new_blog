@@ -31,5 +31,9 @@ const blog = await getBlogDetail(blogId as string);
 }}>
   <!-- <GoogleResponsiveAd client:only="preact"/> -->
   <main set:html={processer(blog.content, { img: { parameters: { fm: 'webp' } } })} />
+  <div id="wavebox" class="wavebox">
+        <p>もしこの投稿が「いいね！」と思ったら↓から拍手をください</p>
+        <a href="https://wavebox.me/wave/9yprnt1ii7tatpb8/"><img width="100" src="../../../public/logo_symbol_black.png" /></a>
+  </div>
   <!-- <GoogleResponsiveAd client:only="preact"/> -->
 </Layout>
