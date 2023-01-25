@@ -285,6 +285,7 @@ a:focus {
   display: flex;
   gap: 10px;
   justify-content: center;
+  padding-inline-start: 0px;
 }
 
 .pagination ul li {
