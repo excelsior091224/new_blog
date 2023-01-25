@@ -1,92 +1,101 @@
 ---
-import BaseHead from '../../../components/BaseHead.astro';
-import Header from '../../../components/Header.astro';
-import Footer from '../../../components/Footer.astro';
-import Sidebar from '../../../components/Sidebar.astro';
-import Posts from '../../../components/Posts.astro';
-import PreloadFirstPostEyecatch from '../../../components/PreloadFirstPostEyecatch.astro';
-import GoogleResponsiveAd from '../../../components/GoogleResponsiveAd';
-import Pagination from '../../../components/Pagination.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../../config';
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import Posts from "../../../components/Posts.astro";
+import PreloadFirstPostEyecatch from "../../../components/PreloadFirstPostEyecatch.astro";
+import GoogleResponsiveAd from "../../../components/GoogleResponsiveAd";
+import Pagination from "../../../components/Pagination.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../../config";
 
 //microCMS呼び出し
-import { getBlogs, getCategories, getCategoryDetail } from "../../../library/microcms";
+import {
+  getBlogs,
+  getCategories,
+  getCategoryDetail,
+} from "../../../library/microcms";
 
-export async function getStaticPaths({paginate}:any) {
+export async function getStaticPaths({ paginate }: any) {
   const { contents: categories } = await getCategories({ fields: ["id"] });
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
-  const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt", "content", "eyecatch","category"],orders:'-publishedAt' });
+  const { contents: posts } = await getBlogs({
+    fields: ["id", "title", "publishedAt", "content", "eyecatch", "category"],
+    orders: "-publishedAt",
+  });
   // console.log(posts);
   // すべてのタグに対して、paginate() の結果を返す。
   // 必ず、`{params: {tag}} を `paginate()` に渡してください。
   // そうすれば、Astroは結果がどのタググループに対するものか分かります。
   return allTags.map((categoryId) => {
-    const filteredPosts = posts.filter((post) => post.category !== null && post.category.id === categoryId);
+    const filteredPosts = posts.filter(
+      (post) => post.category !== null && post.category.id === categoryId
+    );
     return paginate(filteredPosts, {
       params: { categoryId },
-      pageSize: 10
+      pageSize: 10,
     });
   });
 }
 const { page } = Astro.props;
 const params = Astro.params;
 const category = await getCategoryDetail(params.categoryId as string);
-
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
-	<head>
-		<BaseHead title={`${category.name}|${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-		<style>
-			ul {
-				list-style-type: none;
-				padding: unset;
-			}
-			ul li {
-				display: flex;
-			}
-			ul li time {
-				flex: 0 0 130px;
-				font-style: italic;
-				color: #595959;
-			}
-			ul li a:visited {
-				color: #8e32dc;
-			}
+  <head>
+    <BaseHead
+      title={`${category.name}|${SITE_TITLE}`}
+      description={SITE_DESCRIPTION}
+    />
+    <style>
+      ul {
+        list-style-type: none;
+        padding: unset;
+      }
+      ul li {
+        display: flex;
+      }
+      ul li time {
+        flex: 0 0 130px;
+        font-style: italic;
+        color: #595959;
+      }
+      ul li a:visited {
+        color: #8e32dc;
+      }
 
-			div a div {
-				margin:1em auto;
-			}
-			div a div time {
-				flex: 0 0 130px;
-				font-style: italic;
-				color: #595959;
-			}
-			div a:visited {
-				color: #8e32dc;
-			}
+      div a div {
+        margin: 1em auto;
+      }
+      div a div time {
+        flex: 0 0 130px;
+        font-style: italic;
+        color: #595959;
+      }
+      div a:visited {
+        color: #8e32dc;
+      }
 
-			div a div h2 {
-				margin-top: 0;
-			}
-		</style>
-		<PreloadFirstPostEyecatch posts={page.data}/>
-	</head>
-	<body>
-		<Header />
-		<main class="main">
-			<Sidebar></Sidebar>
-			<section class="contents">
-				<h1>{category.name}</h1>
-				<Posts posts={page.data}/>
-				<!-- {page.url.prev ? <a href={page.url.prev}>Previous</a> : null} -->
-				<!-- {page.url.next ? <a href={page.url.next}>Next</a> : null} -->
-                <Pagination page={page} categoryId={params.categoryId}/>
-				<!-- <GoogleResponsiveAd client:only="preact"/> -->
-			</section>
-		</main>
-		<Footer />
-	</body>
+      div a div h2 {
+        margin-top: 0;
+      }
+    </style>
+    <PreloadFirstPostEyecatch posts={page.data} />
+  </head>
+  <body>
+    <Header />
+    <main class="main">
+      <Sidebar />
+      <section class="contents">
+        <h1>{category.name}</h1>
+        <Posts posts={page.data} />
+        <Pagination page={page} categoryId={params.categoryId} />
+        <!-- <GoogleResponsiveAd client:only="preact"/> -->
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>

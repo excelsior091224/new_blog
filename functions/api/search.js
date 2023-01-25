@@ -9,41 +9,45 @@ export async function onRequest({ request, env }) {
   });
 
   const getBlogs = async (queries) => {
-    const data = await client.get({ endpoint: "blogs", queries});
+    const data = await client.get({ endpoint: "blogs", queries });
     data.q = queries.q;
 
     if (data.offset + data.limit < data.totalCount) {
-      queries ? queries.offset = data.offset + data.limit : '';
-      const result = await getBlogs(queries)
+      queries ? (queries.offset = data.offset + data.limit) : "";
+      const result = await getBlogs(queries);
       return {
-          q:q,
-          offset:result.offset,
-          limit:result.limit,
-          contents: [...data.contents, ...result.contents],
-          totalCount: result.totalCount,
-        };
+        q: q,
+        offset: result.offset,
+        limit: result.limit,
+        contents: [...data.contents, ...result.contents],
+        totalCount: result.totalCount,
+      };
     }
-    return data
+    return data;
   };
 
   const url = request.url;
-  const q  = new URL(url).searchParams.get('q');
+  const q = new URL(url).searchParams.get("q");
   if (!q) {
-    return new Response(JSON.stringify({
+    return new Response(
+      JSON.stringify({
         error: 'Missing "q" query parameter',
-      }), {status:400});
+      }),
+      { status: 400 }
+    );
   }
-  return await getBlogs({ q: q, orders: '-publishedAt' })
-  // client
-  //   .get({
-  //     endpoint: 'blogs',
-  //     queries: { q: q, orders: '-createdAt' },
-  //   })
+  return await getBlogs({ q: q, orders: "-publishedAt" })
+    // client
+    //   .get({
+    //     endpoint: 'blogs',
+    //     queries: { q: q, orders: '-createdAt' },
+    //   })
     .then((data) => {
-      return new Response(JSON.stringify(data), {status:200})
+      return new Response(JSON.stringify(data), { status: 200 });
     })
-    .catch((error) => (
-      new Response(String(error), {status:400})
-      // new Response(JSON.stringify({error:String(error),query:q,client:client}), {status:400})
-    ));
-};
+    .catch(
+      (error) =>
+        new Response(String(error), { status: 400 })
+        // new Response(JSON.stringify({error:String(error),query:q,client:client}), {status:400})
+    );
+}

@@ -2,54 +2,97 @@
 import type { Page } from "astro";
 // PropsでpageとadjacentPageNumber（隣接するページを表示する数）を定義
 export interface Props {
-	page: Page;
-    adjacentPageNumber?: number;
-    categoryId?: string;
+  page: Page;
+  adjacentPageNumber?: number;
+  categoryId?: string;
 }
 // propsからpageを取得（adjacentPageNumberの初期値は1）
-const { page, adjacentPageNumber = 1, categoryId = null } = Astro.props;
+const { page, adjacentPageNumber = 1, categoryId } = Astro.props;
 // ページ番号の配列を作成
 const pager = [...Array(page.lastPage).keys()].map((i) => ++i);
 // リンク先のパスを生成する関数
-const getPath = (page:number, cId?:string) => {
-  const path = cId ? (page === 1 ? `/category/${cId}/` : `/category/${cId}/${page}`) : (page === 1 ? `/` : `/${page}`)
-  return path
+const getPath = (page: number, cId?: string) => {
+  const path = cId
+    ? page === 1
+      ? `/category/${cId}/`
+      : `/category/${cId}/${page}`
+    : page === 1
+    ? `/`
+    : `/${page}`;
+  return path;
   //if (page) {
   //    return `./${page}`;
   //} else {
   //    return `./`;
-  //}  
+  //}
 };
 ---
+
 <nav class="pagination">
   <ul>
     <!-- 前ページが存在する場合はPREVリンクを表示する -->
-    {page.url.prev ? <li><a href={page.url.prev}>Previous</a></li> : page.url.current === '' || page.url.current === `/category/${categoryId}` ? null : categoryId ? <li><a href={`/category/${categoryId}/`}>Previous</a></li> : <li><a href="/">Previous</a></li>}
-    <!-- 現在ページが「隣接ページ数 + 1」を超える場合は先頭ページと...を表示する -->
-    {adjacentPageNumber + 1 < page.currentPage &&
+    {
+      page.url.prev ? (
         <li>
-            <a href={getPath(1,categoryId)}>
-            1
-            </a>
+          <a href={page.url.prev}>&#9665;</a>
         </li>
-        <li>&#8230;</li>
+      ) : page.url.current === "" ||
+        page.url.current === `/category/${categoryId}` ? null : categoryId ? (
+        <li>
+          <a href={`/category/${categoryId}/`}>&#9665;</a>
+        </li>
+      ) : (
+        <li>
+          <a href="/">&#9665;</a>
+        </li>
+      )
+    }
+    <!-- 現在ページが「隣接ページ数 + 1」を超える場合は先頭ページと...を表示する -->
+    {
+      adjacentPageNumber + 1 < page.currentPage && (
+        <>
+          <li>
+            <a href={getPath(1, categoryId)}>1</a>
+          </li>
+          <li>&#8230;</li>
+        </>
+      )
     }
     <!-- ページ番号の配列リストから「現在ページ +- 隣接ページ数」のページを表示する -->
-    {pager.map((p) => (
-        page.currentPage - adjacentPageNumber <= p && p <= page.currentPage + adjacentPageNumber &&
-            (page.currentPage === p ?
-             <li><span>{p}</span></li> :
-             <li><a href={getPath(p,categoryId)}>{p}</a></li>
-            )
-    ))}
+    {
+      pager.map(
+        (p) =>
+          page.currentPage - adjacentPageNumber <= p &&
+          p <= page.currentPage + adjacentPageNumber &&
+          (page.currentPage === p ? (
+            <li>
+              <span>{p}</span>
+            </li>
+          ) : (
+            <li>
+              <a href={getPath(p, categoryId)}>{p}</a>
+            </li>
+          ))
+      )
+    }
     <!-- 現在ページが「最終ページ - 隣接ページ数」の場合...と最終ページを表示する -->
-    {page.currentPage < page.lastPage - adjacentPageNumber &&
-        <li>&#8230;</li>
-        <li>
-            <a href={getPath(page.lastPage,categoryId)}>{page.lastPage}</a>
-        </li>
+    {
+      page.currentPage < page.lastPage - adjacentPageNumber && (
+        <>
+          <li>&#8230;</li>
+          <li>
+            <a href={getPath(page.lastPage, categoryId)}>{page.lastPage}</a>
+          </li>
+        </>
+      )
     }
     <!-- 次ページが存在する場合はNEXTリンクを表示する -->
-    {page.url.next && <li><a href={page.url.next}>Next</a></li>}
+    {
+      page.url.next && (
+        <li>
+          <a href={page.url.next}>&#9655;</a>
+        </li>
+      )
+    }
   </ul>
 </nav>

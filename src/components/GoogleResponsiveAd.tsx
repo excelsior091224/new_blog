@@ -1,5 +1,4 @@
-import React from 'react';
-import {Adsense} from '@ctrl/react-adsense';
+import { Adsense } from '@ctrl/react-adsense';
 
 const DisplayAd = () => {
     return (

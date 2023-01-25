@@ -19,16 +19,16 @@ const BlogPreview = () => {
 
   return (
     <article class="contents">
-        {data?.eyecatch && <img class="heroImage" width="720" height="360" src={`${data?.eyecatch?.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" />}
-        <h1 class="title">{data?.title}</h1>
-        <time class="publishedAt">{data?.publishedAt ?? data?.createdAt}</time>			
-        <div>
-            Last updated on <time class="updatedAt">{data?.updatedAt ?? data?.createdAt}</time>
-        </div>
-        { data?.category && <span class="category"><a href={`/category/${data?.category?.id}`}>{data?.category?.name}</a></span> }
-        <hr />
-        <main class="post" dangerouslySetInnerHTML={{ __html: data?.content ?? "" }}/>
-        {isValidating && <div>更新中...</div>}
+      {data?.eyecatch && <img class="heroImage" width="720" height="360" src={`${data?.eyecatch?.url}?fit=crop&crop=top&w=720&h=360&fm=webp`} alt="" />}
+      <h1 class="title">{data?.title}</h1>
+      <time class="publishedAt">{data?.publishedAt ?? data?.createdAt}</time>
+      <div>
+        Last updated on <time class="updatedAt">{data?.updatedAt ?? data?.createdAt}</time>
+      </div>
+      {data?.category && <span class="category"><a href={`/category/${data?.category?.id}`}>{data?.category?.name}</a></span>}
+      <hr />
+      <main class="post" dangerouslySetInnerHTML={{ __html: data?.content ?? "" }} />
+      {isValidating && <div>更新中...</div>}
     </article>
   );
 };

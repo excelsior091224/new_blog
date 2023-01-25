@@ -7,26 +7,26 @@ import BlogPreview from "../components/BlogPreview";
 ---
 
 <html lang="ja">
-	<head>
-		<BaseHead title="" description="" robots="noindex" />
-		<style>
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-				border-top: 1px solid #ddd;
-				margin: 1rem 0;
-			}
-		</style>
-	</head>
+  <head>
+    <BaseHead title="" description="" robots="noindex" />
+    <style>
+      .title {
+        font-size: 2em;
+        margin: 0.25em 0 0;
+      }
+      hr {
+        border-top: 1px solid #ddd;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
 
-	<body>
-		<Header />
-		<main class="main">
-			<Sidebar></Sidebar>
-			<BlogPreview client:only="preact" />
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Header />
+    <main class="main">
+      <Sidebar />
+      <BlogPreview client:only="preact" />
+    </main>
+    <Footer />
+  </body>
 </html>

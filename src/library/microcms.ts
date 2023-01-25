@@ -70,19 +70,19 @@ export type LinkResponse = {
 //   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
 // };
 export const getBlogs = async (queries?: MicroCMSQueries) => {
-  const data = await client.get<BlogResponse>({ endpoint: "blogs", queries});
+  const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
 
   if (data.offset + data.limit < data.totalCount) {
-    queries ? queries.offset = data.offset + data.limit : '';
-    const result:BlogResponse = await getBlogs(queries);
+    queries ? (queries.offset = data.offset + data.limit) : "";
+    const result: BlogResponse = await getBlogs(queries);
     return {
-        offset:result.offset,
-        limit:result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
+      offset: result.offset,
+      limit: result.limit,
+      contents: [...data.contents, ...result.contents],
+      totalCount: result.totalCount,
+    };
   }
-  return data
+  return data;
 };
 export const getBlogDetail = async (
   contentId: string,
@@ -98,19 +98,22 @@ export const getBlogDetail = async (
 //   return await client.get<CategoryResponse>({ endpoint: "categories", queries });
 // };
 export const getCategories = async (queries?: MicroCMSQueries) => {
-  const data = await client.get<CategoryResponse>({ endpoint: "categories", queries });
+  const data = await client.get<CategoryResponse>({
+    endpoint: "categories",
+    queries,
+  });
 
   if (data.offset + data.limit < data.totalCount) {
-    queries ? queries.offset = data.offset + data.limit : '';
-    const result:CategoryResponse = await getCategories(queries);
+    queries ? (queries.offset = data.offset + data.limit) : "";
+    const result: CategoryResponse = await getCategories(queries);
     return {
-        offset:result.offset,
-        limit:result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
+      offset: result.offset,
+      limit: result.limit,
+      contents: [...data.contents, ...result.contents],
+      totalCount: result.totalCount,
+    };
   }
-  return data
+  return data;
 };
 export const getCategoryDetail = async (
   contentId: string,
@@ -129,16 +132,16 @@ export const getLinks = async (queries?: MicroCMSQueries) => {
   const data = await client.get<LinkResponse>({ endpoint: "links", queries });
 
   if (data.offset + data.limit < data.totalCount) {
-    queries ? queries.offset = data.offset + data.limit : '';
-    const result:LinkResponse = await getLinks(queries);
+    queries ? (queries.offset = data.offset + data.limit) : "";
+    const result: LinkResponse = await getLinks(queries);
     return {
-        offset:result.offset,
-        limit:result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
+      offset: result.offset,
+      limit: result.limit,
+      contents: [...data.contents, ...result.contents],
+      totalCount: result.totalCount,
+    };
   }
-  return data
+  return data;
 };
 export const getLinkDetail = async (
   contentId: string,

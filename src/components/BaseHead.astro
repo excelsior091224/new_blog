@@ -1,35 +1,47 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
+import "../styles/global.css";
 
 export interface Props {
-	title: string;
-	description: string;
-	image?: string;
+  title: string;
+  description: string;
+  image?: string;
   robots?: string;
 }
 
-const { title, description, image = import.meta.env.CARD_IMAGE, robots = "index, follow" } = Astro.props;
+const {
+  title,
+  description,
+  image = import.meta.env.CARD_IMAGE,
+  robots = "index, follow",
+} = Astro.props;
 ---
+
 <!-- The next line enables the indexing by robots on the page level -->
 <meta name="robots" content={robots} />
 
 <!-- Google tag (gtag.js) -->
 <script
- type="text/partytown"
-  src="https://www.googletagmanager.com/gtag/js?id=G-0M4H6RV722">
-</script>
+  type="text/partytown"
+  src="https://www.googletagmanager.com/gtag/js?id=G-0M4H6RV722"
+></script>
 <script type="text/partytown">
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
 
-  gtag('config', 'G-0M4H6RV722');
+  gtag("config", "G-0M4H6RV722");
 </script>
 
 <!-- Google Adsense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320" crossorigin="anonymous"></script>
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320"
+  crossorigin="anonymous"
+></script>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -48,12 +60,14 @@ const { title, description, image = import.meta.env.CARD_IMAGE, robots = "index,
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
-<meta property="og:image" content={`${image}?fit=crop&crop=top&w=720&h=360`} />
+<meta property="og:image" content={`${image}?fm=webp&fit=crop&crop=top&w=720&h=360`} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<!-- <meta property="twitter:image" content={new URL(image, Astro.url)} /> -->
-<meta property="twitter:image" content={`${image}?fit=crop&crop=top&w=720&h=360`} />
+<meta
+  property="twitter:image"
+  content={`${image}?fm=webp&fit=crop&crop=top&w=720&h=360`}
+/>

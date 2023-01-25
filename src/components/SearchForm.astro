@@ -3,9 +3,14 @@ const { searchform_text_id } = Astro.props;
 ---
 
 <div class="searchform">
-    <form action="/search" method="get">
-        <label for={searchform_text_id}>サイト内検索</label>
-        <input id={searchform_text_id} type="text" name="q" class="searchform-text">
-        <input type="submit" value="検索" class="searchform-submit">
-    </form>
+  <form action="/search" method="get">
+    <label for={searchform_text_id}>サイト内検索</label>
+    <input
+      id={searchform_text_id}
+      type="text"
+      name="q"
+      class="searchform-text"
+    />
+    <input type="submit" value="検索" class="searchform-submit" />
+  </form>
 </div>

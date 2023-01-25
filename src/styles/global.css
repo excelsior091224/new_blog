@@ -4,16 +4,16 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 body {
-	font-family: Verdana, sans-serif;
-	margin: auto;
-	padding: 20px;
-	max-width: 65ch;
-	text-align: left;
-	background-color: #fff;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	line-height: 1.5;
-	color: #444;
+  font-family: Verdana, sans-serif;
+  margin: auto;
+  padding: 20px;
+  max-width: 65ch;
+  text-align: left;
+  background-color: #fff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  color: #444;
 }
 h1,
 h2,
@@ -23,51 +23,51 @@ h5,
 h6,
 strong,
 b {
-	color: #222;
+  color: #222;
 }
 a {
-	color: #3273dc;
+  color: #3273dc;
 }
 textarea {
-	width: 100%;
-	font-size: 16px;
+  width: 100%;
+  font-size: 16px;
 }
 input {
-	font-size: 16px;
+  font-size: 16px;
 }
 content {
-	line-height: 1.6;
+  line-height: 1.6;
 }
 table {
-	width: 100%;
+  width: 100%;
 }
 img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 code {
-	padding: 2px 5px;
-	background-color: #f2f2f2;
+  padding: 2px 5px;
+  background-color: #f2f2f2;
 }
 pre {
-	padding: 1rem;
+  padding: 1rem;
 }
 pre > code {
-	all: unset;
+  all: unset;
 }
 blockquote {
-	border: 1px solid #999;
-	color: #222;
-	padding: 2px 0px 2px 20px;
-	margin: 0px;
-	font-style: italic;
+  border: 1px solid #999;
+  color: #222;
+  padding: 2px 0px 2px 20px;
+  margin: 0px;
+  font-style: italic;
 }
 section a {
-	text-decoration: none;
+  text-decoration: none;
 }
 a div.description {
-	color: #444;
-	text-decoration: none;
+  color: #444;
+  text-decoration: none;
 }
 
 .hamburger {
@@ -88,7 +88,7 @@ a div.description {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 .nav-links {
   width: 100%;
@@ -123,7 +123,8 @@ a div.description {
   text-transform: uppercase;
 }
 
-.nav-links a:hover, a:focus {
+.nav-links a:hover,
+a:focus {
   background-color: #8f8f8f;
 }
 
@@ -138,11 +139,11 @@ a div.description {
 
 .categories_link ul {
   margin: 0;
-  padding-left:0;
+  padding-left: 0;
 }
 
 .categories_link li {
-  list-style:none;
+  list-style: none;
 }
 
 .categories_button {
@@ -162,11 +163,11 @@ a div.description {
 
 .external_link ul {
   margin: 0;
-  padding-left:0;
+  padding-left: 0;
 }
 
 .external_link li {
-  list-style:none;
+  list-style: none;
 }
 
 .external_link_button {
@@ -197,7 +198,7 @@ a div.description {
 
 .category {
   font-size: 15px;
-  margin:auto;
+  margin: auto;
 }
 
 .category a {
@@ -220,7 +221,9 @@ a div.description {
   height: 30px;
 }
 
-.close::before, .close::after { /* 共通設定 */
+.close::before,
+.close::after {
+  /* 共通設定 */
   content: "";
   position: absolute;
   top: 50%;
@@ -231,11 +234,11 @@ a div.description {
 }
 
 .close::before {
-  transform: translate(-50%,-50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close::after {
-  transform: translate(-50%,-50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .spans {
@@ -247,15 +250,15 @@ a div.description {
 }
 
 .newer_home_older ul {
-  padding-inline-start:0;
+  padding-inline-start: 0;
   display: flex;
   list-style: none;
   justify-content: center;
 }
 
-.newer_home_older ul li{
+.newer_home_older ul li {
   display: inline-block;
-  width:33%;
+  width: 33%;
   text-align: center;
 }
 
@@ -275,15 +278,18 @@ a div.description {
   margin: 0 auto 0 0;
 }
 
+.pagination {
+}
+
 .pagination ul {
   display: flex;
-  list-style: none;
+  gap: 10px;
   justify-content: center;
 }
 
-.pagination ul li{
+.pagination ul li {
   display: inline-block;
-  text-align: center;
+  list-style: none;
 }
 
 @media screen and (min-width: 636px) {
@@ -307,7 +313,7 @@ a div.description {
   /*.close {
     display: none;
   }*/
-  
+
   .categories_button {
     padding: 15px 20px;
     display: inline-block;
@@ -336,7 +342,7 @@ a div.description {
   }
 
   .contents {
-    width:80%;
+    width: 80%;
   }
 
   .hamburger {

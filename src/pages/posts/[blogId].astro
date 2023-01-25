@@ -1,8 +1,8 @@
 ---
 import Layout from "../../layouts/BlogPost.astro";
-import GoogleResponsiveAd from '../../components/GoogleResponsiveAd';
+import GoogleResponsiveAd from "../../components/GoogleResponsiveAd";
 import { getBlogs, getBlogDetail } from "../../library/microcms";
-import pkg from 'microcms-richedit-processer';
+import pkg from "microcms-richedit-processer";
 const { processer } = pkg;
 
 // 生成する記事のIDを全て取得
@@ -19,7 +19,10 @@ export async function getStaticPaths() {
 const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId as string);
 // 記事を発行日降順でIDとタイトルを取得
-const posts = await getBlogs({ fields: ["id","title"], orders:'-publishedAt' });
+const posts = await getBlogs({
+  fields: ["id", "title"],
+  orders: "-publishedAt",
+});
 // 現在の記事のpostsの中でのindex番号を取得
 const current_index = posts.contents.findIndex((post) => post.id === blogId);
 // 1つ新しい記事（ない場合null）
@@ -28,20 +31,47 @@ const newer = posts.contents[current_index - 1] ?? null;
 const older = posts.contents[current_index + 1] ?? null;
 ---
 
-<Layout content={{
+<Layout
+  content={{
     title: blog.title,
-    description: blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,''),
-    heroImage: blog.eyecatch && `${blog.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`,
-    pubDate: new Date(blog.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
-    updatedDate: new Date(blog.updatedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' }),
-    categoryId: blog.category.id ?? '',
-    categoryName: blog.category.name ?? '',
-}} newer={newer} older={older}>
-    <!-- <GoogleResponsiveAd client:only="preact"/> -->
-    <main set:html={processer(blog.content, { img: { parameters: { fm: 'webp' } } })} />
-    <div id="wavebox" class="wavebox">
-        <p>もしこの投稿が「いいね！」と思ったら↓から拍手をください</p>
-        <a href="https://wavebox.me/wave/9yprnt1ii7tatpb8/" target="_blank" rel="noopener noreferrer"><img width="100" height="40" alt="wavebox logo" src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/7ae13f9a38be4db3b40ac2166607885a/logo_symbol_black.png?fm=webp&w=100" /></a>
-    </div>
-    <!-- <GoogleResponsiveAd client:only="preact"/> -->
+    description:
+      blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "").length > 100
+        ? blog.content
+            .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+            .slice(0, 101) + "..."
+        : blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
+    heroImage:
+      blog.eyecatch &&
+      `${blog.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`,
+    pubDate: new Date(blog.publishedAt).toLocaleString("ja-JP", {
+      timeZone: "Asia/Tokyo",
+    }),
+    updatedDate: new Date(blog.updatedAt).toLocaleString("ja-JP", {
+      timeZone: "Asia/Tokyo",
+    }),
+    categoryId: blog.category.id ?? "",
+    categoryName: blog.category.name ?? "",
+  }}
+  newer={newer}
+  older={older}
+>
+  <!-- <GoogleResponsiveAd client:only="preact"/> -->
+  <main
+    set:html={processer(blog.content, { img: { parameters: { fm: "webp" } } })}
+  />
+  <div id="wavebox" class="wavebox">
+    <p>もしこの投稿が「いいね！」と思ったら↓から拍手をください</p>
+    <a
+      href="https://wavebox.me/wave/9yprnt1ii7tatpb8/"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><img
+        width="100"
+        height="40"
+        alt="wavebox logo"
+        src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/7ae13f9a38be4db3b40ac2166607885a/logo_symbol_black.png?fm=webp&w=100"
+      /></a
+    >
+  </div>
+  <!-- <GoogleResponsiveAd client:only="preact"/> -->
 </Layout>

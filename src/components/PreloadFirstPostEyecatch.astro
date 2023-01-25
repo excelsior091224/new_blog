@@ -1,8 +1,15 @@
 ---
 const { posts } = Astro.props;
 ---
+
 {
-    posts.map((post:any,index:number) => (
-        post.eyecatch && (index === 0 || index === 1) ? <link rel="preload" as="image" href={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} /> :  null 
-    ))
+  posts.map((post: any, index: number) =>
+    post.eyecatch && (index === 0 || index === 1) ? (
+      <link
+        rel="preload"
+        as="image"
+        href={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`}
+      />
+    ) : null
+  )
 }

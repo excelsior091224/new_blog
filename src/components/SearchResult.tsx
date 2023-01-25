@@ -29,6 +29,19 @@ const BlogSearch = () => {
       })
   );
 
+  const adjacentPageNumber = 1;
+
+  // リンク先のパスを生成する関数
+  const getPath = (q:any, page?: number) => {
+    const path = page ? `/search?q=${q}&page=${page}` : `/search?q=${q}`;
+    return path;
+    //if (page) {
+    //    return `./${page}`;
+    //} else {
+    //    return `./`;
+    //}
+  };
+
   if (error) return <div>エラーが発生しました</div>;
 
   if (isLoading) return <div>読み込み中...</div>;
@@ -57,45 +70,75 @@ const BlogSearch = () => {
           ))}
           {data?.totalCount !== undefined && (
             <nav>
-              <ul style={{ display: "flex", gap: "8px" }}>
+              <ul style={{ display: "flex", gap: "8px", justifyContent: "center" }}>
                 {page >= 2
                 ?
-                <li style={{ listStyle: "none" }}>
-                  <a href={page - 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${page - 1}`}>
-                    Prev
+                <li style={{ listStyle: "none", display: "inline-block" }}>
+                  {/* <a href={page - 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${page - 1}`}> */}
+                  <a href={page - 1 === 1 ? getPath(q) : getPath(q,page - 1)}>
+                    &#9665;
                   </a>
                 </li>
                 :
                 null
                 }
+                {
+                  adjacentPageNumber + 1 < page && (
+                    <>
+                      <li style={{ listStyle: "none", display: "inline-block" }}>
+                        <a href={getPath(q)}>1</a>
+                      </li>
+                      <li style={{ listStyle: "none", display: "inline-block" }}>
+                        &#8230;
+                      </li>
+                    </>
+                  )
+                }
                 {Array.from({
                   length: Math.ceil(data.totalCount / LIMIT),
                 }).map((_, i) => (
-                  <li key={i} style={{ listStyle: "none" }}>
-                    {/* <button
-                      onClick={() => setPage(i + 1)}
-                      disabled={page === i + 1 }
-                    > */}
-                      {/* {i + 1} */}
-                    {/* </button> */}
-                    {page === i + 1 ?
-                      <span>
-                        {i + 1}
-                      </span>
-                      :
-                      <a 
-                      href={i + 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${i + 1}`}
-                      >
-                        {i + 1}
-                      </a>
-                    }
-                  </li>
+                  // <li key={i} style={{ listStyle: "none", display: "inline-block" }}>
+                  //   {page === i + 1 ?
+                  //     <span>
+                  //       {i + 1}
+                  //     </span>
+                  //     :
+                  //     <a 
+                  //     href={i + 1 === 1 ? `/search?q=${q}` : `/search?q=${q}&page=${i + 1}`}
+                  //     >
+                  //       {i + 1}
+                  //     </a>
+                  //   }
+                  // </li>
+                  page - adjacentPageNumber <= i + 1 &&
+                  i + 1 <= page + adjacentPageNumber &&
+                  (page === i + 1 ? (
+                    <li key={i + 1} style={{ listStyle: "none", display: "inline-block" }}>
+                      <span>{i + 1}</span>
+                    </li>
+                  ) : (
+                    <li key={i + 1} style={{ listStyle: "none", display: "inline-block" }}>
+                      <a href={getPath(q, i + 1)}>{i + 1}</a>
+                    </li>
+                  ))
                 ))}
+                {
+                  page < Math.ceil(data.totalCount / LIMIT) - adjacentPageNumber && (
+                    <>
+                      <li style={{ listStyle: "none", display: "inline-block" }}>
+                        &#8230;
+                      </li>
+                      <li style={{ listStyle: "none", display: "inline-block" }}>
+                        <a href={getPath(q,Math.ceil(data.totalCount / LIMIT))}>{Math.ceil(data.totalCount / LIMIT)}</a>
+                      </li>
+                    </>
+                  )
+                }
                 {page != Math.ceil(data.totalCount / LIMIT) ?
-                  <li style={{ listStyle: "none" }}>
-                  <a href={`/search?q=${q}&page=${page + 1}`}>
-                    Next
-                  </a>
+                  <li style={{ listStyle: "none", display: "inline-block" }}>
+                    <a href={`/search?q=${q}&page=${page + 1}`}>
+                      &#9655;
+                    </a>
                   </li>
                   :
                   null

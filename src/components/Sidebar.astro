@@ -1,48 +1,109 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import SearchForm from './SearchForm.astro';
-import GoogleResponsiveAd from './GoogleResponsiveAd';
+import HeaderLink from "./HeaderLink.astro";
+import SearchForm from "./SearchForm.astro";
+import GoogleResponsiveAd from "./GoogleResponsiveAd";
 //microCMS呼び出し
 import { getCategories, getLinks } from "../library/microcms";
-const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
-const { contents: links } = await getLinks({fields: ["createdAt","title","url"],orders: 'createdAt'});
+const { contents: categories } = await getCategories({
+  fields: ["id", "name"],
+  orders: "name",
+});
+const { contents: links } = await getLinks({
+  fields: ["createdAt", "title", "url"],
+  orders: "createdAt",
+});
 ---
+
 <div class="sidebar">
-    <nav>
-        <SearchForm searchform_text_id="sidebar_searchform_text"/>
-        <div class="sidebar_private_links">            
-            <ul class="">
-                <li><a href="/about">プライバシーポリシー</a></li>
-                {import.meta.env.TWITTER ? <li><a href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer" class="">Twitter</a></li> : null}
-                {import.meta.env.PIXIV ? <li><a href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer" class="">pixiv</a></li> : null}
-                {import.meta.env.FANBOX ? <li><a href={import.meta.env.FANBOX} target="_blank" rel="noopener noreferrer" class="">FANBOX</a></li> : null}
-                {import.meta.env.OLD_SITE ? <li><a href={import.meta.env.OLD_SITE} target="_blank" rel="noopener noreferrer" class="">旧サイト</a></li> : null}
-            </ul>
-        </div>
-        <div class="sidebar_categories_links">
-            <p>Categories</p>
-            <ul>
-                {
-                    categories.map((category:any) => (
-                        <li>
-                            <HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
-                        </li>	
-                    ))
-                }
-            </ul>
-        </div>
-        <div class="sidebar_external_links">
-            <p>Links</p>
-            <ul>
-                {
-                    links.map((link:any) => (
-                        <li>
-                            <HeaderLink href={link.url}>{link.title}</HeaderLink>
-                        </li>	
-                    ))
-                }
-            </ul>
-        </div>
-    </nav>
-    <!-- <GoogleResponsiveAd client:only="preact"/> -->
+  <nav>
+    <SearchForm searchform_text_id="sidebar_searchform_text" />
+    <div class="sidebar_private_links">
+      <ul class="">
+        <li><a href="/about">プライバシーポリシー</a></li>
+        {
+          import.meta.env.TWITTER ? (
+            <li>
+              <a
+                href={import.meta.env.TWITTER}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                Twitter
+              </a>
+            </li>
+          ) : null
+        }
+        {
+          import.meta.env.PIXIV ? (
+            <li>
+              <a
+                href={import.meta.env.PIXIV}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                pixiv
+              </a>
+            </li>
+          ) : null
+        }
+        {
+          import.meta.env.FANBOX ? (
+            <li>
+              <a
+                href={import.meta.env.FANBOX}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                FANBOX
+              </a>
+            </li>
+          ) : null
+        }
+        {
+          import.meta.env.OLD_SITE ? (
+            <li>
+              <a
+                href={import.meta.env.OLD_SITE}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                旧サイト
+              </a>
+            </li>
+          ) : null
+        }
+      </ul>
+    </div>
+    <div class="sidebar_categories_links">
+      <p>Categories</p>
+      <ul>
+        {
+          categories.map((category: any) => (
+            <li>
+              <HeaderLink href={`/category/${category.id}`}>
+                {category.name}
+              </HeaderLink>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="sidebar_external_links">
+      <p>Links</p>
+      <ul>
+        {
+          links.map((link: any) => (
+            <li>
+              <HeaderLink href={link.url}>{link.title}</HeaderLink>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+  <!-- <GoogleResponsiveAd client:only="preact"/> -->
 </div>

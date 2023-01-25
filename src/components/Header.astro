@@ -1,79 +1,119 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import SearchForm from './SearchForm.astro';
-import { SITE_TITLE } from '../config';
+import HeaderLink from "./HeaderLink.astro";
+import SearchForm from "./SearchForm.astro";
+import { SITE_TITLE } from "../config";
 
 //microCMS呼び出し
 import { getCategories, getLinks } from "../library/microcms";
-const { contents: categories } = await getCategories({ fields: ["id","name"],orders: 'name' },);
-const { contents: links } = await getLinks({fields: ["createdAt","title","url"],orders: 'createdAt'});
+const { contents: categories } = await getCategories({
+  fields: ["id", "name"],
+  orders: "name",
+});
+const { contents: links } = await getLinks({
+  fields: ["createdAt", "title", "url"],
+  orders: "createdAt",
+});
 ---
 
 <header>
-	<div class="navbar">
-		<a href="/" class="">
-			<h2 class="site_title">
-				{SITE_TITLE}
-			</h2>
-		</a>
-		<div class="hamburger">
-			<span class="line"></span>
-			<span class="line"></span>
-			<span class="line"></span>
-		</div>
-	</div>
-	<nav>
-		<div class="nav-links">
-			<SearchForm searchform_text_id="header_searchform_text"/>
-			<HeaderLink href="/about">プライバシーポリシー</HeaderLink>
-			{import.meta.env.TWITTER ? <HeaderLink href={import.meta.env.TWITTER} target="_blank" rel="noopener noreferrer">Twitter</HeaderLink> : null}
-			{import.meta.env.PIXIV ? <HeaderLink href={import.meta.env.PIXIV} target="_blank" rel="noopener noreferrer">pixiv</HeaderLink> : null}
-			{import.meta.env.FANBOX ? <HeaderLink href={import.meta.env.FANBOX} target="_blank" rel="noopener noreferrer">FANBOX</HeaderLink> : null}
-			{import.meta.env.OLD_SITE ? <HeaderLink href={import.meta.env.OLD_SITE} target="_blank" rel="noopener noreferrer">旧サイト</HeaderLink> : null}
-			<details class="categories_link">
-				<summary class="categories_button">
-					Categories
-				</summary>
-					<ul>
-						{
-							categories.map((category:any) => (
-								<li>
-									<HeaderLink href={`/category/${category.id}`}>{category.name}</HeaderLink>
-								</li>	
-							))
-						}
-					</ul>
-			</details>
-			<details class="external_link">
-				<summary class="external_link_button">
-					Link
-				</summary>
-					<ul>
-						{
-							links.map((link:any) => (
-								<li>
-									<HeaderLink href={link.url}>{link.title}</HeaderLink>
-								</li>	
-							))
-						}
-					</ul>
-			</details>
-		</div>
-	</nav>	
+  <div class="navbar">
+    <a href="/" class="">
+      <h2 class="site_title">
+        {SITE_TITLE}
+      </h2>
+    </a>
+    <div class="hamburger">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+  <nav>
+    <div class="nav-links">
+      <SearchForm searchform_text_id="header_searchform_text" />
+      <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
+      {
+        import.meta.env.TWITTER ? (
+          <HeaderLink
+            href={import.meta.env.TWITTER}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </HeaderLink>
+        ) : null
+      }
+      {
+        import.meta.env.PIXIV ? (
+          <HeaderLink
+            href={import.meta.env.PIXIV}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            pixiv
+          </HeaderLink>
+        ) : null
+      }
+      {
+        import.meta.env.FANBOX ? (
+          <HeaderLink
+            href={import.meta.env.FANBOX}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            FANBOX
+          </HeaderLink>
+        ) : null
+      }
+      {
+        import.meta.env.OLD_SITE ? (
+          <HeaderLink
+            href={import.meta.env.OLD_SITE}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            旧サイト
+          </HeaderLink>
+        ) : null
+      }
+      <details class="categories_link">
+        <summary class="categories_button"> Categories</summary>
+        <ul>
+          {
+            categories.map((category: any) => (
+              <li>
+                <HeaderLink href={`/category/${category.id}`}>
+                  {category.name}
+                </HeaderLink>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+      <details class="external_link">
+        <summary class="external_link_button"> Link</summary>
+        <ul>
+          {
+            links.map((link: any) => (
+              <li>
+                <HeaderLink href={link.url}>{link.title}</HeaderLink>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+    </div>
+  </nav>
 </header>
 <style>
-	header {
-		width: 100%;
-		/* margin: 0em 0 2em; */
-		max-width: 65ch;
-		position: relative;
-		top: 0;
-		background-color: #fff;
-	}
-	h2 {
-		margin: 0.5em 0;
-	}
-	.site_title {
-		/*display: inline;*/
-	}
+  header {
+    width: 100%;
+    max-width: 65ch;
+    position: relative;
+    top: 0;
+    background-color: #fff;
+  }
+  h2 {
+    margin: 0.5em 0;
+  }
 </style>

@@ -1,87 +1,139 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Sidebar from '../components/Sidebar.astro';
-import { SITE_TITLE } from '../config';
-import type { Blog } from '../library/microcms';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+import { SITE_TITLE } from "../config";
+import type { Blog } from "../library/microcms";
 
 export interface Props {
-	content: {
-		title: string;
-		description: string;
-		pubDate?: string;
-		updatedDate?: string;
-		heroImage?: string;
-		categoryId: string;
-		categoryName: string;
-	};
-	newer?:Blog;
-	older?:Blog;
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+    heroImage?: string;
+    categoryId: string;
+    categoryName: string;
+  };
+  newer?: Blog;
+  older?: Blog;
 }
 
 const {
-	content: { title, description, pubDate, updatedDate, heroImage, categoryId, categoryName },
-	newer,
-	older,
+  content: {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage,
+    categoryId,
+    categoryName,
+  },
+  newer,
+  older,
 } = Astro.props;
 ---
 
 <html lang="ja">
-	<head>
-		<BaseHead title={`${title}|${SITE_TITLE}`} description={description} image={heroImage} />
-		<style>
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-				border-top: 1px solid #ddd;
-				margin: 1rem 0;
-			}
-		</style>
-		<!-- {heroImage && <link rel="preload" as="image" href={heroImage} />} -->
-	</head>
+  <head>
+    <BaseHead
+      title={`${title}|${SITE_TITLE}`}
+      description={description}
+      image={heroImage}
+    />
+    <style>
+      .title {
+        font-size: 2em;
+        margin: 0.25em 0 0;
+      }
+      hr {
+        border-top: 1px solid #ddd;
+        margin: 1rem 0;
+      }
+    </style>
+    <!-- {heroImage && <link rel="preload" as="image" href={heroImage} />} -->
+  </head>
 
-	<body>
-		<Header />
-		<main class="main">
-			<Sidebar></Sidebar>
-			<article class="contents">
-				{heroImage && <img width={720} height={360} src={heroImage} alt=""/>}
-				<h1 class="title">{title}</h1>
-				{pubDate && <time>{pubDate}</time>}
-				{
-					updatedDate && (
-						<div>
-							Last updated on <time>{updatedDate}</time>
-						</div>
-					)
-				}
-				<div class="spans">
-					{ categoryId && categoryName && <span class="category"><a href={`/category/${categoryId}`}>{categoryName}</a></span> }
-					<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
-						Tweet
-					</a>
-				</div>
-				<hr />
-				<slot />
-				<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">
-					Tweet
-				</a>
-				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-				<nav class="newer_home_older">
-					<ul>
-						<li>{newer && <div class="newer"><a href={`/posts/${newer.id}/`}>{newer.title}</a><span>&#9665;</span></div>}</li>
-						<li><a href="/">Home</a></li>
-						<li>{older && <div class="older"><span>&#9655;</span><a href={`/posts/${older.id}/`}>{older.title}</a></div>}</li>
-					</ul>
-				</nav>
-			</article>
-		</main>
-		<Footer />
-		<script>
-		  import "lazysizes";
-		</script>
-	</body>
+  <body>
+    <Header />
+    <main class="main">
+      <Sidebar />
+      <article class="contents">
+        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+        <h1 class="title">{title}</h1>
+        {pubDate && <time>{pubDate}</time>}
+        {
+          updatedDate && (
+            <div>
+              Last updated on <time>{updatedDate}</time>
+            </div>
+          )
+        }
+        <div class="spans">
+          {
+            categoryId && categoryName && (
+              <span class="category">
+                <a href={`/category/${categoryId}`}>{categoryName}</a>
+              </span>
+            )
+          }
+          <a
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+            class="twitter-share-button"
+            data-show-count="false"
+          >
+            Tweet
+          </a>
+        </div>
+        <hr />
+        <slot />
+        <a
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          class="twitter-share-button"
+          data-show-count="false"
+        >
+          Tweet
+        </a>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+        <nav class="newer_home_older">
+          <ul>
+            <li>
+              {
+                newer && (
+                  <div class="newer">
+                    <>
+                      <a href={`/posts/${newer.id}/`}>{newer.title}</a>
+                      <span>&#9665;</span>
+                    </>
+                  </div>
+                )
+              }
+            </li>
+            <li><a href="/">Home</a></li>
+            <li>
+              {
+                older && (
+                  <div class="older">
+                    <>
+                      <span>&#9655;</span>
+                      <a href={`/posts/${older.id}/`}>{older.title}</a>
+                    </>
+                  </div>
+                )
+              }
+            </li>
+          </ul>
+        </nav>
+      </article>
+    </main>
+    <Footer />
+    <script>
+      import "lazysizes";
+    </script>
+  </body>
 </html>
