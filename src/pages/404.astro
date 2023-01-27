@@ -1,0 +1,34 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+import { SITE_TITLE } from "../config";
+---
+
+<html lang="ja">
+  <head>
+    <BaseHead
+      title={`Not Found Page|${SITE_TITLE}`}
+      description={'お探しのページは見つかりませんでした。'}
+    />
+    <style>
+      .notfound {
+        font-size: 2em;
+        margin: 0.25em 0 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main class="main">
+      <Sidebar />
+      <h1 class="notfound">お探しのページは見つかりませんでした。</h1>
+    </main>
+    <Footer />
+    <script>
+      import "lazysizes";
+    </script>
+  </body>
+</html>
