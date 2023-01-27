@@ -62,8 +62,8 @@ const getPath = (page: number, cId?: string) => {
     {
       pager.map(
         (p) =>
-          page.currentPage - adjacentPageNumber <= p &&
-          p <= page.currentPage + adjacentPageNumber &&
+          page.currentPage - adjacentPageNumber - 1 < p &&
+          p < page.currentPage + adjacentPageNumber + 1 &&
           (page.currentPage === p ? (
             <li>
               <span>{p}</span>

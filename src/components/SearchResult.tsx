@@ -96,8 +96,8 @@ const BlogSearch = () => {
                 {Array.from({
                   length: Math.ceil(data.totalCount / LIMIT),
                 }).map((_, i) => (
-                  page - adjacentPageNumber <= i + 1 &&
-                  i + 1 <= page + adjacentPageNumber &&
+                  page - adjacentPageNumber - 1 < i + 1 &&
+                  i + 1 < page + adjacentPageNumber + 1 &&
                   (page === i + 1 ? (
                     <li key={i + 1}>
                       <span>{i + 1}</span>

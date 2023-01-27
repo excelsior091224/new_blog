@@ -3,18 +3,10 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
-import cloudflare from "@astrojs/cloudflare";
-
-// https://astro.build/config
-import netlify from "@astrojs/netlify/functions";
-
-// https://astro.build/config
 import vue from "@astrojs/vue";
 import partytown from "@astrojs/partytown";
 import preact from "@astrojs/preact";
 import robotsTxt from "astro-robots-txt";
-
-// https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
@@ -33,14 +25,5 @@ export default defineConfig({
     }),
     robotsTxt(),
   ],
-  site: "https://www.vermilion3.xyz",
-  // output: "server",
-  // adapter: cloudflare(),
-  // vite: {
-  //   define: {
-  //       "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
-  //       "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
-  //   },
-  // },
-  // adapter: netlify()
+  site: "https://www.vermilion3.xyz"
 });
