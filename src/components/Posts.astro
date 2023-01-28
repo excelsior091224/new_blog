@@ -16,7 +16,7 @@ const { posts } = Astro.props;
             />
           </a>
         ) : post.eyecatch ? (
-          <a href={`/posts/${post.id}`} aria-label="記事へ進む">
+          <a href={`/posts/${post.id}/`} aria-label="記事へ進む">
             <img
               width={720}
               height={360}
@@ -36,7 +36,7 @@ const { posts } = Astro.props;
           </span>
           {post.category && (
             <span class="category">
-              <a href={`/category/${post.category.id}`}>{post.category.name}</a>
+              <a href={`/category/${post.category.id}/`}>{post.category.name}</a>
             </span>
           )}
         </div>

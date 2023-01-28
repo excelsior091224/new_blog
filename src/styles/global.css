@@ -348,6 +348,10 @@ a:focus {
   text-decoration: none;
 }
 
+.page-item.disabled-button.d-none {
+  display: none;
+}
+
 @media screen and (min-width: 636px) {
   /*.nav-links {
     margin-left: 5em;

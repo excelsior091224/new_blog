@@ -29,6 +29,7 @@
     "microcms-js-sdk": "^2.3.2",
     "microcms-richedit-processer": "^1.1.0",
     "preact": "^10.11.3",
+    "react-paginate": "^8.1.4",
     "rollup": "^3.9.0",
     "swr": "^2.0.0",
     "vue": "^3.2.45",
