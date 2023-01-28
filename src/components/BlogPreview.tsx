@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { getBlogDetail } from "../library/microcms";
+import { createTableOfContents } from "microcms-richedit-processer";
 
 const BlogPreview = () => {
   const params = new URLSearchParams(window.location.search);
@@ -12,6 +13,8 @@ const BlogPreview = () => {
       : ["/preview", contentId, draftKey],
     ([, contentId, draftKey]) => getBlogDetail(contentId, { draftKey })
   );
+
+  const table_of_content = data?.content && createTableOfContents(data?.content,{ tags: "h1,h2,h3,h4,h5" })
 
   if (error) return <div>エラーが発生しました</div>;
 
@@ -27,6 +30,19 @@ const BlogPreview = () => {
       </div>
       {data?.category && <span class="category"><a href={`/category/${data?.category?.id}`}>{data?.category?.name}</a></span>}
       <hr />
+      {table_of_content && table_of_content.length > 0 && (
+        <div class="table_of_content_wrapper">
+          <h4 class="table_of_content_title">目次</h4>
+          <ul class="table_of_content_lists">
+            {table_of_content.map((item) => (
+              <li class={`table_of_content_list ${item.name}`}>
+                <a href={`#${item.id}`}>{item.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+      }
       <main class="post" dangerouslySetInnerHTML={{ __html: data?.content ?? "" }} />
       {isValidating && <div>更新中...</div>}
     </article>

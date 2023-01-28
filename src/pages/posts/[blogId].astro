@@ -3,7 +3,7 @@ import Layout from "../../layouts/BlogPost.astro";
 import GoogleResponsiveAd from "../../components/GoogleResponsiveAd";
 import { getBlogs, getBlogDetail } from "../../library/microcms";
 import pkg from "microcms-richedit-processer";
-const { processer } = pkg;
+const { createTableOfContents, processer } = pkg;
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
@@ -23,6 +23,10 @@ const posts = await getBlogs({
   fields: ["id", "title"],
   orders: "-publishedAt",
 });
+
+const content = processer(blog.content, { img: { parameters: { fm: "webp" } } });
+const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" })
+
 // 現在の記事のpostsの中でのindex番号を取得
 const current_index = posts.contents.findIndex((post) => post.id === blogId);
 // 1つ新しい記事（ない場合null）
@@ -56,8 +60,21 @@ const older = posts.contents[current_index + 1] ?? null;
   older={older}
 >
   <!-- <GoogleResponsiveAd client:only="preact"/> -->
+  {table_of_content.length > 0 && (
+    <div class="table_of_content_wrapper">
+      <h4 class="table_of_content_title">目次</h4>
+      <ul class="table_of_content_lists">
+        {table_of_content.map((item) => (
+          <li class={`table_of_content_list ${item.name}`}>
+            <a href={`#${item.id}`}>{item.text}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+  }
   <main
-    set:html={processer(blog.content, { img: { parameters: { fm: "webp" } } })}
+    set:html={content}
   />
   <div id="wavebox" class="wavebox">
     <p>もしこの投稿が「いいね！」と思ったら↓から拍手をください</p>
