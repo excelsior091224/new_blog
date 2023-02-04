@@ -22,7 +22,7 @@ export const get = () =>
                 .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
                 .slice(0, 101) + "..."
             : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
-        content: post.content,
+        content: post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
       };
     }),
   });
