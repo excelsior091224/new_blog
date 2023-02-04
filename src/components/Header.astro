@@ -31,6 +31,14 @@ const { contents: links } = await getLinks({
   <nav>
     <div class="nav-links">
       <SearchForm searchform_text_id="header_searchform_text" />
+      <HeaderLink href="/feed.xml">
+        <img
+          src="/rss_feed.svg"
+          alt="RSS feed"
+          width="16px"
+          height="16px"
+        />RSSフィード
+      </HeaderLink>
       <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
       {
         import.meta.env.TWITTER ? (

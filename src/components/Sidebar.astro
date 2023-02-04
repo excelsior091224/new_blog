@@ -19,6 +19,15 @@ const { contents: links } = await getLinks({
     <SearchForm searchform_text_id="sidebar_searchform_text" />
     <div class="sidebar_private_links">
       <ul class="">
+        <li>
+          <a href="/feed.xml"
+            ><img
+              src="/rss_feed.svg"
+              alt="RSS feed"
+              width="16px"
+              height="16px"
+            />RSSフィード</a>
+        </li>
         <li><a href="/about">プライバシーポリシー</a></li>
         {
           import.meta.env.TWITTER ? (
