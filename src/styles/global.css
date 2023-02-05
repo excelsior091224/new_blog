@@ -352,6 +352,28 @@ a:focus {
   display: none;
 }
 
+
+.tweet {
+  margin: 8px;
+  background-color: #1d9bf0;
+  border-radius: 5px;
+}
+.tweet a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.tweet img {
+  vertical-align: middle;
+  height: 16px;
+  width: 16px;
+  padding: 1px;
+}
+
+.rss a {
+  margin: 8px;
+}
+
 @media screen and (min-width: 636px) {
   /*.nav-links {
     margin-left: 5em;
