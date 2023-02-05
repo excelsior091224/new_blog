@@ -80,9 +80,9 @@ const {
           }
           <span class="tweet">
             <a
-              href={`https://twitter.com/intent/tweet?url=${
+              href={`https://twitter.com/intent/tweet?url=%0a${
                 Astro.request.url
-              }&text=${encodeURI(`${title}|${SITE_TITLE}`)}%0a`}
+              }&text=${encodeURI(`${title}|${SITE_TITLE}`)}`}
               class="tweet_button"
               data-show-count="false"
               target="_blank"
@@ -111,9 +111,9 @@ const {
         <slot />
         <span class="tweet">
           <a
-            href={`https://twitter.com/intent/tweet?url=${
+            href={`https://twitter.com/intent/tweet?url=%0a${
               Astro.request.url
-            }&text=${encodeURI(`${title}|${SITE_TITLE}`)}%0a`}
+            }&text=${encodeURI(`${title}|${SITE_TITLE}`)}`}
             class="tweet_button"
             data-show-count="false"
             target="_blank"
