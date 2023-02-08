@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Sidebar from "../components/Sidebar.astro";
+import GoogleResponsiveAd from "../components/GoogleResponsiveAd";
 import { SITE_TITLE } from "../config";
 import type { Blog } from "../library/microcms";
 
@@ -167,6 +168,7 @@ const {
           </ul>
         </nav>
       </article>
+      <GoogleResponsiveAd client:only="preact"/>
     </main>
     <Footer />
   </body>

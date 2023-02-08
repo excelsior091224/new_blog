@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/BlogPost.astro";
-import GoogleResponsiveAd from "../../components/GoogleResponsiveAd";
 import { getBlogs, getBlogDetail } from "../../library/microcms";
 import pkg from "microcms-richedit-processer";
 const { createTableOfContents, processer } = pkg;
@@ -90,4 +89,3 @@ const older = posts.contents[current_index + 1] ?? null;
     >
   </div>
 </Layout>
-<GoogleResponsiveAd client:only="preact"/>
