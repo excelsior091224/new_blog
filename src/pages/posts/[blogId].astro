@@ -59,7 +59,6 @@ const older = posts.contents[current_index + 1] ?? null;
   newer={newer}
   older={older}
 >
-  <!-- <GoogleResponsiveAd client:only="preact"/> -->
   {table_of_content.length > 0 && (
     <div class="table_of_content_wrapper">
       <h4 class="table_of_content_title">目次</h4>
@@ -90,5 +89,5 @@ const older = posts.contents[current_index + 1] ?? null;
       /></a
     >
   </div>
-  <!-- <GoogleResponsiveAd client:only="preact"/> -->
+  <GoogleResponsiveAd client:only="preact"/>
 </Layout>

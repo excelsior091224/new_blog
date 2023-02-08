@@ -93,6 +93,17 @@ const { contents: links } = await getLinks({
           </HeaderLink>
         ) : null
       }
+      {
+        import.meta.env.DEVIANTART ? (
+          <HeaderLink
+            href={import.meta.env.DEVIANTART}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            DeviantArt
+          </HeaderLink>
+        ) : null
+      }
       <details class="categories_link">
         <summary class="categories_button"> Categories</summary>
         <ul>

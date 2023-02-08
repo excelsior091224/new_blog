@@ -88,6 +88,20 @@ const { contents: links } = await getLinks({
             </li>
           ) : null
         }
+        {
+          import.meta.env.DEVIANTART ? (
+            <li>
+              <a
+                href={import.meta.env.DEVIANTART}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                DeviantArt
+              </a>
+            </li>
+          ) : null
+        }
       </ul>
     </div>
     <div class="sidebar_categories_links">
@@ -117,5 +131,5 @@ const { contents: links } = await getLinks({
       </ul>
     </div>
   </nav>
-  <!-- <GoogleResponsiveAd client:only="preact"/> -->
+  <GoogleResponsiveAd client:only="preact"/>
 </div>
