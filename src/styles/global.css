@@ -357,6 +357,7 @@ a:focus {
   vertical-align: middle;
   font-size: 20px;
   text-decoration: none;
+  color: #1DA1F2;
 }
 
 .tweet a img {
@@ -369,7 +370,45 @@ a:focus {
 .rss a {
   display: inline-block;
   vertical-align: middle;
+  font-size: 20px;
   margin: 8px;
+  text-decoration: none;
+}
+
+.facebook a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  color: #1877f2;
+}
+
+.line a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  color: #06C755;
+}
+
+.pocket a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  color: #d3505a;
+}
+
+.feedly a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.feedly img {
+  height: 20px;
+  width: 20px;
 }
 
 @media screen and (min-width: 636px) {

@@ -89,23 +89,56 @@ const {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d0d3a221531e4a47b95ff2a97363f3e0/Twitter_icon.svg"
-                alt="tweet button image"
-              /></a
+              <i class="fab fa-twitter"></i>
+            </a>
+          </span>
+          <span class="facebook">
+            <a
+              href={`http://www.facebook.com/share.php?u=${Astro.request.url}`}
+              class="facebook_button"
+              target="_blank"
+              rel="noopener noreferrer"
             >
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+          </span>
+          <span class="line">
+            <a
+              href={`http://line.me/R/msg/text/?${Astro.request.url}%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
+              class="line_button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-line"></i>
+            </a>
+          </span>
+          <span class="pocket">
+            <a
+              href={`http://getpocket.com/edit?url=${Astro.request.url}&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
+              class="pocket_button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-get-pocket"></i>
+            </a>
+          </span>
+          <span class="feedly">
+            <a
+              href={`https://feedly.com/i/subscription/feed/https://${Astro.request.url.split('/')[2]}/feed.xml`}
+              class="feedly_button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/53c7fa1dc737465c9ada0b650f9f90d1/1298740_feedly_icon.svg" alt="">
+            </a>
           </span>
           <span class="rss">
             <a href="/feed.xml"
               target="_blank"
               rel="noopener noreferrer"
-            ><img
-                src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d9257bd33e1a4538a525d9575fd09368/rss_feed.svg"
-                alt="RSS feed"
-                width="16px"
-                height="16px"
-              /></a
             >
+              <i class="fa-solid fa-rss"></i>
+            </a>
           </span>
         </div>
         <hr />
@@ -120,23 +153,56 @@ const {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
-              src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d0d3a221531e4a47b95ff2a97363f3e0/Twitter_icon.svg"
-              alt="tweet button image"
-            />
+            <i class="fab fa-twitter"></i>
+          </a>
+        </span>
+        <span class="facebook">
+          <a
+            href={`http://www.facebook.com/share.php?u=${Astro.request.url}`}
+            class="facebook_button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+        </span>
+        <span class="line">
+          <a
+            href={`http://line.me/R/msg/text/?${Astro.request.url}%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
+            class="line_button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-line"></i>
+          </a>
+        </span>
+        <span class="pocket">
+          <a
+            href={`http://getpocket.com/edit?url=${Astro.request.url}&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
+            class="pocket_button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-get-pocket"></i>
+          </a>
+        </span>
+        <span class="feedly">
+          <a
+            href={`https://feedly.com/i/subscription/feed/https://${Astro.request.url.split('/')[2]}/feed.xml`}
+            class="feedly_button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/53c7fa1dc737465c9ada0b650f9f90d1/1298740_feedly_icon.svg" alt="">
           </a>
         </span>
         <span class="rss">
           <a href="/feed.xml"
             target="_blank"
               rel="noopener noreferrer"
-          ><img
-              src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d9257bd33e1a4538a525d9575fd09368/rss_feed.svg"
-              alt="RSS feed"
-              width="16px"
-              height="16px"
-            /></a
           >
+            <i class="fa-solid fa-rss"></i>
+          </a>
         </span>
         <nav class="newer_home_older">
           <ul>
