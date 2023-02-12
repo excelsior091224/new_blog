@@ -72,8 +72,10 @@ const {
 <!-- font awesome -->
 <style>.fa-brands,.fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:var(--fa-display,inline-block);font-style:normal;font-variant:normal;line-height:1;text-rendering:auto}.fa-brands,.fab{font-family:"Font Awesome 6 Brands"}</style>
 <style>:host,:root{--fa-style-family-brands:"Font Awesome 6 Brands";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}.fa-brands,.fab{font-weight:400}.fa-facebook:before{content:"\f09a"}.fa-line:before{content:"\f3c0"}.fa-get-pocket:before{content:"\f265"}.fa-twitter:before{content:"\f099"}</style>
-<link rel="stylesheet" href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css">
-<link rel="stylesheet" href="/fontawesome-free-6.3.0-web/css/brands.min.css">
+<!-- <link rel="stylesheet" href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css">
+<link rel="stylesheet" href="/fontawesome-free-6.3.0-web/css/brands.min.css"> -->
+<link rel="preload" href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/fontawesome-free-6.3.0-web/css/brands.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <!-- rss feed -->
 <link rel="alternate" type="application/rss+xml" href={`https://${Astro.request.url.split('/')[2]}/feed.xml`} title="RSS2.0">
