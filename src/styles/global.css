@@ -206,6 +206,10 @@ a:focus {
   /* padding: 8px; */
 }
 
+.post_category {
+  margin: 8px 0px;
+}
+
 .description {
   margin: 0;
 }
@@ -358,6 +362,7 @@ a:focus {
   font-size: 20px;
   text-decoration: none;
   color: #1DA1F2;
+  margin: 8px;
 }
 
 .tweet a img {
@@ -381,6 +386,7 @@ a:focus {
   font-size: 20px;
   text-decoration: none;
   color: #1877f2;
+  margin: 8px;
 }
 
 .line a {
@@ -389,6 +395,7 @@ a:focus {
   font-size: 20px;
   text-decoration: none;
   color: #06C755;
+  margin: 8px;
 }
 
 .pocket a {
@@ -397,6 +404,7 @@ a:focus {
   font-size: 20px;
   text-decoration: none;
   color: #d3505a;
+  margin: 8px;
 }
 
 .feedly a {
@@ -404,6 +412,7 @@ a:focus {
   vertical-align: middle;
   font-size: 20px;
   text-decoration: none;
+  margin: 8px;
 }
 
 .feedly img {

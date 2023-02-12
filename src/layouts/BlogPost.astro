@@ -71,14 +71,16 @@ const {
             </div>
           )
         }
-        <div class="spans">
-          {
-            categoryId && categoryName && (
-              <span class="category">
+        {
+          categoryId && categoryName && (
+            <div class="post_category">
+              <span>
                 <a href={`/category/${categoryId}`}>{categoryName}</a>
               </span>
-            )
-          }
+            </div>
+          )
+        }
+        <div class="spans">
           <span class="tweet">
             <a
               href={`https://twitter.com/intent/tweet?url=%0a${
