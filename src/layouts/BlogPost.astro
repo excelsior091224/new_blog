@@ -108,7 +108,9 @@ const {
           </span>
           <span class="line">
             <a
-              href={`http://line.me/R/msg/text/?${Astro.request.url}%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
+              href={`http://line.me/R/msg/text/?${
+                Astro.request.url
+              }%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
               class="line_button"
               target="_blank"
               rel="noopener noreferrer"
@@ -119,7 +121,9 @@ const {
           </span>
           <span class="pocket">
             <a
-              href={`http://getpocket.com/edit?url=${Astro.request.url}&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
+              href={`http://getpocket.com/edit?url=${
+                Astro.request.url
+              }&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
               class="pocket_button"
               target="_blank"
               rel="noopener noreferrer"
@@ -129,12 +133,18 @@ const {
             </a>
           </span>
           <span class="rss">
-            <a href="/feed.xml"
+            <a
+              href="/feed.xml"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="RSS feed"
             >
-              <i class="fa-solid fa-rss"></i>
+              <img
+                src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d9257bd33e1a4538a525d9575fd09368/rss_feed.svg"
+                alt="RSS feed"
+                width="16px"
+                height="16px"
+              />
             </a>
           </span>
         </div>
@@ -167,7 +177,9 @@ const {
         </span>
         <span class="line">
           <a
-            href={`http://line.me/R/msg/text/?${Astro.request.url}%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
+            href={`http://line.me/R/msg/text/?${
+              Astro.request.url
+            }%0a${encodeURI(`${title}|${SITE_TITLE}`)}`}
             class="line_button"
             target="_blank"
             rel="noopener noreferrer"
@@ -178,7 +190,9 @@ const {
         </span>
         <span class="pocket">
           <a
-            href={`http://getpocket.com/edit?url=${Astro.request.url}&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
+            href={`http://getpocket.com/edit?url=${
+              Astro.request.url
+            }&title=${encodeURI(`${title}|${SITE_TITLE}`)}`}
             class="pocket_button"
             target="_blank"
             rel="noopener noreferrer"
@@ -188,12 +202,18 @@ const {
           </a>
         </span>
         <span class="rss">
-          <a href="/feed.xml"
+          <a
+            href="/feed.xml"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="RSS feed"
           >
-            <i class="fa-solid fa-rss"></i>
+            <img
+              src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d9257bd33e1a4538a525d9575fd09368/rss_feed.svg"
+              alt="RSS feed"
+              width="16px"
+              height="16px"
+            />
           </a>
         </span>
         <nav class="newer_home_older">
@@ -226,7 +246,7 @@ const {
           </ul>
         </nav>
       </article>
-      <GoogleResponsiveAd client:only="preact"/>
+      <GoogleResponsiveAd client:only="preact" />
     </main>
     <Footer />
   </body>

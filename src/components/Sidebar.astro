@@ -20,11 +20,14 @@ const { contents: links } = await getLinks({
     <div class="sidebar_private_links">
       <ul class="">
         <li>
-          <a href="/feed.xml"
-            target="_blank"
-              rel="noopener noreferrer"
+          <a href="/feed.xml" target="_blank" rel="noopener noreferrer">
+            <img
+              src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/d9257bd33e1a4538a525d9575fd09368/rss_feed.svg"
+              alt="RSS feed"
+              width="16px"
+              height="16px"
+            />RSSフィード</a
           >
-          <i class="fa-solid fa-rss"></i>RSSフィード</a>
         </li>
         <li><a href="/about">プライバシーポリシー</a></li>
         {
@@ -126,5 +129,5 @@ const { contents: links } = await getLinks({
       </ul>
     </div>
   </nav>
-  <GoogleResponsiveAd client:only="preact"/>
+  <GoogleResponsiveAd client:only="preact" />
 </div>
