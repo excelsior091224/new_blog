@@ -22,7 +22,7 @@ export const get = () =>
                 .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
                 .slice(0, 101) + "..."
             : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
-        customData: post.eyecatch ? `<enclosure url=${post.eyecatch.url}> </enclosure>` : null,
+        customData: `<enclosure url=${post.eyecatch.url}> </enclosure>`,
       };
     }),
   });
