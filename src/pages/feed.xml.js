@@ -11,6 +11,7 @@ export const get = () =>
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: import.meta.env.SITE,
+    customData: `<language>ja</language>`,
     items: posts.map((post) => {
       return {
         link: `/posts/${post.id}`,
