@@ -45,7 +45,8 @@ const older = posts.contents[current_index + 1] ?? null;
         : blog.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
     heroImage:
       blog.eyecatch &&
-      `${blog.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`,
+      // `${blog.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`,
+      blog.eyecatch.url,
     pubDate: new Date(blog.publishedAt).toLocaleString("ja-JP", {
       timeZone: "Asia/Tokyo",
     }),

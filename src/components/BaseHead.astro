@@ -60,14 +60,14 @@ const {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
-<meta property="og:image" content={image} />
+<meta property="og:image" content={image + '?fit=crop&crop=top&w=720&h=360'} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={image} />
+<meta property="twitter:image" content={image + '?fit=crop&crop=top&w=720&h=360'} />
 
 <!-- font awesome -->
 <style>.fa-brands,.fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:var(--fa-display,inline-block);font-style:normal;font-variant:normal;line-height:1;text-rendering:auto}.fa-brands,.fab{font-family:"Font Awesome 6 Brands"}</style>

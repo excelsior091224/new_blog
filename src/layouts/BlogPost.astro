@@ -61,7 +61,7 @@ const {
     <main class="main">
       <Sidebar />
       <article class="contents">
-        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+        {heroImage && <img width={720} height={360} src={`${heroImage}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" />}
         <h1 class="title">{title}</h1>
         {pubDate && <time>{pubDate}</time>}
         {
