@@ -1,6 +1,5 @@
 // functions/search.js
 import { createClient } from "microcms-js-sdk";
-// import { client } from "../src/library/microcms";
 
 export async function onRequest({ request, env }) {
   const client = createClient({

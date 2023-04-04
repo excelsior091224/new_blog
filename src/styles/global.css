@@ -471,7 +471,7 @@ a:focus {
 
   .contents {
     width: 80%;
-    margin: auto 1rem;
+    margin: 0 1rem;
   }
 
   .hamburger {

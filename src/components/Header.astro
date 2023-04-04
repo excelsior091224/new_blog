@@ -4,12 +4,12 @@ import SearchForm from "./SearchForm.astro";
 import { SITE_TITLE } from "../config";
 
 //microCMS呼び出し
-import { getCategories, getLinks } from "../library/microcms";
-const { contents: categories } = await getCategories({
+import { cmsBlog } from "../library/microcms";
+const { contents: categories } = await cmsBlog.getCategories({
   fields: ["id", "name"],
   orders: "name",
 });
-const { contents: links } = await getLinks({
+const { contents: links } = await cmsBlog.getLinks({
   fields: ["createdAt", "title", "url"],
   orders: "createdAt",
 });

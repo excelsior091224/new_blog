@@ -1,30 +1,34 @@
 ---
 import Layout from "../../layouts/BlogPost.astro";
-import { getBlogs, getBlogDetail } from "../../library/microcms";
+import { cmsBlog } from "../../library/microcms";
 import pkg from "microcms-richedit-processer";
 const { createTableOfContents, processer } = pkg;
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
-  const response = await getBlogs({ fields: ["id"] });
+  const response = await cmsBlog.getBlogs({orders: "-publishedAt"});
   return response.contents.map((content: any) => ({
     params: {
       blogId: content.id,
+    },
+    props: {
+      blog: content,
     },
   }));
 }
 
 //記事の詳細情報を取得
 const { blogId } = Astro.params;
-const blog = await getBlogDetail(blogId as string);
+const { blog } = Astro.props;
+// const blog = await getBlogDetail(blogId as string);
 // 記事を発行日降順でIDとタイトルを取得
-const posts = await getBlogs({
+const posts = await cmsBlog.getBlogs({
   fields: ["id", "title"],
   orders: "-publishedAt",
 });
 
 const content = processer(blog.content, { img: { parameters: { fm: "webp", fit:"clip", w:700, h:700 }, lazy: false } });
-const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" })
+const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" });
 
 // 現在の記事のpostsの中でのindex番号を取得
 const current_index = posts.contents.findIndex((post) => post.id === blogId);

@@ -11,16 +11,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../../config";
 
 //microCMS呼び出し
 import {
-  getBlogs,
-  getCategories,
-  getCategoryDetail,
+  cmsBlog
 } from "../../../library/microcms";
 
 export async function getStaticPaths({ paginate }: any) {
-  const { contents: categories } = await getCategories({ fields: ["id"] });
+  const { contents: categories } = await cmsBlog.getCategories({ fields: ["id"] });
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
-  const { contents: posts } = await getBlogs({
+  const { contents: posts } = await cmsBlog.getBlogs({
     fields: ["id", "title", "publishedAt", "content", "eyecatch", "category"],
     orders: "-publishedAt",
   });
@@ -40,7 +38,7 @@ export async function getStaticPaths({ paginate }: any) {
 }
 const { page } = Astro.props;
 const params = Astro.params;
-const category = await getCategoryDetail(params.categoryId as string);
+const category = await cmsBlog.getCategoryDetail(params.categoryId as string);
 ---
 
 <!DOCTYPE html>

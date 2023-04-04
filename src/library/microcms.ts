@@ -5,6 +5,10 @@ export const client = createClient({
   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: import.meta.env.MICROCMS_API_KEY,
 });
+import { Cache, CacheContainer } from "node-ts-cache";
+import { MemoryStorage } from "node-ts-cache-storage-memory";
+
+const userCache = new CacheContainer(new MemoryStorage());
 
 export type Blog = {
   id: string;
@@ -64,37 +68,81 @@ export type LinkResponse = {
   contents: Link[];
 };
 
-// export const getBlogs = async (queries?: MicroCMSQueries) => {
-//   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
-// };
-export const getBlogs = async (queries?: MicroCMSQueries) => {
-  const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
+class CMSBlog {
+  @Cache(userCache, { ttl: 300 })
+  // export const getBlogs = async (queries?: MicroCMSQueries) => {
+  public async getBlogs(queries?: MicroCMSQueries) {
+    const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
 
-  if (data.offset + data.limit < data.totalCount) {
-    queries ? (queries.offset = data.offset + data.limit) : "";
-    const result: BlogResponse = await getBlogs(queries);
-    return {
-      offset: result.offset,
-      limit: result.limit,
-      contents: [...data.contents, ...result.contents],
-      totalCount: result.totalCount,
-    };
+    if (data.offset + data.limit < data.totalCount) {
+      queries ? (queries.offset = data.offset + data.limit) : "";
+      const result: BlogResponse = await this.getBlogs(queries);
+      return {
+        offset: result.offset,
+        limit: result.limit,
+        contents: [...data.contents, ...result.contents],
+        totalCount: result.totalCount,
+      };
+    }
+    return data;
   }
-  return data;
-};
-export const getBlogDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries
-) => {
-  return await client.getListDetail<Blog>({
-    endpoint: "blogs",
-    contentId,
-    queries,
-  });
-};
-// export const getCategories = async (queries?: MicroCMSQueries) => {
-//   return await client.get<CategoryResponse>({ endpoint: "categories", queries });
-// };
+  public async getBlogDetail(contentId: string, queries?: MicroCMSQueries) {
+    return await client.getListDetail<Blog>({
+      endpoint: "blogs",
+      contentId,
+      queries,
+    });
+  }
+  public async getCategories(queries?: MicroCMSQueries) {
+    const data = await client.get<CategoryResponse>({
+      endpoint: "categories",
+      queries,
+    });
+
+    if (data.offset + data.limit < data.totalCount) {
+      queries ? (queries.offset = data.offset + data.limit) : "";
+      const result: CategoryResponse = await this.getCategories(queries);
+      return {
+        offset: result.offset,
+        limit: result.limit,
+        contents: [...data.contents, ...result.contents],
+        totalCount: result.totalCount,
+      };
+    }
+    return data;
+  }
+  public async getCategoryDetail(contentId: string, queries?: MicroCMSQueries) {
+    return await client.getListDetail<Category>({
+      endpoint: "categories",
+      contentId,
+      queries,
+    });
+  }
+  public async getLinks(queries?: MicroCMSQueries) {
+    const data = await client.get<LinkResponse>({ endpoint: "links", queries });
+
+    if (data.offset + data.limit < data.totalCount) {
+      queries ? (queries.offset = data.offset + data.limit) : "";
+      const result: LinkResponse = await this.getLinks(queries);
+      return {
+        offset: result.offset,
+        limit: result.limit,
+        contents: [...data.contents, ...result.contents],
+        totalCount: result.totalCount,
+      };
+    }
+    return data;
+  }
+  public async getLinkDetail(contentId: string, queries?: MicroCMSQueries) {
+    return await client.getListDetail<Link>({
+      endpoint: "links",
+      contentId,
+      queries,
+    });
+  }
+}
+export const cmsBlog = new CMSBlog();
+
 export const getCategories = async (queries?: MicroCMSQueries) => {
   const data = await client.get<CategoryResponse>({
     endpoint: "categories",
@@ -123,9 +171,6 @@ export const getCategoryDetail = async (
     queries,
   });
 };
-// export const getLinks = async (queries?: MicroCMSQueries) => {
-//   return await client.get<LinkResponse>({ endpoint: "links", queries });
-// };
 export const getLinks = async (queries?: MicroCMSQueries) => {
   const data = await client.get<LinkResponse>({ endpoint: "links", queries });
 

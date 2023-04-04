@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
-import { getBlogs } from "../library/microcms";
-const { contents: posts } = await getBlogs({
+import { cmsBlog } from "../library/microcms";
+const { contents: posts } = await cmsBlog.getBlogs({
   fields: ["id", "title", "publishedAt", "content", "eyecatch", "category"],
   orders: "-publishedAt",
 });

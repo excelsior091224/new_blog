@@ -1,5 +1,4 @@
 import useSWR from "swr";
-// import { getBlogDetail } from "../library/microcms";
 import { createTableOfContents } from "microcms-richedit-processer";
 
 const BlogPreview = () => {
@@ -11,10 +10,6 @@ const BlogPreview = () => {
   const endpoint = contentId === null || draftKey === null ? null : `/api/preview?contentId=${contentId}&draftKey=${draftKey}`;
 
   const { data, error, isLoading, isValidating } = useSWR(
-    // contentId === null || draftKey === null
-    //   ? null
-    //   : ["/preview", contentId, draftKey],
-    // ([, contentId, draftKey]) => getBlogDetail(contentId, { draftKey })
     endpoint,fetcher
   );
 

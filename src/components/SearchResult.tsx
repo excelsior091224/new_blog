@@ -1,8 +1,6 @@
 import useSWR from 'swr'
 
 import { useState } from "preact/hooks";
-// import type { MicroCMSQueries } from "microcms-js-sdk";
-// import { client, BlogResponse } from "../library/microcms";
 import ReactPaginate from 'react-paginate';
 
 const LIMIT = 10;

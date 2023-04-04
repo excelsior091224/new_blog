@@ -3,20 +3,8 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Sidebar from '../../components/Sidebar.astro';
-// import SearchResult from '../../components/SearchResult.vue';
 import SearchResult from '../../components/SearchResult';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
-
-// //microCMS呼び出し
-// import { getBlogs } from "../../library/microcms";
-
-// export async function getStaticPaths({ paginate }:any) {
-//   const { contents: posts } = await getBlogs({ fields: ["id", "title", "publishedAt","content","eyecatch","category"] });
-//   // 記事の配列から、1ページに10個づつ入るようにページを生成する
-//   return paginate(posts, { pageSize: 10 });
-// }
-// // ページ分割されたデータは、すべて "page" プロパティとして渡される
-// const { page } = Astro.props;
 ---
 
 <!DOCTYPE html>
