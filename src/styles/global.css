@@ -69,6 +69,16 @@ a div.description {
   color: #444;
   text-decoration: none;
 }
+header {
+  width: 100%;
+  max-width: 65ch;
+  position: relative;
+  top: 0;
+  /* background-color: #fff; */
+}
+header h2 {
+  margin: 0.5em 0;
+}
 
 .hamburger {
   position: relative;
@@ -321,7 +331,7 @@ a:focus {
   border-bottom: 1px solid #e7e7f3;
 }
 
-.table_of_content_list::before{
+.table_of_content_list::before {
   content: "-";
   margin-right: 5px;
   color: #cacae7;
@@ -347,7 +357,7 @@ a:focus {
   margin-left: 50px;
 }
 
-.table_of_content_list a{
+.table_of_content_list a {
   color: #2b2c30;
   text-decoration: none;
 }
@@ -361,7 +371,7 @@ a:focus {
   vertical-align: middle;
   font-size: 20px;
   text-decoration: none;
-  color: #1DA1F2;
+  color: #1da1f2;
   margin: 8px;
 }
 
@@ -369,7 +379,7 @@ a:focus {
   height: 20px;
   width: 20px;
   padding: 1px;
-  background-color:#fff;
+  background-color: #fff;
 }
 
 .rss a {
@@ -394,7 +404,7 @@ a:focus {
   vertical-align: middle;
   font-size: 20px;
   text-decoration: none;
-  color: #06C755;
+  color: #06c755;
   margin: 8px;
 }
 
@@ -418,6 +428,45 @@ a:focus {
 .feedly img {
   height: 20px;
   width: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
+    color: #fff;
+  }
+  .contents main span {
+    color: #fff !important;
+  }
+  .contents main a {
+    color: #fff !important;
+  }
+  a div.description {
+    color: #fff !important;
+  }
+  .published_time_span time {
+    color: #fff !important;
+  }
+  blockquote {
+    color: #fff !important;
+  }
+  .hamburger {
+    background-color: #000;
+  }
+  
+  .hamburger .line {
+    background-color: #fff;
+  }
 }
 
 @media screen and (min-width: 636px) {
