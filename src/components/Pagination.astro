@@ -36,7 +36,7 @@ const getPath = (page: number, cId?: string) => {
         <li>
           <a href={page.url.prev}>&#9665;</a>
         </li>
-      ) : page.url.current === "" ||
+      ) : page.url.current === "/" ||
         page.url.current === `/category/${categoryId}` ? null : categoryId ? (
         <li>
           <a href={`/category/${categoryId}/`}>&#9665;</a>
