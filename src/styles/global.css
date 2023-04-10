@@ -467,6 +467,9 @@ a:focus {
   .hamburger .line {
     background-color: #fff;
   }
+  .wavebox img {
+    background-color:#fff ;
+  }
 }
 
 @media screen and (min-width: 636px) {
