@@ -3,7 +3,7 @@ import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import GoogleResponsiveAd from "./GoogleResponsiveAd";
 //microCMS呼び出し
-import { cmsBlog} from "../library/microcms";
+import { cmsBlog } from "../library/microcms";
 const { contents: categories } = await cmsBlog.getCategories({
   fields: ["id", "name"],
   orders: "name",
@@ -117,7 +117,13 @@ const { contents: links } = await cmsBlog.getLinks({
         {
           links.map((link: any) => (
             <li>
-              <HeaderLink href={link.url}>{link.title}</HeaderLink>
+              <HeaderLink
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.title}
+              </HeaderLink>
             </li>
           ))
         }
