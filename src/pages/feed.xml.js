@@ -24,10 +24,10 @@ export const get = () =>
                 .slice(0, 101) + "..."
             : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
         enclosure: {
-         url: "/media/alpha-centauri.aac",
+         url: post.eyecatch ? post.eyecatch.url : "",
          length: 124568,
-         type: "audio/aac"
-  }
+         type: "/"
+        }
         // customData: [`<enclosure url="${post.eyecatch ? post.eyecatch.url : ""}">eyecatch</enclosure>`].join(''),
       };
     }),
