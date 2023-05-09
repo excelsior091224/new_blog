@@ -21,7 +21,6 @@ async function getImageFileSize(imageUrl) {
 
     req.on('error', (error) => {
       console.error(`エラーが発生しました: ${error}`);
-      resolve(1);
     });
 
     req.end();
@@ -54,9 +53,9 @@ export const get = async () => {
 
     if (enclosureUrl) {
       item.enclosure = {
-        url: `${enclosureUrl}?fit=crop&crop=top&w=720&h=360`,
+        url: `${enclosureUrl}?fm=webp&fit=crop&crop=top&w=720&h=360`,
         length: enclosureLength,
-        type: "image/png",
+        type: "image/webp",
       };
     }
 
