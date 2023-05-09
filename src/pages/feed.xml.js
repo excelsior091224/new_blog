@@ -26,7 +26,7 @@ export const get = () =>
         enclosure: {
          url: post.eyecatch ? post.eyecatch.url : "",
          length: 124568,
-         type: "/"
+         type: "image/png"
         }
         // customData: [`<enclosure url="${post.eyecatch ? post.eyecatch.url : ""}">eyecatch</enclosure>`].join(''),
       };
