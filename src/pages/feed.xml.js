@@ -34,38 +34,40 @@ export const get = async () => {
     orders: "-publishedAt",
   });
 
-  const items = await Promise.all(
-    posts.map(async (post) => {
-      let enclosure = {};
-      if (post.eyecatch && post.eyecatch.url) {
-        const enclosureUrl = `${post.eyecatch.url}?fit=crop&crop=top&w=720&h=360`;
-        const enclosureLength = await getImageFileSize(enclosureUrl);
-        enclosure = {
-          url: `${enclosureUrl}`,
-          length: enclosureLength,
-          type: "image/png"
-        };
-      }
-      return {
-        link: `/posts/${post.id}`,
-        pubDate: post.publishedAt,
-        title: post.title,
-        description:
-          post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "").length > 100
-            ? post.content
-                .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
-                .slice(0, 101) + "..."
-            : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
-        enclosure: enclosure
+  const items = [];
+
+  for (const post of posts) {
+    const enclosureUrl = post.eyecatch ? post.eyecatch.url : "";
+    const enclosureLength = enclosureUrl ? await getImageFileSize(`${enclosureUrl}?fit=crop&crop=top&w=720&h=360`) : 0;
+
+    const item = {
+      link: `/posts/${post.id}`,
+      pubDate: post.publishedAt,
+      title: post.title,
+      description:
+        post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "").length > 100
+          ? post.content
+              .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
+              .slice(0, 101) + "..."
+          : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
+    };
+
+    if (enclosureUrl) {
+      item.enclosure = {
+        url: `${enclosureUrl}?fit=crop&crop=top&w=720&h=360`,
+        length: enclosureLength,
+        type: "image/png",
       };
-    })
-  );
+    }
+
+    items.push(item);
+  }
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: import.meta.env.SITE,
     customData: `<language>ja</language>`,
-    items: items,
+    items,
   });
 };
