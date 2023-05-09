@@ -37,7 +37,7 @@ export const get = async () => {
 
   for (const post of posts) {
     const enclosureUrl = post.eyecatch ? post.eyecatch.url : "";
-    const enclosureLength = enclosureUrl ? await getImageFileSize(`${enclosureUrl}?fit=crop&crop=top&w=720&h=360`) : 0;
+    const enclosureLength = enclosureUrl ? await getImageFileSize(`${enclosureUrl}?fm=webp&fit=crop&crop=top&w=720&h=360`) : 0;
 
     const item = {
       link: `/posts/${post.id}`,
