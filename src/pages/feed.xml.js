@@ -23,7 +23,7 @@ export const get = () =>
                 .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "")
                 .slice(0, 101) + "..."
             : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ""),
-        enclosure: {url: post.eyecatch ? post.eyecatch.url + '?fit=crop&crop=top&w=720&h=360' : "",type: "image/png"}
+        enclosure: {url: post.eyecatch ? post.eyecatch.url + '?fit=crop&crop=top&w=720&h=360' : "",length:0,type: "image/png"}
         // customData: [`<enclosure url="${post.eyecatch ? post.eyecatch.url : ""}">eyecatch</enclosure>`].join(''),
       };
     }),
