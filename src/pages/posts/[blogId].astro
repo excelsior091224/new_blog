@@ -27,7 +27,7 @@ const posts = await cmsBlog.getBlogs({
   orders: "-publishedAt",
 });
 
-const content = processer(blog.content, { img: { parameters: { fm: "webp", fit:"clip", w:700, h:700 }, lazy: false } });
+const content = processer(blog.content, { img: { parameters: { fm: "webp", fit:"clip", w:700, h:700 } } });
 const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" });
 
 // 現在の記事のpostsの中でのindex番号を取得
