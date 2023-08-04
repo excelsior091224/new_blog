@@ -153,7 +153,7 @@ if (
   // DOMツリー構築完了時に
   document.addEventListener("DOMContentLoaded", () => {
     // BODY要素の最後に追加
-    document.body.insertAdjacentHTML('beforeend', createAdsbygooglejs);
+    document.body.appendChild(createAdsbygooglejs);
   });
 }
 //]]>
