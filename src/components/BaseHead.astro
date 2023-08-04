@@ -19,7 +19,7 @@ const {
 ---
 
 <!-- Google Tag Manager -->
-<script type="text/partytown">
+<!-- <script type="text/partytown">
   (function (w, d, s, l, i) {
     w[l] = w[l] || [];
     w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -30,8 +30,47 @@ const {
     j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
     f.parentNode.insertBefore(j, f);
   })(window, document, "script", "dataLayer", "GTM-WM9326C");
-</script>
+</script> -->
 <!-- End Google Tag Manager -->
+
+<!-- New GTM Test -->
+<script>
+	const searchParams = new URL(window.location.href);
+	const isDebug = searchParams.searchParams.get('gtm_debug');
+
+	const scripts = [
+		{
+			src: 'https://www.googletagmanager.com/gtm.js?id=google-tag-id',
+			text: null,
+		},
+		{
+			src: null,
+			text: `
+      window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'GTM-WM9326C');
+      `,
+		},
+	];
+
+	function injectScripts() {
+		scripts.forEach((s) => {
+			const script = document.createElement('script');
+			script.type = isDebug ? 'text/javascript' : 'text/partytown';
+
+			if (s.src) script.src = s.src;
+			if (s.text) script.text = s.text;
+			document.head.appendChild(script);
+		});
+	}
+
+	injectScripts();
+</script>
+<!-- End of New GTM Test -->
 
 <!-- The next line enables the indexing by robots on the page level -->
 <meta name="robots" content={robots} />

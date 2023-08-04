@@ -17,7 +17,23 @@ export default defineConfig({
     partytown({
       // Adds dataLayer.push as a forwarding-event.
       config: {
-        forward: ["dataLayer.push"],
+        resolveUrl: (url, location) => {
+          // these were the proxied hosts I wanted to proxy
+          const proxiedHosts = [
+            "googletagmanager.com",
+            "connect.facebook.net",
+            "googleads.g.doubleclick.net",
+          ];
+
+          if (proxiedHosts.includes(url.hostname)) {
+            const proxyUrl = new URL("proxy path", "proxy origin");
+            proxyUrl.searchParams.append("url", url.href);
+            return proxyUrl;
+          }
+
+          return url;
+        },
+        forward: ["dataLayer.push", "fbq"],
       },
     }),
     preact({
