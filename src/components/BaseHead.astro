@@ -34,17 +34,54 @@ const {
 <!-- End Google Tag Manager -->
 
 <!-- New GTM Test -->
-<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
+<!-- <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
 <script type="text/partytown">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'GTM-WM9326C');
-</script>
+  gtag('config', 'G-0M4H6RV722');
+</script> -->
 <!-- End of New GTM Test -->
 
-<!-- The next line enables the indexing by robots on the page level -->
+<!-- New GTM Test 2 -->
+<script>
+  const searchParams = new URL(window.location.href);
+  const isDebug = searchParams.searchParams.get("gtm_debug");
+
+  const scripts = [
+    {
+      src: "https://www.googletagmanager.com/gtm.js?id=GTM-WM9326C",
+      text: null,
+    },
+    {
+      src: null,
+      text: `
+      window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-0M4H6RV722');
+      `,
+    },
+  ];
+
+  function injectScripts() {
+    scripts.forEach((s) => {
+      const script = document.createElement("script");
+      script.type = isDebug ? "text/javascript" : "text/partytown";
+
+      if (s.src) script.src = s.src;
+      if (s.text) script.text = s.text;
+      document.head.appendChild(script);
+    });
+  }
+
+  injectScripts();
+</script>
+<!-- End of New GTM Test 2 --><!-- The next line enables the indexing by robots on the page level -->
 <meta name="robots" content={robots} />
 
 <!-- Google Adsense -->
@@ -71,19 +108,42 @@ const {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <!-- <meta property="og:image" content={new URL(image, Astro.url)} /> -->
-<meta property="og:image" content={image + '?fit=crop&crop=top&w=720&h=360'} />
+<meta property="og:image" content={image + "?fit=crop&crop=top&w=720&h=360"} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={image + '?fit=crop&crop=top&w=720&h=360'} />
+<meta
+  property="twitter:image"
+  content={image + "?fit=crop&crop=top&w=720&h=360"}
+/>
 
 <!-- font awesome -->
-<link rel="preload" href="/fontawesome-free-6.3.0-web/css/solid.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" href="/fontawesome-free-6.3.0-web/css/brands.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link
+  rel="preload"
+  href="/fontawesome-free-6.3.0-web/css/solid.min.css"
+  as="style"
+  onload="this.onload = null; this.rel = 'stylesheet'"
+/>
+<link
+  rel="preload"
+  href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css"
+  as="style"
+  onload="this.onload = null; this.rel = 'stylesheet'"
+/>
+<link
+  rel="preload"
+  href="/fontawesome-free-6.3.0-web/css/brands.min.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 
 <!-- rss feed -->
-<link rel="alternate" type="application/rss+xml" href={`https://${Astro.request.url.split('/')[2]}/feed.xml`} title="RSS2.0">
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href={`https://${Astro.request.url.split("/")[2]}/feed.xml`}
+  title="RSS2.0"
+/>
