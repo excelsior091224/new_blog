@@ -18,7 +18,8 @@ const {
 } = Astro.props;
 ---
 
-<!-- Google Tag Manager --><!-- <script type="text/partytown">
+<!-- Google Tag Manager -->
+<!-- <script type="text/partytown">
   (function (w, d, s, l, i) {
     w[l] = w[l] || [];
     w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -30,7 +31,6 @@ const {
     f.parentNode.insertBefore(j, f);
   })(window, document, "script", "dataLayer", "GTM-WM9326C");
 </script> -->
-<!-- End Google Tag Manager -->
 
 <!-- New GTM Test -->
 <!-- <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
@@ -41,7 +41,6 @@ const {
 
   gtag('config', 'G-0M4H6RV722');
 </script> -->
-<!-- End of New GTM Test -->
 
 <!-- New GTM Test 2 -->
 <script>
@@ -80,7 +79,6 @@ const {
 
   injectScripts();
 </script>
-<!-- End of New GTM Test 2 -->
 
 <!-- The next line enables the indexing by robots on the page level -->
 <meta name="robots" content={robots} />
@@ -88,7 +86,75 @@ const {
 <!-- Google Adsense -->
 <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320"
      crossorigin="anonymous"></script> -->
-<script>let lazyloadads=!1;window.addEventListener("scroll",function(){(0!=document.documentElement.scrollTop&&!1===lazyloadads||0!=document.body.scrollTop&&!1===lazyloadads)&&(!function(){let e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";let t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}(),lazyloadads=!0)},!0);</script>
+<!-- <script>
+  let lazyloadads = !1;
+  window.addEventListener(
+    "scroll",
+    function () {
+      ((0 != document.documentElement.scrollTop && !1 === lazyloadads) ||
+        (0 != document.body.scrollTop && !1 === lazyloadads)) &&
+        (!(function () {
+          let e = document.createElement("script");
+          (e.type = "text/javascript"),
+            (e.async = !0),
+            (e.src =
+              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320");
+          let t = document.getElementsByTagName("script")[0];
+          t.parentNode.insertBefore(e, t);
+        })(),
+        (lazyloadads = !0));
+    },
+    !0
+  );
+</script> -->
+<script type="text/javascript">
+//<![CDATA[
+// iPhone iPad iPod Android の判別
+if (
+  navigator.userAgent.indexOf("iPhone") > 0 ||
+  navigator.userAgent.indexOf("iPad") > 0 ||
+  navigator.userAgent.indexOf("iPod") > 0 ||
+  navigator.userAgent.indexOf("Android") > 0
+) {
+  var lazyadsense = false;
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (
+        (document.documentElement.scrollTop != 0 && lazyadsense === false) ||
+        (document.body.scrollTop != 0 && lazyadsense === false)
+      ) {
+        (function () {
+          var ad = document.createElement("script");
+          ad.type = "text/javascript";
+          ad.async = true;
+          ad.src =
+            "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
+          ad.crossorigin = "anonymous";
+          var sc = document.getElementsByTagName("script")[0];
+          sc.parentNode.insertBefore(ad, sc);
+        })();
+
+        lazyadsense = true;
+      }
+    },
+    true
+  );
+} else {
+  // scriptタグ生成
+  const createAdsbygooglejs = document.createElement("script");
+
+  // src属性をtrue,src属性に読み込みたいファイルを指定
+  createAdsbygooglejs.async = true;
+  createAdsbygooglejs.src =
+    "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
+  createAdsbygooglejs.crossorigin = "anonymous";
+
+  // BODY要素の最後に追加
+  document.body.appendChild(createAdsbygooglejs);
+}
+//]]>
+</script>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -128,21 +194,21 @@ const {
 />
 <link
   rel="preload"
-  href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css"
+    href="/fontawesome-free-6.3.0-web/css/fontawesome.min.css"
   as="style"
   onload="this.onload = null; this.rel = 'stylesheet'"
 />
 <link
   rel="preload"
-  href="/fontawesome-free-6.3.0-web/css/brands.min.css"
+    href="/fontawesome-free-6.3.0-web/css/brands.min.css"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'"
 />
 
 <!-- rss feed -->
 <link
-  rel="alternate"
-  type="application/rss+xml"
+  rel="alte   r nat e"
+  typ e =" application/rss+xml"
   href={`https://${Astro.request.url.split("/")[2]}/feed.xml`}
   title="RSS2.0"
 />
