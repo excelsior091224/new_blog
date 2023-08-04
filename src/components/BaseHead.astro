@@ -150,8 +150,11 @@ if (
     "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
   createAdsbygooglejs.crossorigin = "anonymous";
 
-  // BODY要素の最後に追加
-  document.body.insertAdjacentHTML('beforeend', createAdsbygooglejs);
+  // DOMツリー構築完了時に
+  document.addEventListener("DOMContentLoaded", () => {
+    // BODY要素の最後に追加
+    document.body.insertAdjacentHTML('beforeend', createAdsbygooglejs);
+  });
 }
 //]]>
 </script>
