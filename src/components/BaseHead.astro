@@ -151,7 +151,7 @@ if (
   createAdsbygooglejs.crossorigin = "anonymous";
 
   // BODY要素の最後に追加
-  document.body.appendChild(createAdsbygooglejs);
+  document.body.insertAdjacentHTML('beforeend', createAdsbygooglejs);
 }
 //]]>
 </script>
