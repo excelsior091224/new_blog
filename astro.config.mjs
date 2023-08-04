@@ -34,6 +34,7 @@ export default defineConfig({
           return url;
         },
         forward: ["dataLayer.push", "fbq"],
+        // forward: ["dataLayer.push"],
       },
     }),
     preact({
