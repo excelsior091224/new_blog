@@ -26,6 +26,20 @@ const { contents: links } = await cmsBlog.getLinks({
         </li>
         <li><a href="/about">プライバシーポリシー</a></li>
         {
+          import.meta.env.LIT_LINK ? (
+            <li>
+              <a
+                href={import.meta.env.LIT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                各種アカウントへのリンク（lit.link）
+              </a>
+            </li>
+          ) : null
+        }
+        {
           import.meta.env.TWITTER ? (
             <li>
               <a
@@ -35,6 +49,20 @@ const { contents: links } = await cmsBlog.getLinks({
                 class=""
               >
                 Twitter
+              </a>
+            </li>
+          ) : null
+        }
+        {
+          import.meta.env.MASTODON ? (
+            <li>
+              <a
+                href={import.meta.env.MASTODON}
+                target="_blank"
+                rel="noopener noreferrer"
+                class=""
+              >
+                Mastodon
               </a>
             </li>
           ) : null
