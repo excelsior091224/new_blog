@@ -371,7 +371,7 @@ a:focus {
   vertical-align: middle;
   font-size: 20px;
   text-decoration: none;
-  color: #1da1f2;
+  color: #000;
   margin: 8px;
 }
 
@@ -430,6 +430,27 @@ a:focus {
   width: 20px;
 }
 
+.mastodon a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  /* color: #06c755; */
+  margin: 8px;
+}
+
+.misskey a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 8px;
+  background-color: #92cb16;
+  border-radius:5px;
+  width: 1em;
+  padding:0 5px 0 5px;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000 !important;
@@ -469,6 +490,10 @@ a:focus {
   }
   .wavebox img {
     background-color:#fff ;
+  }
+
+  .tweet a {
+    color: #fff;
   }
 }
 
