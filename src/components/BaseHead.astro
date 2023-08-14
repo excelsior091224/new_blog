@@ -19,18 +19,6 @@ const {
 ---
 
 <!-- Google Tag Manager -->
-<!-- <script type="text/partytown">
-  (function (w, d, s, l, i) {
-    w[l] = w[l] || [];
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != "dataLayer" ? "&l=" + l : "";
-    j.async = true;
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-WM9326C");
-</script> -->
 
 <!-- New GTM Test -->
 <!-- <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID-HERE"></script>
@@ -84,29 +72,6 @@ const {
 <meta name="robots" content={robots} />
 
 <!-- Google Adsense -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320"
-     crossorigin="anonymous"></script> -->
-<!-- <script>
-  let lazyloadads = !1;
-  window.addEventListener(
-    "scroll",
-    function () {
-      ((0 != document.documentElement.scrollTop && !1 === lazyloadads) ||
-        (0 != document.body.scrollTop && !1 === lazyloadads)) &&
-        (!(function () {
-          let e = document.createElement("script");
-          (e.type = "text/javascript"),
-            (e.async = !0),
-            (e.src =
-              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320");
-          let t = document.getElementsByTagName("script")[0];
-          t.parentNode.insertBefore(e, t);
-        })(),
-        (lazyloadads = !0));
-    },
-    !0
-  );
-</script> -->
 <script type="text/javascript">
 //<![CDATA[
 // iPhone iPad iPod Android の判別
@@ -189,12 +154,13 @@ if (
 />
 
 <!-- font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- rss feed -->
 <link
   rel="alte   r nat e"
-  typ e =" application/rss+xml"
+  type =" application/rss+xml"
   href={`https://${Astro.request.url.split("/")[2]}/feed.xml`}
   title="RSS2.0"
 />
