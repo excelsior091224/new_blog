@@ -142,6 +142,30 @@ a:focus {
   display: none;
 }
 
+.private_link {
+  display: block;
+  text-align: center;
+}
+
+.private_link ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.private_link li {
+  list-style: none;
+}
+
+.private_link_button {
+  display: block;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .categories_link {
   display: block;
   text-align: center;
