@@ -57,7 +57,7 @@ const { page } = Astro.props;
       <Sidebar />
       <section class="contents">
         <Posts posts={page.data} />
-        <Pagination page={page} />
+        <Pagination page={page} adjacentPageNumber={1} />
         <GoogleResponsiveAd client:only="preact"/>
       </section>
     </main>
