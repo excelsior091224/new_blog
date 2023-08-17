@@ -44,85 +44,105 @@ const { contents: links } = await cmsBlog.getLinks({
         <i class="fa-sharp fa-solid fa-rss"></i>RSSフィード
       </HeaderLink>
       <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
-      {
-        import.meta.env.LIT_LINK ? (
-          <HeaderLink
-            href={import.meta.env.LIT_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            各種アカウントへのリンク（lit.link）
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.TWITTER ? (
-          <HeaderLink
-            href={import.meta.env.TWITTER}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Twitter
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.MASTODON ? (
-          <HeaderLink
-            href={import.meta.env.MASTODON}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Mastodon
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.PIXIV ? (
-          <HeaderLink
-            href={import.meta.env.PIXIV}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            pixiv
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.FANBOX ? (
-          <HeaderLink
-            href={import.meta.env.FANBOX}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            FANBOX
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.OLD_SITE ? (
-          <HeaderLink
-            href={import.meta.env.OLD_SITE}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            旧サイト
-          </HeaderLink>
-        ) : null
-      }
-      {
-        import.meta.env.DEVIANTART ? (
-          <HeaderLink
-            href={import.meta.env.DEVIANTART}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            DeviantArt
-          </HeaderLink>
-        ) : null
-      }
+      <details class="private_link">
+        <summary class="private_link_button">Accounts</summary>
+        <ul>
+          {
+            import.meta.env.LIT_LINK ? (
+              <li>
+              <HeaderLink
+                href={import.meta.env.LIT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                各種アカウントへのリンク（lit.link）
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.TWITTER ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.TWITTER}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Twitter
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.MASTODON ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.MASTODON}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Mastodon
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.PIXIV ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.PIXIV}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                pixiv
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.FANBOX ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.FANBOX}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                FANBOX
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.OLD_SITE ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.OLD_SITE}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                旧サイト
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
+            import.meta.env.DEVIANTART ? (
+            <li>
+              <HeaderLink
+                href={import.meta.env.DEVIANTART}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DeviantArt
+              </HeaderLink>
+            </li>
+            ) : null
+          }
+        </ul>
+      </details>
+      
       <details class="categories_link">
-        <summary class="categories_button"> Categories</summary>
+        <summary class="categories_button">Categories</summary>
         <ul>
           {
             categories.map((category: any) => (
@@ -136,7 +156,7 @@ const { contents: links } = await cmsBlog.getLinks({
         </ul>
       </details>
       <details class="external_link">
-        <summary class="external_link_button"> Link</summary>
+        <summary class="external_link_button">Link</summary>
         <ul>
           {
             links.map((link: any) => (
