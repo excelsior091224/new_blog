@@ -472,9 +472,19 @@ a:focus {
   text-decoration: none;
   margin: 8px;
   background-color: #92cb16;
-  border-radius:5px;
+  border-radius: 5px;
   width: 1em;
-  padding:0 5px 0 5px;
+  padding: 0 5px 0 5px;
+}
+
+pre {
+  background-color: #1A2638;
+  color: #fff;
+}
+
+code {
+  background-color: #1A2638;
+  color: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -491,6 +501,12 @@ a:focus {
   strong,
   b {
     color: #fff;
+  }
+  code {
+    background-color: #0b4a9c;
+  }
+  pre {
+    background-color: #0b4a9c;
   }
   .contents main span {
     color: #fff !important;
@@ -510,12 +526,12 @@ a:focus {
   .hamburger {
     background-color: #000;
   }
-  
+
   .hamburger .line {
     background-color: #fff;
   }
   .wavebox img {
-    background-color:#fff ;
+    background-color: #fff;
   }
 
   .tweet a {
