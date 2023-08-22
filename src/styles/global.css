@@ -480,6 +480,7 @@ a:focus {
 pre {
   background-color: #1A2638;
   color: #fff;
+  overflow: scroll;
 }
 
 code {
