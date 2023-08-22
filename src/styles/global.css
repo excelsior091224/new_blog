@@ -49,12 +49,12 @@ code {
   padding: 2px 5px;
   background-color: #f2f2f2;
 }
-pre {
+/* pre {
   padding: 1rem;
 }
 pre > code {
   all: unset;
-}
+} */
 blockquote {
   border: 1px solid #999;
   color: #222;
@@ -477,15 +477,42 @@ a:focus {
   padding: 0 5px 0 5px;
 }
 
+/* コードブロック */
 pre {
+  overflow-x: auto;
+  margin-top: 16px;
+  margin-bottom: 0px;
+  border-radius: 5px;
+  padding: unset;
+}
+
+/* コードブロック(ファイル名が入力ありの場合) */
+div[data-filename] {
+  margin-top: 16px;
+}
+
+div[data-filename] > span {
+  display: inline-block;
+  background-color: #1D1F21;
+  color: #dfdfdf;
+  text-align: center;
+  padding: 3px 15px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+div[data-filename] > pre {
+  margin-top: 0px;
+  border-top-left-radius: 0px;
+}
+/* pre {
   background-color: #1A2638;
   color: #fff;
   overflow: scroll;
-}
+} */
 
 code {
-  background-color: #1A2638;
-  color: #fff;
+  background-color: #1D1F21;
+  color: #dfdfdf;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -502,15 +529,6 @@ code {
   strong,
   b {
     color: #fff;
-  }
-  code {
-    background-color: #0b4a9c;
-  }
-  pre {
-    background-color: #0b4a9c;
-  }
-  .contents main span {
-    color: #fff !important;
   }
   .contents main a {
     color: #fff !important;

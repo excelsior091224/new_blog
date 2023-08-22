@@ -4,6 +4,10 @@ import { cmsBlog } from "../../library/microcms";
 import pkg from "microcms-richedit-processer";
 const { createTableOfContents, processer } = pkg;
 
+import { load } from "cheerio";
+import hljs, { HighlightResult } from "highlight.js";
+import 'highlight.js/styles/hybrid.css';
+
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
   const response = await cmsBlog.getBlogs({orders: "-publishedAt"});
@@ -26,6 +30,46 @@ const posts = await cmsBlog.getBlogs({
   fields: ["id", "title"],
   orders: "-publishedAt",
 });
+
+
+// APIから取得したリッチエディタのHTMLからcheerioオブジェクトを生成
+const $ = load(blog.content);
+
+// コードブロックのファイル名が入力されている場合の処理
+$("div[data-filename]").each((_, elm) => {
+  // data-filename属性の値を持つspanを
+  // <div data-filename="{入力したファイル名}">の最初の子要素として追加
+  $(elm).prepend(`<span class="filename">${$(elm).attr("data-filename")}</span>`);
+});
+
+// コードブロックのシンタックスハイライトを行う
+$("pre code").each((_, elm) => {
+  const language = $(elm).attr("class") || "";
+  let result: HighlightResult;
+
+  if (language == "") {
+    // 言語が入力なしの場合、自動判定
+    result = hljs.highlightAuto($(elm).text());
+  } else {
+    // 言語が入力ありの場合、入力された言語で判定
+    result = hljs.highlight($(elm).text(), {
+      language: language.replace("language-", ""),
+    });
+  }
+  $(elm).html(result.value);
+  $(elm).addClass("hljs");
+});
+
+$("img").each((_, elm) => {
+  const src = $(elm).attr("src");
+  if (src && src.includes("https://images.microcms-assets.io/assets/")) {
+    const webpQueryParam = src.includes("?") ? "&fm=webp" : "?fm=webp";
+    $(elm).attr("src", src + webpQueryParam);
+  }
+});
+
+// 編集したHTMLを再設定
+blog.content = $.html();
 
 // const content = processer(blog.content, { img: { parameters: { fm: "webp", fit:"clip", w:700, h:700 } } });
 const content = blog.content;
