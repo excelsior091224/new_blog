@@ -79,6 +79,7 @@ $("img").each((index, elm) => {
     $(elm).attr("data-sizes","100vw");
     if(index===0){
       $(elm).attr("loading","eager");
+      const lcp = srcWithoutQuery;
     }else{
       $(elm).attr("loading","lazy");
     }
@@ -127,6 +128,7 @@ const older = posts.contents[current_index + 1] ?? null;
     }),
     categoryId: blog.category.id ?? "",
     categoryName: blog.category.name ?? "",
+    lcp: lcp ?? "",
   }}
   newer={newer}
   older={older}
