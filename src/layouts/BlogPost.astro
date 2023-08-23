@@ -62,7 +62,7 @@ const href_list = [`?fm=webp&fit=crop&crop=top&w=640&h=320`,`?fm=webp&fit=crop&c
     <main class="main">
       <Sidebar />
       <article class="contents">
-        {heroImage && <img width={720} height={360} data-src={`${heroImage}?fm=webp`} data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w, ${heroImage}?fm=webp&fit=crop&crop=top&w=828&h=414 828w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1080&h=540 1080w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1200&h=600 1200w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1920&h=960 1920w, ${heroImage}?fm=webp&fit=crop&crop=top&w=2048&h=1024 2048w, ${heroImage}?fm=webp&fit=crop&crop=top&w=3840&h=1920 3840w`} alt="" class="lazyload" loading="eager" /> }
+        {heroImage && <img width={720} height={360} data-src={`${heroImage}?fm=webp`} data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w, ${heroImage}?fm=webp&fit=crop&crop=top&w=828&h=414 828w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1080&h=540 1080w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1200&h=600 1200w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1920&h=960 1920w, ${heroImage}?fm=webp&fit=crop&crop=top&w=2048&h=1024 2048w, ${heroImage}?fm=webp&fit=crop&crop=top&w=3840&h=1920 3840w`} alt="" class="lazyload" loading="auto" /> }
         <h1 class="title">{title}</h1>
         {pubDate && <time>{pubDate}</time>}
         {
