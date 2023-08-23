@@ -59,8 +59,8 @@ const BlogPreview = () => {
       if (src && src.includes("https://images.microcms-assets.io/assets/")) {
         // クエリパラメータを削除
         const srcWithoutQuery = src.split("?")[0];
-        // auto=format パラメータ
-        const webpQueryParam = "?auto=format";
+        // fm=webp パラメータ
+        const webpQueryParam = "?fm=webp";
         // classにlazyloadを追加
         $(elm).addClass("lazyload");
         // srcを削除
