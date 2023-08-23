@@ -60,18 +60,25 @@ $("pre code").each((_, elm) => {
   $(elm).addClass("hljs");
 });
 
-$("img").each((_, elm) => {
+$("img").each((index, elm) => {
   const src = $(elm).attr("src");
   if (src && src.includes("https://images.microcms-assets.io/assets/")) {
     const webpQueryParam = src.includes("?") ? "&fm=webp" : "?fm=webp";
     $(elm).attr("src", src + webpQueryParam);
+    if(index !== 0){
+      $(elm).addClass("lazyload");
+      $(elm).removeAttr("src");
+      $(elm).attr("data-src", src + webpQueryParam);
+    }else{
+      $(elm).attr("src", src + webpQueryParam);
+    }
   }
 });
 
 // 編集したHTMLを再設定
 blog.content = $.html();
 
-// const content = processer(blog.content, { img: { parameters: { fm: "webp", fit:"clip", w:700, h:700 } } });
+// const content = processer(blog.content, { img: { parameters: { fm: "webp"} } });
 const content = blog.content;
 const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" });
 
