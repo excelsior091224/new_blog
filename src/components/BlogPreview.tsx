@@ -31,7 +31,9 @@ const BlogPreview = () => {
     $("div[data-filename]").each((_, elm) => {
       // data-filename属性の値を持つspanを
       // <div data-filename="{入力したファイル名}">の最初の子要素として追加
-      $(elm).prepend(`<span class="filename">${$(elm).attr("data-filename")}</span>`);
+      $(elm).prepend(
+        `<span class="filename">${$(elm).attr("data-filename")}</span>`
+      );
     });
 
     // コードブロックのシンタックスハイライトを行う
@@ -52,12 +54,32 @@ const BlogPreview = () => {
       $(elm).addClass("hljs");
     });
 
-    $("img").each((_, elm) => {
+    $("img").each((index, elm) => {
       const src = $(elm).attr("src");
       if (src && src.includes("https://images.microcms-assets.io/assets/")) {
-        const webpQueryParam = src.includes("?") ? "&fm=webp" : "?fm=webp";
-        $(elm).attr("src", src + webpQueryParam);
+        // クエリパラメータを削除
+        const srcWithoutQuery = src.split("?")[0];
+        // auto=format パラメータ
+        const webpQueryParam = "?auto=format";
+        // classにlazyloadを追加
+        $(elm).addClass("lazyload");
+        // srcを削除
+        $(elm).removeAttr("src");
+        // data-srcを設定
+        $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
+        // data-srcsetを設定
+        $(elm).attr("data-srcset", `${srcWithoutQuery + webpQueryParam}&w=640 640w, ${srcWithoutQuery + webpQueryParam}&w=750 750w, ${srcWithoutQuery + webpQueryParam}&w=828 828w, ${srcWithoutQuery + webpQueryParam}&w=1080 1080w, ${srcWithoutQuery + webpQueryParam}&w=1200 1200w, ${srcWithoutQuery + webpQueryParam}&w=1920 1920w, ${srcWithoutQuery + webpQueryParam}&w=2048 2048w, ${srcWithoutQuery + webpQueryParam}&w=3840 3840w`);
+        $(elm).attr("data-sizes", "100vw");
+        if (index === 0) {
+          $(elm).attr("loading", "eager");
+        } else {
+          $(elm).attr("loading", "lazy");
+        }
       }
+    });
+
+    $("iframe").each((index, elm) => {
+      $(elm).addClass("lazyload");
     });
 
     // 編集したHTMLを再設定

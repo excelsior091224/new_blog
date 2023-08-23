@@ -11,8 +11,11 @@ const { posts } = Astro.props;
             <img
               width={720}
               height={360}
-              src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`}
+              data-src={`${post.eyecatch.url}?auto=format`}
+              data-srcset={`${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=640&h=320 640w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=750&h=375 750w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=828&h=414 828w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1080&h=540 1080w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1200&h=600 1200w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1920&h=960 1920w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=2048&h=1024 2048w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=3840&h=1920 3840w`}
               alt=""
+              class="lazyload"
+              loading="eager"
             />
           </a>
         ) : post.eyecatch ? (
@@ -20,9 +23,11 @@ const { posts } = Astro.props;
             <img
               width={720}
               height={360}
-              data-src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`}
+              data-src={`${post.eyecatch.url}?auto=format`}
+              data-srcset={`${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=640&h=320 640w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=750&h=375 750w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=828&h=414 828w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1080&h=540 1080w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1200&h=600 1200w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=1920&h=960 1920w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=2048&h=1024 2048w, ${post.eyecatch.url}?auto=format&fit=crop&crop=top&w=3840&h=1920 3840w`}
               alt=""
               class="lazyload"
+              loading="lazy"
             />
           </a>
         ) : null}

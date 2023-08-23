@@ -6,11 +6,11 @@ const { createTableOfContents, processer } = pkg;
 
 import { load } from "cheerio";
 import hljs, { HighlightResult } from "highlight.js";
-import 'highlight.js/styles/hybrid.css';
+import "highlight.js/styles/hybrid.css";
 
 // 生成する記事のIDを全て取得
 export async function getStaticPaths() {
-  const response = await cmsBlog.getBlogs({orders: "-publishedAt"});
+  const response = await cmsBlog.getBlogs({ orders: "-publishedAt" });
   return response.contents.map((content: any) => ({
     params: {
       blogId: content.id,
@@ -31,7 +31,6 @@ const posts = await cmsBlog.getBlogs({
   orders: "-publishedAt",
 });
 
-
 // APIから取得したリッチエディタのHTMLからcheerioオブジェクトを生成
 const $ = load(blog.content);
 
@@ -39,7 +38,9 @@ const $ = load(blog.content);
 $("div[data-filename]").each((_, elm) => {
   // data-filename属性の値を持つspanを
   // <div data-filename="{入力したファイル名}">の最初の子要素として追加
-  $(elm).prepend(`<span class="filename">${$(elm).attr("data-filename")}</span>`);
+  $(elm).prepend(
+    `<span class="filename">${$(elm).attr("data-filename")}</span>`
+  );
 });
 
 // コードブロックのシンタックスハイライトを行う
@@ -63,14 +64,23 @@ $("pre code").each((_, elm) => {
 $("img").each((index, elm) => {
   const src = $(elm).attr("src");
   if (src && src.includes("https://images.microcms-assets.io/assets/")) {
-    const webpQueryParam = src.includes("?") ? "&fm=webp" : "?fm=webp";
-    $(elm).attr("src", src + webpQueryParam);
-    if(index !== 0){
-      $(elm).addClass("lazyload");
-      $(elm).removeAttr("src");
-      $(elm).attr("data-src", src + webpQueryParam);
+    // クエリパラメータを削除
+    const srcWithoutQuery = src.split("?")[0];
+    // auto=format パラメータ
+    const webpQueryParam = "?auto=format";
+    // classにlazyloadを追加
+    $(elm).addClass("lazyload");
+    // srcを削除
+    $(elm).removeAttr("src");
+    // data-srcを設定
+    $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
+    // data-srcsetを設定
+    $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
+    $(elm).attr("data-sizes","100vw");
+    if(index===0){
+      $(elm).attr("loading","eager");
     }else{
-      $(elm).attr("src", src + webpQueryParam);
+      $(elm).attr("loading","lazy");
     }
   }
 });
@@ -84,7 +94,9 @@ blog.content = $.html();
 
 // const content = processer(blog.content, { img: { parameters: { fm: "webp"} } });
 const content = blog.content;
-const table_of_content = createTableOfContents(blog.content,{ tags: "h1,h2,h3,h4,h5" });
+const table_of_content = createTableOfContents(blog.content, {
+  tags: "h1,h2,h3,h4,h5",
+});
 
 // 現在の記事のpostsの中でのindex番号を取得
 const current_index = posts.contents.findIndex((post) => post.id === blogId);
@@ -119,22 +131,21 @@ const older = posts.contents[current_index + 1] ?? null;
   newer={newer}
   older={older}
 >
-  {table_of_content.length > 0 && (
-    <div class="table_of_content_wrapper">
-      <h4 class="table_of_content_title">目次</h4>
-      <ul class="table_of_content_lists">
-        {table_of_content.map((item) => (
-          <li class={`table_of_content_list ${item.name}`}>
-            <a href={`#${item.id}`}>{item.text}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  {
+    table_of_content.length > 0 && (
+      <div class="table_of_content_wrapper">
+        <h4 class="table_of_content_title">目次</h4>
+        <ul class="table_of_content_lists">
+          {table_of_content.map((item) => (
+            <li class={`table_of_content_list ${item.name}`}>
+              <a href={`#${item.id}`}>{item.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
   }
-  <main
-    set:html={content}
-  />
+  <main set:html={content} />
   <div id="wavebox" class="wavebox">
     <p>もしこの投稿が「いいね！」と思ったら↓のWaveboxから拍手をください</p>
     <a
