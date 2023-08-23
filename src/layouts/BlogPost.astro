@@ -16,6 +16,7 @@ export interface Props {
     heroImage?: string;
     categoryId: string;
     categoryName: string;
+    lcp?: string;
   };
   newer?: Blog;
   older?: Blog;
@@ -30,6 +31,7 @@ const {
     heroImage,
     categoryId,
     categoryName,
+    lcp,
   },
   newer,
   older,
@@ -55,6 +57,7 @@ const href_list = [`?fm=webp&fit=crop&crop=top&w=640&h=320`,`?fm=webp&fit=crop&c
       }
     </style>
     {heroImage ? href_list.map((href_elm) => <link rel="preload" as="image" href={heroImage + href_elm} />):null}
+    {lcp ? href_list.map((href_elm) => <link rel="preload" as="image" href={lcp + href_elm} />):null}
   </head>
 
   <body>
