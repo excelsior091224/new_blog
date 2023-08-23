@@ -75,6 +75,10 @@ $("img").each((index, elm) => {
   }
 });
 
+$("iframe").each((index, elm) => {
+  $(elm).addClass("lazyload");
+});
+
 // 編集したHTMLを再設定
 blog.content = $.html();
 
