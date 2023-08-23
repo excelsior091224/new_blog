@@ -15,9 +15,9 @@ const href_list = [
 {
   posts.map((post: any, index: number) =>
     post.eyecatch && (index === 0 || index === 1)
-      ? href_list.map((href) => {
-          <link rel="preload" as="image" href={post.eyecatch.url + href} />;
-        })
+      ? href_list.map((href_elm) => 
+          <link rel="preload" as="image" href={post.eyecatch.url + href_elm} />
+        )
       : null
   )
 }
