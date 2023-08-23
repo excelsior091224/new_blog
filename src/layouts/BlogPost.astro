@@ -34,6 +34,7 @@ const {
   newer,
   older,
 } = Astro.props;
+const href_list = [`?fm=webp&fit=crop&crop=top&w=640&h=320`,`?fm=webp&fit=crop&crop=top&w=750&h=375`,`?fm=webp&fit=crop&crop=top&w=828&h=414`,`?fm=webp&fit=crop&crop=top&w=1080&h=540`,`?fm=webp&fit=crop&crop=top&w=1200&h=600`,`?fm=webp&fit=crop&crop=top&w=1920&h=960`,`?fm=webp&fit=crop&crop=top&w=2048&h=1024`,`?fm=webp&fit=crop&crop=top&w=3840&h=1920`,];
 ---
 
 <html lang="ja">
@@ -53,7 +54,7 @@ const {
         margin: 1rem 0;
       }
     </style>
-    <!-- {heroImage && <link rel="preload" as="image" href={heroImage} />} -->
+    {heroImage ? href_list.map((href_elm) => <link rel="preload" as="image" href={heroImage + href_elm} />):null}
   </head>
 
   <body>
@@ -61,16 +62,7 @@ const {
     <main class="main">
       <Sidebar />
       <article class="contents">
-        {
-          heroImage && (
-            <img
-              width={720}
-              height={360}
-              src={`${heroImage}?fm=webp&fit=crop&crop=top&w=720&h=360`}
-              alt=""
-            />
-          )
-        }
+        {heroImage && <img width={720} height={360} data-src={`${heroImage}?fm=webp`} data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w, ${heroImage}?fm=webp&fit=crop&crop=top&w=828&h=414 828w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1080&h=540 1080w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1200&h=600 1200w, ${heroImage}?fm=webp&fit=crop&crop=top&w=1920&h=960 1920w, ${heroImage}?fm=webp&fit=crop&crop=top&w=2048&h=1024 2048w, ${heroImage}?fm=webp&fit=crop&crop=top&w=3840&h=1920 3840w`} alt="" class="lazyload" loading="eager" /> }
         <h1 class="title">{title}</h1>
         {pubDate && <time>{pubDate}</time>}
         {
