@@ -61,6 +61,8 @@ $("pre code").each((_, elm) => {
   $(elm).addClass("hljs");
 });
 
+const lcp = "";
+
 $("img").each((index, elm) => {
   const src = $(elm).attr("src");
   if (src && src.includes("https://images.microcms-assets.io/assets/")) {
@@ -79,7 +81,7 @@ $("img").each((index, elm) => {
     $(elm).attr("data-sizes","100vw");
     if(index===0){
       $(elm).attr("loading","eager");
-      const lcp = srcWithoutQuery;
+      lcp = srcWithoutQuery;
     }else{
       $(elm).attr("loading","lazy");
     }
@@ -128,7 +130,7 @@ const older = posts.contents[current_index + 1] ?? null;
     }),
     categoryId: blog.category.id ?? "",
     categoryName: blog.category.name ?? "",
-    lcp: typeof lcp !== 'undefined' ? lcp : null,
+    lcp: typeof lcp !== 'undefined'| lcp !== "" | lcp = null ? lcp : null,
   }}
   newer={newer}
   older={older}
