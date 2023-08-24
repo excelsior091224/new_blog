@@ -16,6 +16,7 @@ export interface Props {
     heroImage?: string;
     categoryId: string;
     categoryName: string;
+    lcp?: string;
   };
   newer?: Blog;
   older?: Blog;
@@ -30,11 +31,13 @@ const {
     heroImage,
     categoryId,
     categoryName,
+    lcp,
   },
   newer,
   older,
 } = Astro.props;
 const href_list = [`?fm=webp&fit=crop&crop=top&w=640&h=320`,`?fm=webp&fit=crop&crop=top&w=750&h=375`,`?fm=webp&fit=crop&crop=top&w=828&h=414`,`?fm=webp&fit=crop&crop=top&w=1080&h=540`,`?fm=webp&fit=crop&crop=top&w=1200&h=600`,`?fm=webp&fit=crop&crop=top&w=1920&h=960`,`?fm=webp&fit=crop&crop=top&w=2048&h=1024`,`?fm=webp&fit=crop&crop=top&w=3840&h=1920`,];
+const href_list2 = [`?fm=webp&w=640`,`?fm=webp&w=750`,`?fm=webp&w=828`,`?fm=webp&w=1080`,`?fm=webp&w=1200`,`?fm=webp&w=1920`,`?fm=webp&w=2048`,`?fm=webp&w=3840`,];
 ---
 
 <html lang="ja">
@@ -54,7 +57,8 @@ const href_list = [`?fm=webp&fit=crop&crop=top&w=640&h=320`,`?fm=webp&fit=crop&c
         margin: 1rem 0;
       }
     </style>
-    {heroImage ? href_list.map((href_elm) => <link rel="preload" as="image" href={heroImage + href_elm} />):null}
+    <!-- {heroImage ? href_list.map((href_elm) => <link rel="preload" as="image" href={heroImage + href_elm} />):null} -->
+    <!-- {lcp ? href_list2.map((href_elm2) => <link rel="preload" as="image" href={lcp + href_elm2} />):null} -->
   </head>
 
   <body>
