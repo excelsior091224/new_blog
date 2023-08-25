@@ -74,6 +74,19 @@ const { contents: links } = await cmsBlog.getLinks({
             ) : null
           }
           {
+            import.meta.env.THREADS ? (
+            <li>
+             <HeaderLink
+               href={import.meta.env.THREADS}
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+               Threads
+             </HeaderLink>
+            </li>
+            ) : null
+          }
+          {
             import.meta.env.MASTODON ? (
             <li>
               <HeaderLink
