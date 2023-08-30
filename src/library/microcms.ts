@@ -69,7 +69,7 @@ export type LinkResponse = {
 };
 
 class CMSBlog {
-  @Cache(userCache, { ttl: 300 })
+  //@Cache(userCache, { ttl: 300 })
   // export const getBlogs = async (queries?: MicroCMSQueries) => {
   public async getBlogs(queries?: MicroCMSQueries) {
     const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
