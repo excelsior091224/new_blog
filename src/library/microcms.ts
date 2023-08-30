@@ -8,7 +8,7 @@ export const client = createClient({
 import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from "node-ts-cache-storage-memory";
 
-const userCache = new CacheContainer(new MemoryStorage());
+// const userCache = new CacheContainer(new MemoryStorage());
 
 export type Blog = {
   id: string;
@@ -69,7 +69,7 @@ export type LinkResponse = {
 };
 
 class CMSBlog {
-  @Cache(userCache, { ttl: 300 })
+  // @Cache(userCache, { ttl: 300 })
   // export const getBlogs = async (queries?: MicroCMSQueries) => {
   public async getBlogs(queries?: MicroCMSQueries) {
     const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
