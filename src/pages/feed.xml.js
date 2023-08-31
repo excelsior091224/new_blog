@@ -27,7 +27,7 @@ async function getImageFileSize(imageUrl) {
   });
 }
 
-export const get = async () => {
+export const GET = async () => {
   const { contents: posts } = await cmsBlog.getBlogs({
     fields: ["id", "title", "publishedAt", "content", "eyecatch", "category"],
     orders: "-publishedAt",
