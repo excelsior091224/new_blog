@@ -79,11 +79,6 @@ export type LinkResponse = {
 };
 
 class CMSBlog {
-<<<<<<< HEAD
-=======
-  //@Cache(userCache, { ttl: 300 })
-  // export const getBlogs = async (queries?: MicroCMSQueries) => {
->>>>>>> 9f277b10836610075129861cfe9e980e7aa4ffae
   public async getBlogs(queries?: MicroCMSQueries) {
     return this.getData("blogs", queries);
   }
