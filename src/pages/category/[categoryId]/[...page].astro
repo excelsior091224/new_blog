@@ -26,7 +26,7 @@ export async function getStaticPaths({ paginate }: any) {
   // すべてのタグに対して、paginate() の結果を返す。
   // 必ず、`{params: {tag}} を `paginate()` に渡してください。
   // そうすれば、Astroは結果がどのタググループに対するものか分かります。
-  return allTags.map((categoryId) => {
+  return allTags.flatMap((categoryId) => {
     const filteredPosts = posts.filter(
       (post) => post.category !== null && post.category.id === categoryId
     );
