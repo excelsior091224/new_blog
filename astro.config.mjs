@@ -39,17 +39,13 @@ export default defineConfig({
     }),
     preact({
       compat: true,
+      include: ['**/*[jt]sx']
     }),
     robotsTxt(),
   ],
   site: "https://www.vermilion3.xyz",
   // output: "server",
-  // adapter: cloudflare(),
-  // vite: {
-  //   define: {
-  //       "process.env.MICROCMS_SERVICE_DOMAIN": process.env.MICROCMS_SERVICE_DOMAIN,
-  //       "process.env.MICROCMS_API_KEY":process.env.MICROCMS_API_KEY,
-  //   },
-  // },
-  // adapter: netlify()
+  // adapter: cloudflare({
+  //  runtime: 'local',
+  // }),
 });
