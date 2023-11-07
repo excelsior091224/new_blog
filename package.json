@@ -44,6 +44,6 @@
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
-    "wrangler": "^3.13.2"
+    "wrangler": "^3.15.0"
   }
 }
