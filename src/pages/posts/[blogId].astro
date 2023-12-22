@@ -5,7 +5,7 @@ import pkg from "microcms-richedit-processer";
 const { createTableOfContents, processer } = pkg;
 
 import { load } from "cheerio";
-import hljs, { HighlightResult } from "highlight.js";
+import hljs, { type HighlightResult } from "highlight.js";
 import "highlight.js/styles/hybrid.css";
 
 // 生成する記事のIDを全て取得
@@ -130,7 +130,7 @@ const older = posts.contents[current_index + 1] ?? null;
     }),
     categoryId: blog.category.id ?? "",
     categoryName: blog.category.name ?? "",
-    lcp: (typeof lcp !== 'undefined'| lcp !== "" | lcp !== null) ? lcp : null,
+    lcp: (typeof lcp !== 'undefined' && lcp !== "" && lcp !== null) ? lcp : undefined,
   }}
   newer={newer}
   older={older}
