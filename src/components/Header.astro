@@ -1,7 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
-import { SITE_TITLE,ICON } from "../config";
+import { SITE_TITLE,ICON_HEADER } from "../config";
 
 //microCMS呼び出し
 import { cmsBlog } from "../library/microcms";
@@ -28,7 +28,7 @@ const { contents: links } = await cmsBlog.getLinks({
   <div class="navbar">
     <a href="/" class="">
       <h2 class="site_title">
-      <img alt="icon" width="25" height="25" src={ICON}>
+      <img alt="icon" width="25" height="25" src={ICON_HEADER}>
 
         {SITE_TITLE}
       </h2>
