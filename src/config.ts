@@ -7,3 +7,6 @@ export const SITE_TITLE = import.meta.env.SITE_TITLE
 export const SITE_DESCRIPTION = import.meta.env.SITE_DESCRIPTION
   ? import.meta.env.SITE_DESCRIPTION
   : "Welcome to my website!";
+export const ICON = import.meta.env.ICON
+  ? import.meta.env.ICON
+  : "/favicon.svg";
