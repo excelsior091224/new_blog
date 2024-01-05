@@ -477,6 +477,15 @@ a:focus {
   padding: 0 5px 0 5px;
 }
 
+.taittsuu a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  /* color: #06c755; */
+  margin: 8px;
+}
+
 /* コードブロック */
 pre {
   overflow-x: auto;
