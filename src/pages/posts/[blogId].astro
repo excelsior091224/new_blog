@@ -77,8 +77,10 @@ $("img").each((index, elm) => {
     // data-srcを設定
     $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
     // data-srcsetを設定
-    $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
-    $(elm).attr("data-sizes","100vw");
+    // $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
+    $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w`);
+    // $(elm).attr("data-sizes","100vw");
+    $(elm).attr("data-sizes","(min-width: 640px) 1000px, 100vw");
     if(index===0){
       $(elm).attr("loading","eager");
       lcp = srcWithoutQuery;
