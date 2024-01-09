@@ -1,7 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
-import { SITE_TITLE,ICON_HEADER } from "../config";
+import { SITE_TITLE, ICON_HEADER } from "../config";
 
 //microCMS呼び出し
 import { cmsBlog } from "../library/microcms";
@@ -15,29 +15,41 @@ const { contents: links } = await cmsBlog.getLinks({
 });
 ---
 
-<!-- Google Tag Manager (noscript) -->
-<!-- <noscript
+<!-- Google Tag Manager (noscript) --><!-- <noscript
   ><iframe
     src="https://www.googletagmanager.com/ns.html?id=GTM-WM9326C"
     height="0"
     width="0"
     style="display:none;visibility:hidden"></iframe></noscript
-> -->
-<!-- End Google Tag Manager (noscript) -->
+> --><!-- End Google Tag Manager (noscript) -->
 <header>
   <div class="navbar">
     <a href="/" class="">
       <h2 class="site_title">
-      <img alt="icon" width="25" height="25" src={`${ICON_HEADER}?fm=webp&fit=clip&w=38&h=38`}>
+        <img
+          alt="icon"
+          width="25"
+          height="25"
+          src={`${ICON_HEADER}?fm=webp&fit=clip&w=38&h=38`}
+        />
 
         {SITE_TITLE}
       </h2>
     </a>
-    <div class="hamburger">
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line"></span>
-    </div>
+    <div class="switch_and_hamburger">
+      <!-- 🌙or🌄 -->
+      <div class="switch">
+        <label class="switch-label" for="js_mode_toggle">
+          <input type="checkbox" id="js_mode_toggle" />
+          <span class="switch-mode" id="js_rotate"></span>
+        </label>
+      </div>
+      <div class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>    
   </div>
   <nav>
     <div class="nav-links">
@@ -52,110 +64,110 @@ const { contents: links } = await cmsBlog.getLinks({
           {
             import.meta.env.LIT_LINK ? (
               <li>
-              <HeaderLink
-                href={import.meta.env.LIT_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                各種アカウントへのリンク（lit.link）
-              </HeaderLink>
-            </li>
+                <HeaderLink
+                  href={import.meta.env.LIT_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  各種アカウントへのリンク（lit.link）
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.TWITTER ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.TWITTER}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                X
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.TWITTER}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  X
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.THREADS ? (
-            <li>
-             <HeaderLink
-               href={import.meta.env.THREADS}
-               target="_blank"
-               rel="noopener noreferrer"
-             >
-               Threads
-             </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.THREADS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Threads
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.MASTODON ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.MASTODON}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Mastodon
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.MASTODON}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Mastodon
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.PIXIV ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.PIXIV}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                pixiv
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.PIXIV}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  pixiv
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.FANBOX ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.FANBOX}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                FANBOX
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.FANBOX}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  FANBOX
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.OLD_SITE ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.OLD_SITE}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                旧サイト
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.OLD_SITE}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  旧サイト
+                </HeaderLink>
+              </li>
             ) : null
           }
           {
             import.meta.env.DEVIANTART ? (
-            <li>
-              <HeaderLink
-                href={import.meta.env.DEVIANTART}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                DeviantArt
-              </HeaderLink>
-            </li>
+              <li>
+                <HeaderLink
+                  href={import.meta.env.DEVIANTART}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DeviantArt
+                </HeaderLink>
+              </li>
             ) : null
           }
         </ul>
       </details>
-      
+
       <details class="categories_link">
         <summary class="categories_button">Categories</summary>
         <ul>
