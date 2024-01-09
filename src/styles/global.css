@@ -530,6 +530,10 @@ code {
   color: #dfdfdf;
 }
 
+.wavebox img {
+  background-color: #fff;
+}
+
 /* for checkbox */
 input[type="checkbox"] {
   display: none;
@@ -579,9 +583,6 @@ body[data-theme="dark"] .hamburger {
   background-color: #2c2c30;
 }
 body[data-theme="dark"] .hamburger .line {
-  background-color: #ffffffa1;
-}
-body[data-theme="dark"] .wavebox img {
   background-color: #ffffffa1;
 }
 body[data-theme="dark"] .tweet a {
