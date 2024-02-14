@@ -1,4 +1,5 @@
 ---
+import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import GoogleResponsiveAd from "./GoogleResponsiveAd";
@@ -29,107 +30,7 @@ const { contents: links } = await cmsBlog.getLinks({
     </div>
     <div class="sidebar_private_links">
       <p>Accounts</p>
-      <ul class="">
-        {
-          import.meta.env.LIT_LINK ? (
-            <li>
-              <a
-                href={import.meta.env.LIT_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                各種アカウントへのリンク（lit.link）
-              </a>
-            </li>
-          ) : null
-        }
-        {
-          import.meta.env.TWITTER ? (
-            <li>
-              <a
-                href={import.meta.env.TWITTER}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                X
-              </a>
-            </li>
-          ) : null
-        }
-        {import.meta.env.THREADS ? (<li><a href={import.meta.env.THREADS} target="_blank" rel="noopener noreferrer">Threads</a></li>) : null}
-        {
-          import.meta.env.MASTODON ? (
-            <li>
-              <a
-                href={import.meta.env.MASTODON}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                Mastodon
-              </a>
-            </li>
-          ) : null
-        }
-        {
-          import.meta.env.PIXIV ? (
-            <li>
-              <a
-                href={import.meta.env.PIXIV}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                pixiv
-              </a>
-            </li>
-          ) : null
-        }
-        {
-          import.meta.env.FANBOX ? (
-            <li>
-              <a
-                href={import.meta.env.FANBOX}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                FANBOX
-              </a>
-            </li>
-          ) : null
-        }
-        {
-          import.meta.env.OLD_SITE ? (
-            <li>
-              <a
-                href={import.meta.env.OLD_SITE}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                旧サイト
-              </a>
-            </li>
-          ) : null
-        }
-        {
-          import.meta.env.DEVIANTART ? (
-            <li>
-              <a
-                href={import.meta.env.DEVIANTART}
-                target="_blank"
-                rel="noopener noreferrer"
-                class=""
-              >
-                DeviantArt
-              </a>
-            </li>
-          ) : null
-        }
-      </ul>
+      <AccountsLinks />
     </div>
     <div class="sidebar_categories_links">
       <p>Categories</p>

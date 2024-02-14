@@ -1,4 +1,5 @@
 ---
+import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import { SITE_TITLE, ICON_HEADER } from "../config";
@@ -49,7 +50,7 @@ const { contents: links } = await cmsBlog.getLinks({
         <span class="line"></span>
         <span class="line"></span>
       </div>
-    </div>    
+    </div>
   </div>
   <nav>
     <div class="nav-links">
@@ -60,112 +61,7 @@ const { contents: links } = await cmsBlog.getLinks({
       <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
       <details class="private_link">
         <summary class="private_link_button">Accounts</summary>
-        <ul>
-          {
-            import.meta.env.LIT_LINK ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.LIT_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  各種アカウントへのリンク（lit.link）
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.TWITTER ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.TWITTER}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  X
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.THREADS ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.THREADS}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Threads
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.MASTODON ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.MASTODON}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Mastodon
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.PIXIV ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.PIXIV}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  pixiv
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.FANBOX ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.FANBOX}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  FANBOX
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.OLD_SITE ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.OLD_SITE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  旧サイト
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-          {
-            import.meta.env.DEVIANTART ? (
-              <li>
-                <HeaderLink
-                  href={import.meta.env.DEVIANTART}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DeviantArt
-                </HeaderLink>
-              </li>
-            ) : null
-          }
-        </ul>
+        <AccountsLinks />
       </details>
 
       <details class="categories_link">

@@ -1,0 +1,123 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+---
+
+<ul>
+  {
+    import.meta.env.LIT_LINK ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.LIT_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          各種アカウントへのリンク（lit.link）
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.PIXIV ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.PIXIV}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          pixiv
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.FANBOX ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.FANBOX}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          FANBOX
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.X ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.X}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          X
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.THREADS ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.THREADS}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Threads
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.MASTODON ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.MASTODON}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mastodon
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.BLUESKY ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.BLUESKY}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Bluesky
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.OLD_SITE ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.OLD_SITE}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          旧サイト
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
+    import.meta.env.DEVIANTART ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.DEVIANTART}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          DeviantArt
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+</ul>
