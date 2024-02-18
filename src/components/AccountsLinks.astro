@@ -82,6 +82,19 @@ import HeaderLink from "./HeaderLink.astro";
     ) : null
   }
   {
+    import.meta.env.MISSKEY ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.MISSKEY}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Misskey
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
     import.meta.env.BLUESKY ? (
       <li>
         <HeaderLink
