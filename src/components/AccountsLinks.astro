@@ -43,6 +43,19 @@ import HeaderLink from "./HeaderLink.astro";
     ) : null
   }
   {
+    import.meta.env.XFOLIO ? (
+      <li>
+        <HeaderLink
+          href={import.meta.env.XFOLIO}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Xfolio
+        </HeaderLink>
+      </li>
+    ) : null
+  }
+  {
     import.meta.env.X ? (
       <li>
         <HeaderLink
