@@ -28,7 +28,7 @@ const { title } = Astro.props;
     <a
       href={`https://bsky.app/intent/compose?text=${
         Astro.request.url
-      }&text=${encodeURI(`${title} | ${SITE_TITLE}`)}`}
+      } ${encodeURI(`${title} | ${SITE_TITLE}`)}`}
       class="bsky_button"
       data-show-count="false"
       target="_blank"
