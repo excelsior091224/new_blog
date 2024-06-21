@@ -495,6 +495,15 @@ a:focus {
   margin: 8px;
 }
 
+.threads a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  color: #2c2c30;
+  margin: 8px;
+}
+
 /* コードブロック */
 pre {
   overflow-x: auto;
@@ -595,6 +604,9 @@ body[data-theme="dark"] .hamburger .line {
   background-color: #ffffffa1;
 }
 body[data-theme="dark"] .tweet a {
+  color: #ffffffa1;
+}
+body[data-theme="dark"] .threads a {
   color: #ffffffa1;
 }
 
