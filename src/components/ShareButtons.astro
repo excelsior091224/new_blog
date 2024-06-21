@@ -28,7 +28,7 @@ const { title } = Astro.props;
     <a
       href={`https://bsky.app/intent/compose?text=${encodeURI(
         `${title} | ${SITE_TITLE}`
-      )} ${Astro.request.url}`}
+      )}%0A${Astro.request.url}`}
       class="bsky_button"
       data-show-count="false"
       target="_blank"
@@ -42,7 +42,7 @@ const { title } = Astro.props;
     <a
       href={`https://www.threads.net/intent/post?text=${encodeURI(
         `${title} | ${SITE_TITLE}`
-      )} ${Astro.request.url}`}
+      )}%0A${Astro.request.url}`}
       class="threads_button"
       data-show-count="false"
       target="_blank"
