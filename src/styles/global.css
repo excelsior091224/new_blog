@@ -486,6 +486,15 @@ a:focus {
   margin: 8px;
 }
 
+.bsky a {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+  text-decoration: none;
+  color: #0085ff;
+  margin: 8px;
+}
+
 /* コードブロック */
 pre {
   overflow-x: auto;

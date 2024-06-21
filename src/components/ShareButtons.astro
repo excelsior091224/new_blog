@@ -24,6 +24,20 @@ const { title } = Astro.props;
       <i class="fa-brands fa-x-twitter"></i>
     </a>
   </span>
+  <span class="bsky">
+    <a
+      href={`https://bsky.app/intent/compose?text=${
+        Astro.request.url
+      }&text=${encodeURI(`${title} | ${SITE_TITLE}`)}`}
+      class="bsky_button"
+      data-show-count="false"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="bluesky"
+    >
+      <i class="fa-brands fa-bluesky"></i>
+    </a>
+  </span>
   <span class="facebook">
     <a
       href={`http://www.facebook.com/share.php?u=${Astro.request.url}`}
