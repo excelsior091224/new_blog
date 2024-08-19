@@ -84,7 +84,7 @@ const href_list2 = [
     <Header />
     <main class="main">
       <Sidebar />
-      <article class="contents">
+      <article class="contents h-entry">
         {
           heroImage && (
             <img
@@ -99,7 +99,7 @@ const href_list2 = [
             />
           )
         }
-        <h1 class="title">{title}</h1>
+        <h1 class="title p-name">{title}</h1>
         {pubDate && <time>{pubDate}</time>}
         {
           updatedDate && (

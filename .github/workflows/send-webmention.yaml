@@ -1,0 +1,10 @@
+name: send webmention
+
+on:
+  repository_dispatch:
+    types: [update]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl https://fed.brid.gy/webmention -d source=https://www.vermilion3.xyz/posts/${{ github.event.client_payload.id }}/ -d target=https://fed.brid.gy

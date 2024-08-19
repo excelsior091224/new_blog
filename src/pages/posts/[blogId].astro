@@ -71,8 +71,8 @@ $("img").each((index, elm) => {
     const srcWithoutQuery = src.split("?")[0];
     // fm=webp パラメータ
     const webpQueryParam = "?fm=webp";
-    // classにlazyloadを追加
-    $(elm).addClass("lazyload");
+    // classにlazyload,u-photoを追加
+    $(elm).addClass("lazyload u-photo");
     // srcを削除
     $(elm).removeAttr("src");
     // data-srcを設定
@@ -158,7 +158,7 @@ const older = posts.contents[current_index + 1] ?? null;
       </div>
     )
   }
-  <main set:html={content} />
+  <main set:html={content} class="e-content" />
   <div id="wavebox" class="wavebox">
     <p>もしこの投稿が「いいね！」と思ったら↓のWaveboxから拍手をください</p>
     <a
@@ -171,6 +171,23 @@ const older = posts.contents[current_index + 1] ?? null;
         alt="wavebox logo"
         src="https://images.microcms-assets.io/assets/8026aec5aaba42abb48e90c99ce4967d/7ae13f9a38be4db3b40ac2166607885a/logo_symbol_black.png?fm=webp&w=150"
       /></a
+    >
+  </div>
+  <div style="display: none;">
+    <a class="u-bridgy-fed" href="https://fed.brid.gy/"></a>
+    <time
+      datetime={new Date(blog.publishedAt)
+        .toLocaleString("ja-JP", {
+          timeZone: "Asia/Tokyo",
+        })
+        .replaceAll("/", "-")}
+      >{
+        new Date(blog.publishedAt)
+          .toLocaleString("ja-JP", {
+            timeZone: "Asia/Tokyo",
+          })
+          .replaceAll("/", "-")
+      }</time
     >
   </div>
 </Layout>
