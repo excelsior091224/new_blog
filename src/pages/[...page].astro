@@ -8,6 +8,7 @@ import PreloadFirstPostEyecatch from "../components/PreloadFirstPostEyecatch.ast
 import GoogleResponsiveAd from "../components/GoogleResponsiveAd";
 import Pagination from "../components/Pagination.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import BioForBridgyFed from "../components/BioForBridgyFed.astro";
 
 //microCMS呼び出し
 import { cmsBlog } from "../library/microcms";
@@ -52,6 +53,9 @@ const { page } = Astro.props;
     <!-- <PreloadFirstPostEyecatch posts={page.data} /> -->
   </head>
   <body>
+    <div style="display:none;">
+      <BioForBridgyFed />
+    </div>
     <Header />
     <main class="main">
       <Sidebar />

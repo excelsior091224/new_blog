@@ -2,7 +2,6 @@
 import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
-import BioForBridgyFed from "./BioForBridgyFed.astro";
 import { SITE_TITLE, ICON_HEADER } from "../config";
 
 //microCMS呼び出し
@@ -25,9 +24,6 @@ const { contents: links } = await cmsBlog.getLinks({
     style="display:none;visibility:hidden"></iframe></noscript
 > --><!-- End Google Tag Manager (noscript) -->
 <header>
-  <div style="display:none;">
-    <BioForBridgyFed />
-  </div>
   <div class="navbar">
     <a href="/" class="">
       <h2 class="site_title">
