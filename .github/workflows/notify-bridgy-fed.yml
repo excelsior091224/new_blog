@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # - run: sleep 10m
-      - run: until (curl -o /dev/null -w '%{http_code}\n' -s https://www.vermilion3.xyz/posts/${{ github.event.client_payload.id }}/ | grep "200") do sleep 1m; done
+      - run: until (curl -o /dev/null -w '%{http_code}\n' -s https://www.vermilion3.xyz/posts/${{ github.event.client_payload.id }}/ | grep "200") do sleep 10; done
       - run: curl https://fed.brid.gy/webmention -d source=https://vermilion3.xyz/posts/${{ github.event.client_payload.id }}/ -d target=https://fed.brid.gy
