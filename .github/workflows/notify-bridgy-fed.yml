@@ -1,0 +1,10 @@
+name: notify-bridgy-fed
+on:
+  repository_dispatch:
+    types: [update]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 10m
+      - run: curl https://fed.brid.gy/webmention -d source=https://vermilion3.xyz/posts/${{ github.event.client_payload.id }}/ -d target=https://fed.brid.gy
