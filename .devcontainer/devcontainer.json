@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install -g npm-check-updates && npm install",
+	"postCreateCommand": "npm install -g npm-check-updates && npm install -g wrangler && npm install",
 
 	// Configure tool-specific properties.
 	"customizations": {

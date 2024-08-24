@@ -2,33 +2,42 @@ import useSWR from 'swr'
 
 import { useState } from "preact/hooks";
 import ReactPaginate from 'react-paginate';
+import type { Category } from '../library/microcms';
 
 const LIMIT = 10;
 
-const SearchItems = (props:any) => {
+const SearchItems = (props: any) => {
   const { data, q, offset, LIMIT } = props;
 
   return (
     <>
-      <h1 className="search-result-title">「{ q }」の検索結果:{ data?.totalCount }件</h1>
+      <h1 className="search-result-title">「{q}」の検索結果:{data?.totalCount}件</h1>
       {data?.contents.length !== 0 ? (
         <>
-          {data?.contents.slice(offset,offset + LIMIT).map((post:any) => (
-          <div class="post">
-            {post.eyecatch && <a href={`/posts/${post.id}/`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a>}
-            <div class="spans">
+          {data?.contents.slice(offset, offset + LIMIT).map((post: any) => (
+            <div class="post">
+              {post.eyecatch && <a href={`/posts/${post.id}/`} aria-label="記事へ進む"><img width={720} height={360} src={`${post.eyecatch.url}?fm=webp&fit=crop&crop=top&w=720&h=360`} alt="" /></a>}
+              <div class="spans">
                 <span class="published_time_span">
-                    <time dateTime={post.publishedAt}>
-                        {new Date(post.publishedAt).toLocaleString('ja-JP',{ timeZone: 'Asia/Tokyo' })}
-                    </time>
+                  <time dateTime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
+                  </time>
                 </span>
-                {post.category && <span class="category"><a href={`/category/${post.category.id}`}>{post.category.name}</a></span>}
+                <div class="category">
+                  {
+                    post.categories && post.categories.map((category:Category) => (
+                      <span>
+                        <a href={`/category/${category.id}`}>{category.name}</a>
+                      </span>
+                    ))
+                  }
+                </div>
+              </div>
+              <a href={`/posts/${post.id}/`}>
+                <h2>{post.title}</h2>
+                <div class="description">{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').slice(0, 101) + '...' : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')}</div>
+              </a>
             </div>
-            <a href={`/posts/${post.id}/`}>
-              <h2>{post.title}</h2>
-              <div class="description">{post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').length > 100 ? post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').slice(0,101) + '...' : post.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</div>
-            </a>
-          </div>
           ))}
         </>
       ) : (
@@ -38,11 +47,11 @@ const SearchItems = (props:any) => {
   );
 }
 
-const Paginate = (props:any) => {
+const Paginate = (props: any) => {
   const { totalCount, setOffset, LIMIT, url, params, currentPage } = props;
   const totalPageCount = Math.ceil(totalCount / LIMIT);
 
-  const handlePaginate = (data:any) => {
+  const handlePaginate = (data: any) => {
     const selectedPage = data.selected;
     setOffset(selectedPage * LIMIT);
     if (selectedPage === 0) {
@@ -51,7 +60,7 @@ const Paginate = (props:any) => {
         history.pushState({}, '', url);
       }
     } else {
-      params.set('page',selectedPage + 1);
+      params.set('page', selectedPage + 1);
       history.pushState({}, '', url);
     }
     // params.set('page',selectedPage + 1);
@@ -71,7 +80,7 @@ const Paginate = (props:any) => {
         pageLinkClassName="page-link rounded-full" // a
         activeClassName="active" // active.li
         activeLinkClassName="active" // active.li < a
-        
+
         // 戻る・進む関連
         previousClassName="page-item" // li
         nextClassName="page-item" // li
@@ -79,10 +88,10 @@ const Paginate = (props:any) => {
         previousLinkClassName="previous-link"
         nextLabel={'▷'} // a
         nextLinkClassName="next-link"
-      
+
         // 先頭 or 末尾に行ったときにそれ以上戻れ(進め)なくする
         disabledClassName="disabled-button d-none"
-      
+
         // 中間ページの省略表記関連
         breakLabel="..."
         breakClassName="page-item"
@@ -103,14 +112,14 @@ const BlogSearch = () => {
 
   const { data, error, isLoading } = useSWR(endpoint, fetcher);
 
-  const [ offset, setOffset ] = useState(0);
+  const [offset, setOffset] = useState(0);
 
-  const [ currentPage, setCurrentPage ] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   if (pageNum) {
     setCurrentPage(Number(pageNum) - 1);
-    console.log(`${typeof(pageNum)}:${pageNum}`);
-    console.log(`${typeof(Number(pageNum))}:${Number(pageNum)}`);
+    console.log(`${typeof (pageNum)}:${pageNum}`);
+    console.log(`${typeof (Number(pageNum))}:${Number(pageNum)}`);
     setOffset((Number(pageNum) - 1) * LIMIT);
     console.log(offset);
   }
