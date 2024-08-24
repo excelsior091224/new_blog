@@ -136,8 +136,9 @@ const older = posts.contents[current_index + 1] ?? null;
     updatedDate: new Date(blog.updatedAt).toLocaleString("ja-JP", {
       timeZone: "Asia/Tokyo",
     }),
-    categoryId: blog.category.id ?? "",
-    categoryName: blog.category.name ?? "",
+    categories: blog.categories,
+    // categoryId: blog.category.id ?? "",
+    // categoryName: blog.category.name ?? "",
     lcp:
       typeof lcp !== "undefined" && lcp !== "" && lcp !== null
         ? lcp

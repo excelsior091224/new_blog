@@ -20,6 +20,14 @@ type ResponseType<T> = T extends "blogs"
   ? LinkResponse
   : never;
 
+export type Category = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  name: string;
+};
 export type Blog = {
   id: string;
   createdAt: string;
@@ -33,28 +41,21 @@ export type Blog = {
     height: number;
     width: number;
   };
-  category: {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    revisedAt: string;
-    name: string;
-  };
+  // category: {
+  //   id: string;
+  //   createdAt: string;
+  //   updatedAt: string;
+  //   publishedAt: string;
+  //   revisedAt: string;
+  //   name: string;
+  // };
+  categories: Category[];
 };
 export type BlogResponse = {
   totalCount: number;
   offset: number;
   limit: number;
   contents: Blog[];
-};
-export type Category = {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  revisedAt: string;
-  name: string;
 };
 export type CategoryResponse = {
   totalCount: number;

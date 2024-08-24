@@ -6,7 +6,7 @@ import Sidebar from "../components/Sidebar.astro";
 import GoogleResponsiveAd from "../components/GoogleResponsiveAd";
 import ShareButtons from "../components/ShareButtons.astro";
 import { SITE_TITLE } from "../config";
-import type { Blog } from "../library/microcms";
+import type { Blog,Category } from "../library/microcms";
 
 export interface Props {
   content: {
@@ -15,8 +15,7 @@ export interface Props {
     pubDate?: string;
     updatedDate?: string;
     heroImage?: string;
-    categoryId: string;
-    categoryName: string;
+    categories?: Category[];
     lcp?: string;
   };
   newer?: Blog;
@@ -30,8 +29,7 @@ const {
     pubDate,
     updatedDate,
     heroImage,
-    categoryId,
-    categoryName,
+    categories,
     lcp,
   },
   newer,
@@ -110,7 +108,16 @@ const href_list2 = [
             </div>
           )
         }
-        {
+        <div class="category">
+          {
+            categories && categories.map((category) => (
+              <span>
+                <a href={`/category/${category.id}`}>{category.name}</a>
+              </span>
+            ))
+          }
+        </div>
+        <!-- {
           categoryId && categoryName && (
             <div class="post_category">
               <span>
@@ -118,7 +125,7 @@ const href_list2 = [
               </span>
             </div>
           )
-        }
+        } -->
         <ShareButtons title={title} />
         <div class="notify">
           このブログではGoogle Adsenseを使ったアフェリエイト広告を導入しています

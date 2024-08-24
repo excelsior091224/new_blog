@@ -8,6 +8,7 @@ import PreloadFirstPostEyecatch from "../../../components/PreloadFirstPostEyecat
 import GoogleResponsiveAd from "../../../components/GoogleResponsiveAd";
 import Pagination from "../../../components/Pagination.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../../config";
+import type { Category } from "../../../library/microcms";
 
 //microCMS呼び出し
 import {
@@ -19,7 +20,7 @@ export async function getStaticPaths({ paginate }: any) {
   const allTags = categories.map((category) => category.id);
   //console.log(allTags);
   const { contents: posts } = await cmsBlog.getBlogs({
-    fields: ["id", "title", "publishedAt", "content", "eyecatch", "category"],
+    fields: ["id", "title", "publishedAt", "content", "eyecatch", "categories"],
     orders: "-publishedAt",
   });
   // console.log(posts);
@@ -28,7 +29,7 @@ export async function getStaticPaths({ paginate }: any) {
   // そうすれば、Astroは結果がどのタググループに対するものか分かります。
   return allTags.flatMap((categoryId) => {
     const filteredPosts = posts.filter(
-      (post) => post.category !== null && post.category.id === categoryId
+      (post) => post.categories && post.categories.map((category) => category.id).includes(categoryId)
     );
     return paginate(filteredPosts, {
       params: { categoryId },

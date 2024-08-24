@@ -39,11 +39,18 @@ const { posts } = Astro.props;
               })}
             </time>
           </span>
-          {post.category && (
+          {
+            post.categories.map((category: any) => (
+              <span class="category">
+                <a href={`/category/${category.id}/`}>{category.name}</a>
+              </span>
+            ))
+          }
+          {/* {post.category && (
             <span class="category">
               <a href={`/category/${post.category.id}/`}>{post.category.name}</a>
             </span>
-          )}
+          )} */}
         </div>
         <a href={`/posts/${post.id}/`}>
           <h2>{post.title}</h2>
