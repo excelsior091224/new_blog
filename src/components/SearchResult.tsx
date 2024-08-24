@@ -23,15 +23,13 @@ const SearchItems = (props: any) => {
                     {new Date(post.publishedAt).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
                   </time>
                 </span>
-                <div class="category">
-                  {
-                    post.categories && post.categories.map((category:Category) => (
-                      <span>
-                        <a href={`/category/${category.id}`}>{category.name}</a>
-                      </span>
-                    ))
-                  }
-                </div>
+                {
+                  post.categories.map((category: any) => (
+                    <span class="category">
+                      <a href={`/category/${category.id}/`}>{category.name}</a>
+                    </span>
+                  ))
+                }
               </div>
               <a href={`/posts/${post.id}/`}>
                 <h2>{post.title}</h2>
