@@ -3,6 +3,7 @@ import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import { SITE_TITLE, ICON_HEADER } from "../config";
+import type { Category, Link } from "../library/microcms";
 
 //microCMS呼び出し
 import { cmsBlog } from "../library/microcms";
@@ -68,7 +69,7 @@ const { contents: links } = await cmsBlog.getLinks({
         <summary class="categories_button">Categories</summary>
         <ul>
           {
-            categories.map((category: any) => (
+            categories.map((category: Category) => (
               <li>
                 <HeaderLink href={`/category/${category.id}`}>
                   {category.name}
@@ -82,7 +83,7 @@ const { contents: links } = await cmsBlog.getLinks({
         <summary class="external_link_button">Link</summary>
         <ul>
           {
-            links.map((link: any) => (
+            links.map((link: Link) => (
               <li>
                 <HeaderLink
                   href={link.url}

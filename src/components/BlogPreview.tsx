@@ -4,6 +4,7 @@ import { createTableOfContents } from "microcms-richedit-processer";
 import { load } from "cheerio";
 import hljs, { HighlightResult } from "highlight.js";
 import 'highlight.js/styles/hybrid.css';
+import type { Category } from "../library/microcms";
 
 const BlogPreview = () => {
   const params = new URLSearchParams(window.location.search);
@@ -100,7 +101,15 @@ const BlogPreview = () => {
       <div>
         Last updated on <time class="updatedAt">{data?.updatedAt ?? data?.createdAt}</time>
       </div>
-      {data?.category && <span class="category"><a href={`/category/${data?.category?.id}`}>{data?.category?.name}</a></span>}
+      <div class="category">
+        {
+          data?.categories && data?.categories.map((category: Category) => (
+            <span>
+              <a href={`/category/${category.id}`}>{category.name}</a>
+            </span>
+          ))
+        }
+      </div>
       <hr />
       {table_of_content && table_of_content.length > 0 && (
         <div class="table_of_content_wrapper">

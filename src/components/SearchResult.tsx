@@ -24,7 +24,7 @@ const SearchItems = (props: any) => {
                   </time>
                 </span>
                 {
-                  post.categories.map((category: any) => (
+                  post.categories.map((category: Category) => (
                     <span class="category">
                       <a href={`/category/${category.id}/`}>{category.name}</a>
                     </span>
