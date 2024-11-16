@@ -71,20 +71,24 @@ $("img").each((index, elm) => {
     const srcWithoutQuery = src.split("?")[0];
     // fm=webp パラメータ
     const webpQueryParam = "?fm=webp";
-    // classにlazyloadを追加
-    $(elm).addClass("lazyload");
+    // classにlazyload u-photoを追加
+    $(elm).addClass("lazyload u-photo");
     // // classにlazyloadを追加
     // $(elm).addClass("lazyload");
-    // srcを削除
+    // srcを削除 & webpパラメータを追加
     $(elm).removeAttr("src");
-    // data-srcを設定
-    $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
-    // data-srcsetを設定
-    // $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
     $(elm).attr(
-      "data-srcset",
+      "src",
       `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
     );
+    // // data-srcを設定
+    // $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
+    // // data-srcsetを設定
+    // // $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
+    // $(elm).attr(
+    //   "data-srcset",
+    //   `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
+    // );
     // $(elm).attr("data-sizes","100vw");
     $(elm).attr("data-sizes", "auto");
     if (index === 0) {

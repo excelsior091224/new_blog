@@ -89,9 +89,10 @@ const href_list2 = [
             <img
               width={720}
               height={360}
-              data-src={`${heroImage}?fm=webp`}
-              data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w`}
-              data-sizes="(min-width: 640px) 1000px, 100vw"
+              // data-src={`${heroImage}?fm=webp`}
+              // data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w`}
+              // data-sizes="(min-width: 640px) 1000px, 100vw"
+              src={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320`}
               alt=""
               class="lazyload"
               loading="eager"
