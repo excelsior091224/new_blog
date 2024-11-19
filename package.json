@@ -39,7 +39,7 @@
     "npm-check-updates": "^17.1.11",
     "preact": "^10.24.3",
     "react-paginate": "^8.2.0",
-    "rollup": "^4.27.2",
+    "rollup": "^4.27.3",
     "swr": "^2.2.5",
     "vue": "^3.5.13",
     "vue-paginate": "^3.6.0",
