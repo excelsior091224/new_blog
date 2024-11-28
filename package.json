@@ -23,9 +23,9 @@
     "@ctrl/react-adsense": "^1.7.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "astro": "^4.16.14",
+    "astro": "^4.16.16",
     "astro-robots-txt": "^1.0.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.8",
     "cheerio": "^1.0.0",
     "highlight.js": "^11.10.0",
     "html-react-parser": "^5.1.18",
@@ -37,15 +37,15 @@
     "node-ts-cache": "^4.4.0",
     "node-ts-cache-storage-memory": "^4.4.0",
     "npm-check-updates": "^17.1.11",
-    "preact": "^10.24.3",
+    "preact": "^10.25.0",
     "react-paginate": "^8.2.0",
-    "rollup": "^4.27.3",
+    "rollup": "^4.27.4",
     "swr": "^2.2.5",
     "vue": "^3.5.13",
     "vue-paginate": "^3.6.0",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
-    "wrangler": "^3.89.0"
+    "wrangler": "^3.91.0"
   }
 }
