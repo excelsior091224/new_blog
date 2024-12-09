@@ -33,6 +33,10 @@ const { contents: links } = await cmsBlog.getLinks({
       <p>Accounts</p>
       <AccountsLinks />
     </div>
+    <div class="sidebar_fediverse_follow">
+      <p>Follow from Fediverse</p>
+      <FediverseFollowForm />
+    </div>
     <div class="sidebar_categories_links">
       <p>Categories</p>
       <ul>
@@ -64,10 +68,6 @@ const { contents: links } = await cmsBlog.getLinks({
           ))
         }
       </ul>
-    </div>
-    <div class="sidebar_fediverse_follow">
-      <p>Follow from Fediverse</p>
-      <FediverseFollowForm />
     </div>
   </nav>
   <GoogleResponsiveAd client:only="preact" />

@@ -65,7 +65,10 @@ const { contents: links } = await cmsBlog.getLinks({
         <summary class="private_link_button">Accounts</summary>
         <AccountsLinks />
       </details>
-
+      <details class="fediverse-follow-form">
+        <summary class="fediverse-follow-form_button">Follow from Fediverse</summary>
+        <FediverseFollowForm />
+      </details>
       <details class="categories_link">
         <summary class="categories_button">Categories</summary>
         <ul>
@@ -97,10 +100,6 @@ const { contents: links } = await cmsBlog.getLinks({
             ))
           }
         </ul>
-      </details>
-      <details class="fediverse-follow-form">
-        <summary class="fediverse-follow-form_button">Follow from Fediverse</summary>
-        <FediverseFollowForm />
       </details>
     </div>
   </nav>
