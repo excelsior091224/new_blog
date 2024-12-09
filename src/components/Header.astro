@@ -57,17 +57,19 @@ const { contents: links } = await cmsBlog.getLinks({
   <nav>
     <div class="nav-links">
       <SearchForm searchform_text_id="header_searchform_text" />
+      <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
       <HeaderLink href="/feed.xml" target="_blank" rel="noopener noreferrer">
         <i class="fa-sharp fa-solid fa-rss"></i>RSSフィード
       </HeaderLink>
-      <HeaderLink href="/about">プライバシーポリシー</HeaderLink>
+      <details class="fediverse-follow-form">
+        <summary class="fediverse-follow-form_button"
+          >Follow from Fediverse</summary
+        >
+        <FediverseFollowForm />
+      </details>
       <details class="private_link">
         <summary class="private_link_button">Accounts</summary>
         <AccountsLinks />
-      </details>
-      <details class="fediverse-follow-form">
-        <summary class="fediverse-follow-form_button">Follow from Fediverse</summary>
-        <FediverseFollowForm />
       </details>
       <details class="categories_link">
         <summary class="categories_button">Categories</summary>

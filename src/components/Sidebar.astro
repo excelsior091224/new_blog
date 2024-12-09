@@ -21,21 +21,21 @@ const { contents: links } = await cmsBlog.getLinks({
     <SearchForm searchform_text_id="sidebar_searchform_text" />
     <div class="sidebar_feed_and_about">
       <ul class="">
+        <li><a href="/about">プライバシーポリシー</a></li>
         <li>
           <a href="/feed.xml" target="_blank" rel="noopener noreferrer">
             <i class="fa-sharp fa-solid fa-rss"></i>RSSフィード</a
           >
         </li>
-        <li><a href="/about">プライバシーポリシー</a></li>
       </ul>
-    </div>
-    <div class="sidebar_private_links">
-      <p>Accounts</p>
-      <AccountsLinks />
     </div>
     <div class="sidebar_fediverse_follow">
       <p>Follow from Fediverse</p>
       <FediverseFollowForm />
+    </div>
+    <div class="sidebar_private_links">
+      <p>Accounts</p>
+      <AccountsLinks />
     </div>
     <div class="sidebar_categories_links">
       <p>Categories</p>
