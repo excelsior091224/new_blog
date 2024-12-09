@@ -2,6 +2,7 @@
 import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
+import FediverseFollowForm from "./FediverseFollowForm.astro";
 import { SITE_TITLE, ICON_HEADER } from "../config";
 import type { Category, Link } from "../library/microcms";
 
@@ -96,6 +97,10 @@ const { contents: links } = await cmsBlog.getLinks({
             ))
           }
         </ul>
+      </details>
+      <details class="fediverse-follow-form">
+        <summary class="fediverse-follow-form_button">Follow from Fediverse</summary>
+        <FediverseFollowForm />
       </details>
     </div>
   </nav>

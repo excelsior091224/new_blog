@@ -48,7 +48,4 @@ export default defineConfig({
   // adapter: cloudflare({
   //  runtime: 'local',
   // }),
-  // experimental: {
-  //   contentCollectionCache: true,
-  // },
 });

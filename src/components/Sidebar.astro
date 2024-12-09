@@ -3,6 +3,7 @@ import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import GoogleResponsiveAd from "./GoogleResponsiveAd";
+import FediverseFollowForm from "./FediverseFollowForm.astro";
 //microCMS呼び出し
 import { cmsBlog } from "../library/microcms";
 const { contents: categories } = await cmsBlog.getCategories({
@@ -63,6 +64,10 @@ const { contents: links } = await cmsBlog.getLinks({
           ))
         }
       </ul>
+    </div>
+    <div class="sidebar_fediverse_follow">
+      <p>Follow from Fediverse</p>
+      <FediverseFollowForm />
     </div>
   </nav>
   <GoogleResponsiveAd client:only="preact" />

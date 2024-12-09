@@ -1,0 +1,27 @@
+<form
+  style="font-size: 0.8rem;"
+  method="post"
+  action="https://fed.brid.gy/remote-follow"
+  target="_blank"
+>
+  <label for="follow-address"
+    >@vermilion3.xyz@vermilion3.xyzをフォロー:
+    <br />
+    あなたのFediverseアカウントのアドレス（@xxxx@xxxx）を入力してください:</label
+  >
+  <input
+    id="follow-address"
+    name="address"
+    type="text"
+    required="required"
+    placeholder="@you@instance.social"
+    title="あなたのFediverseアカウントのアドレス（@xxxx@xxxx）を入力してください"
+    size="17"
+    value=""
+    spellcheck="false"
+    data-ms-editor="true"
+  />
+  <input name="domain" type="hidden" value="vermilion3.xyz" />
+  <input name="protocol" type="hidden" value="web" />
+  <button type="submit">フォロー</button>
+</form>
