@@ -24,4 +24,14 @@
   <input name="domain" type="hidden" value="vermilion3.xyz" />
   <input name="protocol" type="hidden" value="web" />
   <button type="submit">フォロー</button>
+  <br />
+  Blueskyからは
+  <a
+    href={import.meta.env.BLUESKY_BRIDGE}
+    target="_blank"
+    rel="noopener noreferrer"
+    >{
+      import.meta.env.BLUESKY_BRIDGE.replace("https://bsky.app/profile/", "")
+    }</a
+  >をフォローしてください。
 </form>
