@@ -8,7 +8,7 @@
     >@vermilion3.xyz@vermilion3.xyzをフォロー:
     <br />
     あなたのFediverseアカウントのアドレス（@xxxx@xxxx）を入力してください:</label
-  >
+  ><br />
   <input
     id="follow-address"
     name="address"
@@ -16,22 +16,31 @@
     required="required"
     placeholder="@you@instance.social"
     title="あなたのFediverseアカウントのアドレス（@xxxx@xxxx）を入力してください"
-    size="17"
+    size="14"
     value=""
-    spellcheck="false"
     data-ms-editor="true"
   />
   <input name="domain" type="hidden" value="vermilion3.xyz" />
   <input name="protocol" type="hidden" value="web" />
   <button type="submit">フォロー</button>
   <br />
-  Blueskyからは
-  <a
-    href={import.meta.env.BLUESKY_BRIDGE}
-    target="_blank"
-    rel="noopener noreferrer"
-    >{
-      import.meta.env.BLUESKY_BRIDGE.replace("https://bsky.app/profile/", "")
-    }</a
-  >をフォローしてください。
+  {
+    import.meta.env.BLUESKY_BRIDGE ? (
+      <>
+        <br />
+        Blueskyからは
+        <a
+          href={import.meta.env.BLUESKY_BRIDGE}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {import.meta.env.BLUESKY_BRIDGE.replace(
+            "https://bsky.app/profile/",
+            ""
+          )}
+        </a>
+        をフォローしてください。
+      </>
+    ) : null
+  }
 </form>
