@@ -2,7 +2,13 @@
 import Layout from "../../layouts/BlogPost.astro";
 import { cmsBlog } from "../../library/microcms";
 import pkg from "microcms-richedit-processer";
-const { createTableOfContents, processer } = pkg;
+// const { createTableOfContents, processer } = pkg;
+import {
+  microCMSRichEditorHandler,
+  responsiveImageTransformer,
+  tocExtractor,
+  attributesTransformer,
+} from "microcms-rich-editor-handler";
 
 import { load } from "cheerio";
 import hljs, { type HighlightResult } from "highlight.js";
@@ -63,55 +69,83 @@ $("pre code").each((_, elm) => {
 
 let lcp = "";
 
-$("img").each((index, elm) => {
-  const width = $(elm).attr("width");
-  const src = $(elm).attr("src");
-  if (src && src.includes("https://images.microcms-assets.io/assets/")) {
-    // クエリパラメータを削除
-    const srcWithoutQuery = src.split("?")[0];
-    // fm=webp パラメータ
-    const webpQueryParam = "?fm=webp";
-    // classにlazyload u-photoを追加
-    $(elm).addClass("lazyload u-photo");
-    // // classにlazyloadを追加
-    // $(elm).addClass("lazyload");
-    // srcを削除 & webpパラメータを追加
-    $(elm).removeAttr("src");
-    $(elm).attr(
-      "src",
-      `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
-    );
-    // // data-srcを設定
-    // $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
-    // // data-srcsetを設定
-    // // $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
-    // $(elm).attr(
-    //   "data-srcset",
-    //   `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
-    // );
-    // $(elm).attr("data-sizes","100vw");
-    $(elm).attr("data-sizes", "auto");
-    if (index === 0) {
-      $(elm).attr("loading", "eager");
-      lcp = srcWithoutQuery;
-    } else {
-      $(elm).attr("loading", "lazy");
-    }
-  }
-});
+// $("img").each((index, elm) => {
+//   const width = $(elm).attr("width");
+//   const src = $(elm).attr("src");
+//   if (src && src.includes("https://images.microcms-assets.io/assets/")) {
+//     // クエリパラメータを削除
+//     const srcWithoutQuery = src.split("?")[0];
+//     // fm=webp パラメータ
+//     const webpQueryParam = "?fm=webp";
+//     // classにlazyload u-photoを追加
+//     $(elm).addClass("lazyload u-photo");
+//     // // classにlazyloadを追加
+//     // $(elm).addClass("lazyload");
+//     // srcを削除 & webpパラメータを追加
+//     $(elm).removeAttr("src");
+//     $(elm).attr(
+//       "src",
+//       `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
+//     );
+//     // // data-srcを設定
+//     // $(elm).attr("data-src", srcWithoutQuery + webpQueryParam);
+//     // // data-srcsetを設定
+//     // // $(elm).attr("data-srcset",`${srcWithoutQuery+webpQueryParam}&w=640 640w, ${srcWithoutQuery+webpQueryParam}&w=750 750w, ${srcWithoutQuery+webpQueryParam}&w=828 828w, ${srcWithoutQuery+webpQueryParam}&w=1080 1080w, ${srcWithoutQuery+webpQueryParam}&w=1200 1200w, ${srcWithoutQuery+webpQueryParam}&w=1920 1920w, ${srcWithoutQuery+webpQueryParam}&w=2048 2048w, ${srcWithoutQuery+webpQueryParam}&w=3840 3840w`);
+//     // $(elm).attr(
+//     //   "data-srcset",
+//     //   `${srcWithoutQuery + webpQueryParam}&w=${width} ${width}w`
+//     // );
+//     // $(elm).attr("data-sizes","100vw");
+//     $(elm).attr("data-sizes", "auto");
+//     if (index === 0) {
+//       $(elm).attr("loading", "eager");
+//       lcp = srcWithoutQuery;
+//     } else {
+//       $(elm).attr("loading", "lazy");
+//     }
+//   }
+// });
 
-$("iframe").each((index, elm) => {
-  $(elm).addClass("lazyload");
-});
+// $("iframe").each((index, elm) => {
+//   $(elm).addClass("lazyload");
+// });
 
 // 編集したHTMLを再設定
 blog.content = $.html();
 
-// const content = processer(blog.content, { img: { parameters: { fm: "webp"} } });
-const content = blog.content;
-const table_of_content = createTableOfContents(blog.content, {
-  tags: "h1,h2,h3,h4,h5",
+const {
+  html,
+  data: { toc },
+} = await microCMSRichEditorHandler(blog.content, {
+  transformers: [
+    responsiveImageTransformer(),
+    attributesTransformer({
+      elements: {
+        img: {
+          addAttributes: {
+            class: ($element) => {
+              const src = $element.attr("src");
+              if (
+                src &&
+                src.includes("https://images.microcms-assets.io/assets/")
+              ) {
+                return "u-photo";
+              }
+
+              return "";
+            },
+          },
+        },
+      },
+    }),
+  ],
+  extractors: {
+    toc: [tocExtractor(), { phase: "before" }],
+  },
 });
+// const content = processer(blog.content, { img: { parameters: { fm: "webp"} } });
+const content = html;
+const table_of_content = toc;
 
 // 現在の記事のpostsの中でのindex番号を取得
 const current_index = posts.contents.findIndex((post) => post.id === blogId);
@@ -157,7 +191,7 @@ const older = posts.contents[current_index + 1] ?? null;
         <h4 class="table_of_content_title">目次</h4>
         <ul class="table_of_content_lists">
           {table_of_content.map((item) => (
-            <li class={`table_of_content_list ${item.name}`}>
+            <li class={`table_of_content_list h${item.level}`}>
               <a href={`#${item.id}`}>{item.text}</a>
             </li>
           ))}
