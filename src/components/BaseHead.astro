@@ -69,55 +69,55 @@ const {
 
 <!-- Google Adsense -->
 <script type="text/javascript">
-//<![CDATA[
-// iPhone iPad iPod Android の判別
-if (
-  navigator.userAgent.indexOf("iPhone") > 0 ||
-  navigator.userAgent.indexOf("iPad") > 0 ||
-  navigator.userAgent.indexOf("iPod") > 0 ||
-  navigator.userAgent.indexOf("Android") > 0
-) {
-  var lazyadsense = false;
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (
-        (document.documentElement.scrollTop != 0 && lazyadsense === false) ||
-        (document.body.scrollTop != 0 && lazyadsense === false)
-      ) {
-        (function () {
-          var ad = document.createElement("script");
-          ad.type = "text/javascript";
-          ad.async = true;
-          ad.src =
-            "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
-          ad.crossorigin = "anonymous";
-          var sc = document.getElementsByTagName("script")[0];
-          sc.parentNode.insertBefore(ad, sc);
-        })();
+  //<![CDATA[
+  // iPhone iPad iPod Android の判別
+  if (
+    navigator.userAgent.indexOf("iPhone") > 0 ||
+    navigator.userAgent.indexOf("iPad") > 0 ||
+    navigator.userAgent.indexOf("iPod") > 0 ||
+    navigator.userAgent.indexOf("Android") > 0
+  ) {
+    var lazyadsense = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (
+          (document.documentElement.scrollTop != 0 && lazyadsense === false) ||
+          (document.body.scrollTop != 0 && lazyadsense === false)
+        ) {
+          (function () {
+            var ad = document.createElement("script");
+            ad.type = "text/javascript";
+            ad.async = true;
+            ad.src =
+              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
+            ad.crossorigin = "anonymous";
+            var sc = document.getElementsByTagName("script")[0];
+            sc.parentNode.insertBefore(ad, sc);
+          })();
 
-        lazyadsense = true;
-      }
-    },
-    true
-  );
-} else {
-  // scriptタグ生成
-  const createAdsbygooglejs = document.createElement("script");
+          lazyadsense = true;
+        }
+      },
+      true
+    );
+  } else {
+    // scriptタグ生成
+    const createAdsbygooglejs = document.createElement("script");
 
-  // src属性をtrue,src属性に読み込みたいファイルを指定
-  createAdsbygooglejs.async = true;
-  createAdsbygooglejs.src =
-    "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
-  createAdsbygooglejs.crossorigin = "anonymous";
+    // src属性をtrue,src属性に読み込みたいファイルを指定
+    createAdsbygooglejs.async = true;
+    createAdsbygooglejs.src =
+      "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9621814408753320";
+    createAdsbygooglejs.crossorigin = "anonymous";
 
-  // DOMツリー構築完了時に
-  document.addEventListener("DOMContentLoaded", () => {
-    // BODY要素の最後に追加
-    document.body.appendChild(createAdsbygooglejs);
-  });
-}
-//]]>
+    // DOMツリー構築完了時に
+    document.addEventListener("DOMContentLoaded", () => {
+      // BODY要素の最後に追加
+      document.body.appendChild(createAdsbygooglejs);
+    });
+  }
+  //]]>
 </script>
 
 <!-- Global Metadata -->
@@ -151,7 +151,13 @@ if (
 />
 
 <!-- font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
 
 <!-- rss feed -->
 <link
@@ -160,3 +166,7 @@ if (
   href={`https://${Astro.request.url.split("/")[2]}/feed.xml`}
   title="RSS2.0"
 />
+
+<!-- rel me -->
+<link rel="me" href="https://github.com/excelsior091224" />
+<link rel="me" href="https://fed.brid.gy/web/vermilion3.xyz" />
