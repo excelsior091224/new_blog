@@ -11,19 +11,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "12.0.0",
-    "@astrojs/mdx": "4.0.1",
-    "@astrojs/netlify": "6.0.0",
+    "@astrojs/cloudflare": "12.5.3",
+    "@astrojs/mdx": "4.3.0",
+    "@astrojs/netlify": "6.3.4",
     "@astrojs/partytown": "^2.1.4",
-    "@astrojs/preact": "4.0.0",
-    "@astrojs/react": "4.0.0",
+    "@astrojs/preact": "4.1.0",
+    "@astrojs/react": "4.3.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
-    "@astrojs/vue": "5.0.1",
+    "@astrojs/vue": "5.1.0",
     "@ctrl/react-adsense": "^1.8.0",
-    "@types/react": "^18.3.21",
+    "@types/react": "^18.3.22",
     "@types/react-dom": "^18.3.7",
-    "astro": "5.0.2",
+    "astro": "5.8.0",
     "astro-robots-txt": "^1.0.0",
     "axios": "^1.9.0",
     "cheerio": "^1.0.0",
@@ -47,6 +47,6 @@
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
-    "wrangler": "^3.114.8"
+    "wrangler": "^3.114.9"
   }
 }

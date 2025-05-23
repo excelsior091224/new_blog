@@ -117,19 +117,6 @@ const { title } = Astro.props;
       <i class="fa-brands fa-line"></i>
     </a>
   </span>
-  <span class="pocket">
-    <a
-      href={`http://getpocket.com/edit?url=${
-        Astro.request.url
-      }&title=${encodeURI(`${title} | ${SITE_TITLE}`)}`}
-      class="pocket_button"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Pocket"
-    >
-      <i class="fa-brands fa-get-pocket"></i>
-    </a>
-  </span>
   <span class="feedly">
     <a
       href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.vermilion3.xyz%2Ffeed.xml"
