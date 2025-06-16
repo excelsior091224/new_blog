@@ -2,9 +2,11 @@ import useSWR from "swr";
 import { createTableOfContents } from "microcms-richedit-processer";
 
 import { load } from "cheerio";
-import hljs, { HighlightResult } from "highlight.js";
+import hljs from "highlight.js";
+import type { HighlightResult } from "highlight.js";
 import 'highlight.js/styles/hybrid.css';
 import type { Category } from "../library/microcms";
+import { cmsBlog } from "../library/microcms";
 
 const BlogPreview = () => {
   const params = new URLSearchParams(window.location.search);
@@ -12,11 +14,16 @@ const BlogPreview = () => {
   const draftKey = params.get("draftKey");
 
   const fetcher = (url: URL | RequestInfo) => fetch(url).then((res) => res.json());
-  const endpoint = contentId === null || draftKey === null ? null : `/api/preview?contentId=${contentId}&draftKey=${draftKey}`;
+  // const endpoint = contentId === null || draftKey === null ? null : `/api/preview?contentId=${contentId}&draftKey=${draftKey}`;
 
-  const { data, error, isLoading, isValidating } = useSWR(
-    endpoint, fetcher
+  const { data, error, isValidating } = useSWR(
+    // endpoint, fetcher
+    contentId === null || draftKey === null
+      ? null
+      : ["/preview", contentId, draftKey],
+    ([, contentId, draftKey]) => cmsBlog.getBlogDetail(contentId, { draftKey })
   );
+  const isLoading = !data && !error;
 
   if (error) return <div>エラーが発生しました</div>;
 

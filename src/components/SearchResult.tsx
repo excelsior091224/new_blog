@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import { useState } from "preact/hooks";
 import ReactPaginate from 'react-paginate';
 import type { Category } from '../library/microcms';
+import { cmsBlog } from "../library/microcms";
 
 const LIMIT = 10;
 
@@ -108,7 +109,15 @@ const BlogSearch = () => {
 
   const fetcher = (url: URL | RequestInfo) => fetch(url).then((res) => res.json());
 
-  const { data, error, isLoading } = useSWR(endpoint, fetcher);
+  // const { data, error, isLoading } = useSWR(endpoint, fetcher);
+  const { data, error, isLoading } = useSWR(
+    q === null ? null : ["/search", q],
+    ([, q]) =>
+      cmsBlog.getBlogs({
+        q,
+        orders: "-publishedAt"
+      })
+  );
 
   const [offset, setOffset] = useState(0);
 
