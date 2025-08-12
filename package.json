@@ -8,7 +8,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "workers:dev": "wrangler dev",
+    "workers:deploy": "wrangler deploy",
+    "workers:build": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "12.6.3",
