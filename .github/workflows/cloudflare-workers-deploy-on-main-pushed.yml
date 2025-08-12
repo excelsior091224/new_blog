@@ -1,0 +1,38 @@
+name: cloudflare-workers-deploy-on-main-pushed
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22" # プロジェクトで指定のNode.jsバージョン
+      - name: Install Dependencies
+        run: npm ci # 関連パッケージをインストール
+      - name: Build Project
+        run: npm run build # 静的ファイルを生成
+        env:
+          PUBLIC_MICROCMS_SERVICE_DOMAIN: ${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}
+          PUBLIC_MICROCMS_API_KEY: ${{ secrets.PUBLIC_MICROCMS_API_KEY }}
+          SITE_TITLE: ${{ secrets.SITE_TITLE }}
+          SITE_DESCRIPTION: ${{ secrets.SITE_DESCRIPTION }}
+          PIXIV: ${{ secrets.PIXIV }}
+          FANBOX: ${{ secrets.FANBOX }}
+          DEVIANTART: ${{ secrets.DEVIANTART }}
+          CARD_IMAGE: ${{ secrets.CARD_IMAGE }}
+          ICON_HEADER: ${{ secrets.ICON_HEADER }}
+          FAVICON: ${{ secrets.FAVICON }}
+          BLUESKY: ${{ secrets.BLUESKY }}
+          BLUESKY_BRIDGE: ${{ secrets.BLUESKY_BRIDGE }}
+          XFOLIO: ${{ secrets.XFOLIO }}
+          OLD_SITE: ${{ secrets.OLD_SITE }}
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
