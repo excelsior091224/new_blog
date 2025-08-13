@@ -1,5 +1,8 @@
 name: cloudflare-workers-deploy
 on:
+  push:
+    branches:
+      - main
   repository_dispatch:
     types: [update]
 jobs:
