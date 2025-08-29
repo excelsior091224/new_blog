@@ -1,162 +1,25 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+//microCMS呼び出し
+import { cmsBlog } from "../library/microcms";
+
+const { contents: accounts } = await cmsBlog.getAccounts({
+  fields: ["title", "url"],
+});
 ---
 
 <ul>
   {
-    import.meta.env.LIT_LINK ? (
+    accounts.map((account: any) => (
       <li>
         <HeaderLink
-          href={import.meta.env.LIT_LINK}
+          href={account.url}
           target="_blank"
           rel="noopener noreferrer me"
         >
-          各種アカウントへのリンク（lit.link）
+          {account.title}
         </HeaderLink>
       </li>
-    ) : null
-  }
-  {
-    import.meta.env.PIXIV ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.PIXIV}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          pixiv
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.FANBOX ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.FANBOX}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          FANBOX
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.XFOLIO ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.XFOLIO}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Xfolio
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.X ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.X}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          X
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.THREADS ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.THREADS}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Threads
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.MASTODON ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.MASTODON}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Mastodon
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.MISSKEY ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.MISSKEY}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Misskey
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.MISSKEY2 ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.MISSKEY2}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Misskey（2）
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.BLUESKY ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.BLUESKY}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          Bluesky
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.OLD_SITE ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.OLD_SITE}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          旧サイト
-        </HeaderLink>
-      </li>
-    ) : null
-  }
-  {
-    import.meta.env.DEVIANTART ? (
-      <li>
-        <HeaderLink
-          href={import.meta.env.DEVIANTART}
-          target="_blank"
-          rel="noopener noreferrer me"
-        >
-          DeviantArt
-        </HeaderLink>
-      </li>
-    ) : null
+    ))
   }
 </ul>
