@@ -2,14 +2,14 @@
 # see: https://developers.google.com/idx/guides/customize-idx-env
 { pkgs, ... }: {
   # Which nixpkgs channel to use.
-  channel = "stable-23.11"; # or "unstable"
+  channel = "unstable"; # or "unstable"
 
   # Use https://search.nixos.org/packages to find packages
   packages = [
     # pkgs.go
     # pkgs.python311
     # pkgs.python311Packages.pip
-    pkgs.nodejs_20
+    pkgs.nodejs_24
     pkgs.nodePackages.nodemon
     # pkgs.bun
   ];
@@ -41,16 +41,16 @@
 
     # Workspace lifecycle hooks
     workspace = {
-      # Runs when a workspace is first created
-      onCreate = {
-        # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
-      };
-      # Runs when the workspace is (re)started
-      onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
-      };
+      # Runs when the workspace is first created
+      # onCreate = {
+      #   # Example: install dependencies and build your app
+      #   web-onCreate = "npm install && npm run build";
+      # };
+      # Runs when the workspace is started or resumed
+      # onStart = {
+      #   # Example: start a dev server
+      #   web-onStart = "npm run dev";
+      # };
     };
   };
 }
