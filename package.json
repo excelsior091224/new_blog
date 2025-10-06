@@ -24,8 +24,8 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/vue": "5.1.1",
     "@ctrl/react-adsense": "^2.1.0",
-    "@types/react": "^19.1.15",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "astro": "5.14.1",
     "astro-robots-txt": "^1.0.0",
     "axios": "^1.12.2",
@@ -43,13 +43,13 @@
     "npm-check-updates": "^19.0.0",
     "preact": "^10.27.2",
     "react-paginate": "^8.3.0",
-    "rollup": "^4.52.3",
+    "rollup": "^4.52.4",
     "swr": "^2.3.6",
     "vue": "^3.5.22",
     "vue-paginate": "^3.6.0",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
-    "wrangler": "^4.40.2"
+    "wrangler": "^4.42.0"
   }
 }
