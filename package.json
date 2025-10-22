@@ -14,9 +14,9 @@
     "workers:build": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "12.6.9",
-    "@astrojs/mdx": "4.3.6",
-    "@astrojs/netlify": "6.5.11",
+    "@astrojs/cloudflare": "12.6.10",
+    "@astrojs/mdx": "4.3.7",
+    "@astrojs/netlify": "6.5.13",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/preact": "4.1.1",
     "@astrojs/react": "4.4.0",
@@ -24,14 +24,14 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/vue": "5.1.1",
     "@ctrl/react-adsense": "^2.1.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "astro": "5.14.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "astro": "5.14.8",
     "astro-robots-txt": "^1.0.0",
     "axios": "^1.12.2",
     "cheerio": "^1.1.2",
     "highlight.js": "^11.11.1",
-    "html-react-parser": "^5.2.6",
+    "html-react-parser": "^5.2.7",
     "lazysizes": "^5.3.2",
     "microcms-js-sdk": "^3.2.0",
     "microcms-rich-editor-handler": "^1.0.1",
@@ -40,16 +40,16 @@
     "node-html-parser": "^7.0.1",
     "node-ts-cache": "^4.4.0",
     "node-ts-cache-storage-memory": "^4.4.0",
-    "npm-check-updates": "^19.0.0",
+    "npm-check-updates": "^19.1.1",
     "preact": "^10.27.2",
     "react-paginate": "^8.3.0",
-    "rollup": "^4.52.4",
+    "rollup": "^4.52.5",
     "swr": "^2.3.6",
     "vue": "^3.5.22",
     "vue-paginate": "^3.6.0",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
-    "wrangler": "^4.42.0"
+    "wrangler": "^4.44.0"
   }
 }
