@@ -88,20 +88,9 @@ export type AccountResponse = {
 
 class CMSBlog {
   @Cache(userCache, { ttl: 300 })
-  public async getBlogs(queries?: MicroCMSQueries) {
-    const data = await client.get<BlogResponse>({ endpoint: "blogs", queries });
-
-    if (data.offset + data.limit < data.totalCount) {
-      queries ? (queries.offset = data.offset + data.limit) : "";
-      const result: BlogResponse = await this.getBlogs(queries);
-      return {
-        offset: result.offset,
-        limit: result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
-    }
-    return data;
+  public async getBlogs(queries?: MicroCMSQueries): Promise<BlogResponse> {
+    const contents = await client.getAllContents<Blog>({ endpoint: "blogs", queries });
+    return { totalCount: contents.length, offset: 0, limit: contents.length, contents };
   }
   public async getBlogDetail(contentId: string, queries?: MicroCMSQueries) {
     return await client.getListDetail<Blog>({
@@ -110,23 +99,9 @@ class CMSBlog {
       queries,
     });
   }
-  public async getCategories(queries?: MicroCMSQueries) {
-    const data = await client.get<CategoryResponse>({
-      endpoint: "categories",
-      queries,
-    });
-
-    if (data.offset + data.limit < data.totalCount) {
-      queries ? (queries.offset = data.offset + data.limit) : "";
-      const result: CategoryResponse = await this.getCategories(queries);
-      return {
-        offset: result.offset,
-        limit: result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
-    }
-    return data;
+  public async getCategories(queries?: MicroCMSQueries): Promise<CategoryResponse> {
+    const contents = await client.getAllContents<Category>({ endpoint: "categories", queries });
+    return { totalCount: contents.length, offset: 0, limit: contents.length, contents };
   }
   public async getCategoryDetail(contentId: string, queries?: MicroCMSQueries) {
     return await client.getListDetail<Category>({
@@ -135,20 +110,9 @@ class CMSBlog {
       queries,
     });
   }
-  public async getLinks(queries?: MicroCMSQueries) {
-    const data = await client.get<LinkResponse>({ endpoint: "links", queries });
-
-    if (data.offset + data.limit < data.totalCount) {
-      queries ? (queries.offset = data.offset + data.limit) : "";
-      const result: LinkResponse = await this.getLinks(queries);
-      return {
-        offset: result.offset,
-        limit: result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
-    }
-    return data;
+  public async getLinks(queries?: MicroCMSQueries): Promise<LinkResponse> {
+    const contents = await client.getAllContents<Link>({ endpoint: "links", queries });
+    return { totalCount: contents.length, offset: 0, limit: contents.length, contents };
   }
   public async getLinkDetail(contentId: string, queries?: MicroCMSQueries) {
     return await client.getListDetail<Link>({
@@ -157,20 +121,9 @@ class CMSBlog {
       queries,
     });
   }
-  public async getAccounts(queries?: MicroCMSQueries) {
-    const data = await client.get<AccountResponse>({ endpoint: "accounts", queries });
-
-    if (data.offset + data.limit < data.totalCount) {
-      queries ? (queries.offset = data.offset + data.limit) : "";
-      const result: AccountResponse = await this.getAccounts(queries);
-      return {
-        offset: result.offset,
-        limit: result.limit,
-        contents: [...data.contents, ...result.contents],
-        totalCount: result.totalCount,
-      };
-    }
-    return data;
+  public async getAccounts(queries?: MicroCMSQueries): Promise<AccountResponse> {
+    const contents = await client.getAllContents<Account>({ endpoint: "accounts", queries });
+    return { totalCount: contents.length, offset: 0, limit: contents.length, contents };
   }
   public async getAccountDetail(contentId: string, queries?: MicroCMSQueries) {
     return await client.getListDetail<Account>({
