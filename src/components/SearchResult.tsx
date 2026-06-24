@@ -1,7 +1,5 @@
 import useSWR from 'swr'
-
-import { useState } from "preact/hooks";
-import ReactPaginate from 'react-paginate';
+import { useState } from "react";
 import type { Category } from '../library/microcms';
 import { cmsBlog } from "../library/microcms";
 
@@ -47,12 +45,14 @@ const SearchItems = (props: any) => {
 }
 
 const Paginate = (props: any) => {
-  const { totalCount, setOffset, LIMIT, url, params, currentPage } = props;
+  const { totalCount, setOffset, setCurrentPage, LIMIT, url, params, currentPage } = props;
   const totalPageCount = Math.ceil(totalCount / LIMIT);
+  const currentPageLabel = `ページ ${currentPage + 1} / ${totalPageCount}`;
 
   const handlePaginate = (data: any) => {
     const selectedPage = data.selected;
     setOffset(selectedPage * LIMIT);
+    setCurrentPage(selectedPage);
     if (selectedPage === 0) {
       if (params.get('page')) {
         params.delete('page');
@@ -68,34 +68,54 @@ const Paginate = (props: any) => {
 
   return (
     <nav class="pagination">
-      <ReactPaginate
-        forcePage={currentPage} // 現在のページをreactのstateで管理したい場合等
-        pageCount={totalPageCount}
-        onPageChange={handlePaginate}
-        marginPagesDisplayed={1} // 先頭と末尾に表示するページ数
-        pageRangeDisplayed={2} // 現在のページの前後をいくつ表示させるか
-        // containerClassName="pagination justify-center" // ul(pagination本体)
-        pageClassName="page-item" // li
-        pageLinkClassName="page-link rounded-full" // a
-        activeClassName="active" // active.li
-        activeLinkClassName="active" // active.li < a
+      <p class="pagination-current">{currentPageLabel}</p>
+      <ul>
+        {/* 前へ */}
+        <li class={`page-item${currentPage === 0 ? ' disabled-button d-none' : ''}`}>
+          <a class="previous-link" onClick={() => handlePaginate({ selected: currentPage - 1 })} style="cursor:pointer">◁</a>
+        </li>
 
-        // 戻る・進む関連
-        previousClassName="page-item" // li
-        nextClassName="page-item" // li
-        previousLabel={'◁'} // a
-        previousLinkClassName="previous-link"
-        nextLabel={'▷'} // a
-        nextLinkClassName="next-link"
+        {/* 先頭ページ + 省略 */}
+        {currentPage > 2 && (
+          <>
+            <li class="page-item"><a class="page-link rounded-full" onClick={() => handlePaginate({ selected: 0 })} style="cursor:pointer">1</a></li>
+            {currentPage > 3 && <li class="page-item break-item"><span class="page-link">...</span></li>}
+          </>
+        )}
 
-        // 先頭 or 末尾に行ったときにそれ以上戻れ(進め)なくする
-        disabledClassName="disabled-button d-none"
+        {/* ページ番号 */}
+        {Array.from({ length: totalPageCount }, (_, i) => i)
+          .filter(i => i >= currentPage - 2 && i <= currentPage + 2)
+          .map(i => (
+            <li key={i} class={`page-item${i === currentPage ? ' active' : ''}`}>
+              {i === currentPage ? (
+                <span class="page-link rounded-full active" aria-current="page">{i + 1}</span>
+              ) : (
+                <a
+                  class="page-link rounded-full"
+                  onClick={() => handlePaginate({ selected: i })}
+                  style="cursor:pointer"
+                >
+                  {i + 1}
+                </a>
+              )}
+            </li>
+          ))
+        }
 
-        // 中間ページの省略表記関連
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-      />
+        {/* 末尾ページ + 省略 */}
+        {currentPage < totalPageCount - 3 && (
+          <>
+            {currentPage < totalPageCount - 4 && <li class="page-item break-item"><span class="page-link">...</span></li>}
+            <li class="page-item"><a class="page-link rounded-full" onClick={() => handlePaginate({ selected: totalPageCount - 1 })} style="cursor:pointer">{totalPageCount}</a></li>
+          </>
+        )}
+
+        {/* 次へ */}
+        <li class={`page-item${currentPage === totalPageCount - 1 ? ' disabled-button d-none' : ''}`}>
+          <a class="next-link" onClick={() => handlePaginate({ selected: currentPage + 1 })} style="cursor:pointer">▷</a>
+        </li>
+      </ul>
     </nav>
   )
 }
@@ -119,26 +139,22 @@ const BlogSearch = () => {
       })
   );
 
-  const [offset, setOffset] = useState(0);
-
-  const [currentPage, setCurrentPage] = useState(0);
-
-  if (pageNum) {
-    setCurrentPage(Number(pageNum) - 1);
-    console.log(`${typeof (pageNum)}:${pageNum}`);
-    console.log(`${typeof (Number(pageNum))}:${Number(pageNum)}`);
-    setOffset((Number(pageNum) - 1) * LIMIT);
-    console.log(offset);
-  }
+  const initialPage = pageNum ? Math.max(0, Number(pageNum) - 1) : 0;
+  const [offset, setOffset] = useState(initialPage * LIMIT);
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   if (error) return <div>エラーが発生しました</div>;
 
   if (isLoading) return <div>読み込み中...</div>;
 
+  if (!data) return <div>データを取得できませんでした</div>;
+
   return (
     <>
       <SearchItems data={data} q={q} offset={offset} LIMIT={LIMIT} />
-      <Paginate totalCount={data.totalCount} setOffset={setOffset} LIMIT={LIMIT} url={url} params={params} currentPage={currentPage} />
+      {data.totalCount > LIMIT && (
+        <Paginate totalCount={data.totalCount} setOffset={setOffset} setCurrentPage={setCurrentPage} LIMIT={LIMIT} url={url} params={params} currentPage={currentPage} />
+      )}
     </>
   )
 }
