@@ -2,21 +2,23 @@ import rss from "@astrojs/rss";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import { cmsBlog } from "../library/microcms";
 import http from 'http';
-import { parse } from 'url';
+import https from 'https';
 
 async function getImageFileSize(imageUrl) {
   return new Promise((resolve) => {
-    const { hostname, path } = parse(imageUrl);
+    const parsedUrl = new URL(imageUrl);
+    const isHttps = parsedUrl.protocol === 'https:';
+    const client = isHttps ? https : http;
 
     const options = {
       method: 'HEAD',
-      hostname,
-      path,
+      hostname: parsedUrl.hostname,
+      path: `${parsedUrl.pathname}${parsedUrl.search}`,
     };
 
-    const req = http.request(options, (res) => {
+    const req = client.request(options, (res) => {
       const fileSize = res.headers['content-length'];
-      resolve(parseInt(fileSize));
+      resolve(fileSize ? parseInt(fileSize, 10) : 0);
     });
 
     req.on('error', (error) => {
