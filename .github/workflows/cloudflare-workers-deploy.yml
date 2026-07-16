@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "22" # プロジェクトで指定のNode.jsバージョン
+          node-version: ${{ secrets.NODE_VERSION }} # プロジェクトで指定のNode.jsバージョン
       - name: Install Dependencies
         run: npm ci # 関連パッケージをインストール
       - name: Build Project
