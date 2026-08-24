@@ -1,5 +1,4 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
+// サイト全体で使うタイトル、説明文、アイコンを環境変数から組み立てる設定。
 
 export const SITE_TITLE = import.meta.env.SITE_TITLE
   ? import.meta.env.SITE_TITLE

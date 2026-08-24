@@ -1,3 +1,4 @@
+// Google Adsenseのレスポンシブ広告枠を表示するPreactコンポーネント。
 import { Adsense } from '@ctrl/react-adsense';
 
 const DisplayAd = () => {

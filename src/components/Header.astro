@@ -1,21 +1,27 @@
 ---
+// サイトタイトルと、検索・カテゴリ・外部リンクを含む共通ナビゲーション。
+import { getCollection } from "astro:content";
 import AccountsLinks from "./AccountsLinks.astro";
 import HeaderLink from "./HeaderLink.astro";
 import SearchForm from "./SearchForm.astro";
 import FediverseFollowForm from "./FediverseFollowForm.astro";
 import { SITE_TITLE, ICON_HEADER } from "../config";
-import type { Category, Link } from "../library/microcms";
 
-//microCMS呼び出し
-import { cmsBlog } from "../library/microcms";
-const { contents: categories } = await cmsBlog.getCategories({
-  fields: ["id", "name"],
-  orders: "name",
-});
-const { contents: links } = await cmsBlog.getLinks({
-  fields: ["createdAt", "title", "url"],
-  orders: "createdAt",
-});
+const categories = (await getCollection("categories"))
+  .map((entry) => ({
+    ...entry.data,
+    id: entry.id,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name, "ja"));
+
+const links = (await getCollection("links"))
+  .map((entry) => ({
+    ...entry.data,
+    id: entry.id,
+  }))
+  .sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
 ---
 
 <!-- Google Tag Manager (noscript) --><!-- <noscript

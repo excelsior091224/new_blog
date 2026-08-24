@@ -1,4 +1,4 @@
-// functions/search.js
+// Cloudflare Pages FunctionsでmicroCMSの検索結果を全ページ分返すAPI。
 import { createClient } from "microcms-js-sdk";
 
 export async function onRequest({ request, env }) {
@@ -8,6 +8,7 @@ export async function onRequest({ request, env }) {
   });
 
   const getBlogs = async (queries) => {
+    // microCMSの取得上限を超える場合も、再帰的に続きのページを連結する。
     const data = await client.get({ endpoint: "blogs", queries });
     data.q = queries.q;
 
@@ -32,7 +33,7 @@ export async function onRequest({ request, env }) {
       JSON.stringify({
         error: 'Missing "q" query parameter',
       }),
-      { status: 400 }
+      { status: 400 },
     );
   }
   return await getBlogs({ q: q, orders: "-publishedAt" })
@@ -45,8 +46,7 @@ export async function onRequest({ request, env }) {
       return new Response(JSON.stringify(data), { status: 200 });
     })
     .catch(
-      (error) =>
-        new Response(String(error), { status: 400 })
-        // new Response(JSON.stringify({error:String(error),query:q,client:client}), {status:400})
+      (error) => new Response(String(error), { status: 400 }),
+      // new Response(JSON.stringify({error:String(error),query:q,client:client}), {status:400})
     );
 }

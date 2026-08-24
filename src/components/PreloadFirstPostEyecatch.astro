@@ -1,4 +1,5 @@
 ---
+// 一覧の先頭2記事で使うアイキャッチ画像を複数サイズ先読みする補助コンポーネント。
 const { posts } = Astro.props;
 const href_list = [
   `?fm=webp&fit=crop&crop=top&w=640&h=320`,
@@ -15,9 +16,9 @@ const href_list = [
 {
   posts.map((post: any, index: number) =>
     post.eyecatch && (index === 0 || index === 1)
-      ? href_list.map((href_elm) => 
+      ? href_list.map((href_elm) => (
           <link rel="preload" as="image" href={post.eyecatch.url + href_elm} />
-        )
-      : null
+        ))
+      : null,
   )
 }

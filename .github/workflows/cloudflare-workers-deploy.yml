@@ -1,3 +1,4 @@
+# mainへの変更をビルドしてCloudflare Workersへデプロイするワークフロー。
 name: cloudflare-workers-deploy
 on:
   push:

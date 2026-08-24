@@ -1,3 +1,4 @@
+// Astro本体と各種インテグレーションの設定をまとめるエントリーポイント。
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -39,7 +40,7 @@ export default defineConfig({
     }),
     preact({
       compat: true,
-      include: ['**/*[jt]sx']
+      include: ["**/*[jt]sx"],
     }),
     robotsTxt(),
   ],

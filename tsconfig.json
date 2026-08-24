@@ -1,4 +1,5 @@
 {
+  // Astroの厳格な型設定とPreact JSXをプロジェクト全体に適用する。
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "jsx": "react-jsx",

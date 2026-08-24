@@ -1,6 +1,6 @@
 ---
+// 現在の記事URLとタイトルを各SNSの共有リンクに埋め込むボタン群。
 import { SITE_TITLE } from "../config";
-import type { Blog } from "../library/microcms";
 
 export interface Props {
   title: string;
@@ -27,7 +27,7 @@ const { title } = Astro.props;
   <span class="bsky">
     <a
       href={`https://bsky.app/intent/compose?text=${encodeURI(
-        `${title} | ${SITE_TITLE}`
+        `${title} | ${SITE_TITLE}`,
       )}%0A${Astro.request.url}`}
       class="bsky_button"
       data-show-count="false"
@@ -41,7 +41,7 @@ const { title } = Astro.props;
   <span class="threads">
     <a
       href={`https://www.threads.net/intent/post?text=${encodeURI(
-        `${title} | ${SITE_TITLE}`
+        `${title} | ${SITE_TITLE}`,
       )}%0A${Astro.request.url}`}
       class="threads_button"
       data-show-count="false"
@@ -90,7 +90,7 @@ const { title } = Astro.props;
   <span class="taittsuu">
     <a
       href={`https://taittsuu.com/share?text=${encodeURI(
-        `${title} | ${SITE_TITLE}`
+        `${title} | ${SITE_TITLE}`,
       )}\n${Astro.request.url}`}
       target="_blank"
       rel="noopener noreferrer"
@@ -107,7 +107,7 @@ const { title } = Astro.props;
   <span class="line">
     <a
       href={`http://line.me/R/msg/text/?${Astro.request.url}%0a${encodeURI(
-        `${title} | ${SITE_TITLE}`
+        `${title} | ${SITE_TITLE}`,
       )}`}
       class="line_button"
       target="_blank"

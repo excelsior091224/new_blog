@@ -1,4 +1,5 @@
 ---
+// 現在のURLと比較してactive状態を付与する共通リンク。
 export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
 
 const { href, class: className, ...props } = Astro.props;

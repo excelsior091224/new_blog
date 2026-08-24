@@ -1,14 +1,39 @@
+// microCMSの下書きをブラウザー上で取得し、記事プレビューとして表示するコンポーネント。
+// 公開記事の静的生成とは分離し、contentIdとdraftKeyをURLから受け取ってクライアントで表示する。
 import useSWR from "swr";
 import { createTableOfContents } from "microcms-richedit-processer";
+import { createClient } from "microcms-js-sdk";
 
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import type { HighlightResult } from "highlight.js";
 import 'highlight.js/styles/hybrid.css';
-import type { Category } from "../library/microcms";
-import { cmsBlog } from "../library/microcms";
+
+// プレビューはブラウザーからmicroCMSへ直接問い合わせるため、公開設定された環境変数を使う。
+const previewClient = createClient({
+  serviceDomain:
+    import.meta.env.MICROCMS_SERVICE_DOMAIN ??
+    import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN,
+  apiKey:
+    import.meta.env.MICROCMS_API_KEY ?? import.meta.env.PUBLIC_MICROCMS_API_KEY,
+});
+
+async function getBlogDetail(contentId: string, queries?: Record<string, string>) {
+  // microCMSの詳細取得APIを小さな関数に包み、SWRのfetcherとして利用する。
+  return await previewClient.getListDetail({
+    endpoint: "blogs",
+    contentId,
+    queries,
+  });
+}
+
+type Category = {
+  id: string;
+  name: string;
+};
 
 const BlogPreview = () => {
+  // microCMSのプレビュー画面から渡される識別子。どちらかが欠ける場合は取得を実行しない。
   const params = new URLSearchParams(window.location.search);
   const contentId = params.get("contentId");
   const draftKey = params.get("draftKey");
@@ -16,12 +41,13 @@ const BlogPreview = () => {
   const fetcher = (url: URL | RequestInfo) => fetch(url).then((res) => res.json());
   // const endpoint = contentId === null || draftKey === null ? null : `/api/preview?contentId=${contentId}&draftKey=${draftKey}`;
 
+  // キーを配列にして記事IDと下書きキーをキャッシュ単位に含める。
+  // 第1要素をnullにすると、必要なパラメーターが揃うまでSWRの取得が停止する。
   const { data, error, isValidating } = useSWR(
-    // endpoint, fetcher
     contentId === null || draftKey === null
       ? null
       : ["/preview", contentId, draftKey],
-    ([, contentId, draftKey]) => cmsBlog.getBlogDetail(contentId, { draftKey })
+    ([, contentId, draftKey]) => getBlogDetail(contentId, { draftKey })
   );
   const isLoading = !data && !error;
 
@@ -29,9 +55,11 @@ const BlogPreview = () => {
 
   if (isLoading) return <div>読み込み中...</div>;
 
+  // HTML加工前の本文を保持し、目次抽出と表示用本文の元データにする。
   let modifiedContent = data?.content || "";
 
   if (data && data.content) {
+    // リッチエディターHTMLを表示用に変換し、コードと画像をブラウザー向けに整える。
     // APIから取得したリッチエディタのHTMLからcheerioオブジェクトを生成
     const $ = load(data.content);
 
@@ -62,6 +90,7 @@ const BlogPreview = () => {
       $(elm).addClass("hljs");
     });
 
+    // microCMS画像だけをWebP・srcset・lazyload対応に変換し、外部画像には触れない。
     $("img").each((index, elm) => {
       const src = $(elm).attr("src");
       if (src && src.includes("https://images.microcms-assets.io/assets/")) {
@@ -86,6 +115,7 @@ const BlogPreview = () => {
       }
     });
 
+    // 埋め込みコンテンツもlazyload対象にして、プレビュー初期表示を軽くする。
     $("iframe").each((index, elm) => {
       $(elm).addClass("lazyload");
     });
@@ -94,6 +124,7 @@ const BlogPreview = () => {
     data.content = $.html();
   }
 
+  // 見出しタグだけを対象に目次を作り、本文の前にナビゲーションとして表示する。
   const table_of_content = modifiedContent && createTableOfContents(modifiedContent, { tags: "h1,h2,h3,h4,h5" });
 
   if (error) return <div>エラーが発生しました</div>;

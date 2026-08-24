@@ -1,11 +1,14 @@
 ---
+// microCMSで管理している外部アカウントへのリンク一覧。
+import { getCollection } from "astro:content";
 import HeaderLink from "./HeaderLink.astro";
-//microCMS呼び出し
-import { cmsBlog } from "../library/microcms";
 
-const { contents: accounts } = await cmsBlog.getAccounts({
-  fields: ["title", "url"],
-});
+const accounts = (await getCollection("accounts"))
+  .map((entry) => ({
+    ...entry.data,
+    id: entry.id,
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title, "ja"));
 ---
 
 <ul>

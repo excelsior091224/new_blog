@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  // Update to today's date
+  // Cloudflare Workersの互換性と、Astroビルド成果物の配置を定義する。
   "compatibility_date": "2025-08-12",
   "assets": {
     "directory": "./dist",

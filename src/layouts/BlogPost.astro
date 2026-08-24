@@ -1,4 +1,5 @@
 ---
+// 記事本文、メタ情報、共有ボタン、前後記事ナビゲーションを包む共通レイアウト。
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -6,7 +7,21 @@ import Sidebar from "../components/Sidebar.astro";
 import GoogleResponsiveAd from "../components/GoogleResponsiveAd";
 import ShareButtons from "../components/ShareButtons.astro";
 import { SITE_TITLE } from "../config";
-import type { Blog,Category } from "../library/microcms";
+
+type Category = {
+  id: string;
+  name: string;
+};
+
+type Blog = {
+  id: string;
+  title: string;
+  content: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  eyecatch?: { url: string };
+  categories?: Category[];
+};
 
 export interface Props {
   content: {
@@ -83,15 +98,15 @@ const href_list2 = [
     <main class="main">
       <Sidebar />
       <article class="contents h-entry">
-      <!-- <article class="contents"> -->
+        <!-- <article class="contents"> -->
         {
           heroImage && (
             <img
               width={720}
               height={360}
-              // data-src={`${heroImage}?fm=webp`}
-              // data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w`}
-              // data-sizes="(min-width: 640px) 1000px, 100vw"
+              data-src={`${heroImage}?fm=webp`}
+              data-srcset={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320 640w, ${heroImage}?fm=webp&fit=crop&crop=top&w=750&h=375 750w`}
+              data-sizes="(min-width: 640px) 1000px, 100vw"
               src={`${heroImage}?fm=webp&fit=crop&crop=top&w=640&h=320`}
               alt=""
               class="lazyload"
@@ -111,11 +126,12 @@ const href_list2 = [
         }
         <div class="category">
           {
-            categories && categories.map((category) => (
-              <span>
-                <a href={`/category/${category.id}`}>{category.name}</a>
-              </span>
-            ))
+            categories &&
+              categories.map((category) => (
+                <span>
+                  <a href={`/category/${category.id}`}>{category.name}</a>
+                </span>
+              ))
           }
         </div>
         <!-- {
@@ -129,7 +145,8 @@ const href_list2 = [
         } -->
         <ShareButtons title={title} />
         <div class="notify">
-          このブログではGoogle Adsenseを使ったアフェリエイト広告を導入しています<br>
+          このブログではGoogle Adsenseを使ったアフェリエイト広告を導入しています<br
+          />
         </div>
         <hr />
         <slot />

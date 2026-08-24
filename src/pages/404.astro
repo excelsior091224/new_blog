@@ -1,4 +1,5 @@
 ---
+// 存在しないURLに表示する共通エラーページ。
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -10,7 +11,7 @@ import { SITE_TITLE } from "../config";
   <head>
     <BaseHead
       title={`Not Found Page|${SITE_TITLE}`}
-      description={'お探しのページは見つかりませんでした。'}
+      description={"お探しのページは見つかりませんでした。"}
     />
     <style>
       .notfound {

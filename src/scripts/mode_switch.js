@@ -1,29 +1,30 @@
-const checkToggle = document.getElementById('js_mode_toggle');
-const rotateIcon = document.getElementById('js_rotate');
-const keyLocalStorage = 'whike-theme-mode';
+// システム設定と保存済み選択を使って、サイトのライト・ダークテーマを切り替える。
+const checkToggle = document.getElementById("js_mode_toggle");
+const rotateIcon = document.getElementById("js_rotate");
+const keyLocalStorage = "whike-theme-mode";
 
-const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+const isLight = window.matchMedia("(prefers-color-scheme: light)").matches;
 const localTheme = localStorage.getItem(keyLocalStorage);
 
 let nowRotate = 0;
 
 // ローカルストレージの中身と、端末がライトモードかどうか（ie,edgeには無意味）をチェック
-if(isLight) {
-  changeMode('light');
-} else if(localTheme === 'light') {
-  changeMode('light');
+if (isLight) {
+  changeMode("light");
+} else if (localTheme === "light") {
+  changeMode("light");
 } else {
-  changeMode('dark');
+  changeMode("dark");
 }
 
 // チェックボックスでの切り替え、選択をローカルストレージに保存
-checkToggle.addEventListener('change', function(e) {
-  if(e.target.checked) {
-    changeMode('light');
-    localStorage.setItem(keyLocalStorage,'light');
+checkToggle.addEventListener("change", function (e) {
+  if (e.target.checked) {
+    changeMode("light");
+    localStorage.setItem(keyLocalStorage, "light");
   } else {
-    changeMode('dark');
-    localStorage.setItem(keyLocalStorage,'dark');
+    changeMode("dark");
+    localStorage.setItem(keyLocalStorage, "dark");
   }
 });
 
@@ -32,21 +33,21 @@ checkToggle.addEventListener('change', function(e) {
  * @param {String} mode 'light' もしくは 'dark'
  */
 function changeMode(mode) {
-  if(mode === 'light') {
-    changeIcon('light');
-    document.body.setAttribute('data-theme', 'light');
+  if (mode === "light") {
+    changeIcon("light");
+    document.body.setAttribute("data-theme", "light");
     checkToggle.checked = true;
-  } else if(mode === 'dark') {
-    changeIcon('dark');
-    document.body.setAttribute('data-theme', 'dark');
+  } else if (mode === "dark") {
+    changeIcon("dark");
+    document.body.setAttribute("data-theme", "dark");
     checkToggle.checked = false;
   }
 }
 
 function changeIcon(mode) {
-  if(mode === 'light') {
-    rotateIcon.innerText = '🌄';
-  } else if(mode === 'dark') {
-    rotateIcon.innerText = '🌙';
+  if (mode === "light") {
+    rotateIcon.innerText = "🌄";
+  } else if (mode === "dark") {
+    rotateIcon.innerText = "🌙";
   }
 }

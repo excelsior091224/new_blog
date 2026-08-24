@@ -1,4 +1,5 @@
 ---
+// Astroのページ情報から前後移動と近隣ページ番号を描画するページャー。
 import type { Page } from "astro";
 // PropsでpageとadjacentPageNumber（隣接するページを表示する数）を定義
 export interface Props {
@@ -17,8 +18,8 @@ const getPath = (page: number, cId?: string) => {
       ? `/category/${cId}/`
       : `/category/${cId}/${page}`
     : page === 1
-    ? `/`
-    : `/${page}`;
+      ? `/`
+      : `/${page}`;
   return path;
   //if (page) {
   //    return `./${page}`;
@@ -72,7 +73,7 @@ const getPath = (page: number, cId?: string) => {
             <li>
               <a href={getPath(p, categoryId)}>{p}</a>
             </li>
-          ))
+          )),
       )
     }
     <!-- 現在ページが「最終ページ - 隣接ページ数」の場合...と最終ページを表示する -->
