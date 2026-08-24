@@ -3,10 +3,14 @@
 import { getCollection } from "astro:content";
 import HeaderLink from "./HeaderLink.astro";
 
-const accounts = (await getCollection("accounts")).map((entry) => ({
-  ...entry.data,
-  id: entry.id,
-}));
+const accounts = (await getCollection("accounts"))
+  .map((entry) => ({
+    ...entry.data,
+    id: entry.id,
+  }))
+  .sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+  );
 ---
 
 <ul>
