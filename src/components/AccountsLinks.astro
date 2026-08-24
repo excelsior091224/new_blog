@@ -3,12 +3,10 @@
 import { getCollection } from "astro:content";
 import HeaderLink from "./HeaderLink.astro";
 
-const accounts = (await getCollection("accounts"))
-  .map((entry) => ({
-    ...entry.data,
-    id: entry.id,
-  }))
-  .sort((a, b) => a.title.localeCompare(b.title, "ja"));
+const accounts = (await getCollection("accounts")).map((entry) => ({
+  ...entry.data,
+  id: entry.id,
+}));
 ---
 
 <ul>
