@@ -1,21 +1,11 @@
 ---
-// 全記事を検索コンポーネントへ渡す検索結果ページ。
-import { getCollection } from "astro:content";
+// microCMSのq検索をブラウザーから直接叩く検索結果ページ。
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Sidebar from "../../components/Sidebar.astro";
 import SearchResult from "../../components/SearchResult";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../config";
-
-const posts = (await getCollection("blogs"))
-  .map((entry) => ({
-    ...entry.data,
-    id: entry.id,
-  }))
-  .sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
 ---
 
 <!doctype html>
@@ -49,7 +39,7 @@ const posts = (await getCollection("blogs"))
     <main class="main">
       <Sidebar />
       <section class="contents">
-        <SearchResult client:only="preact" posts={posts} />
+        <SearchResult client:only="preact" />
       </section>
     </main>
     <Footer />

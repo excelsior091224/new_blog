@@ -1,6 +1,17 @@
-// 検索語で記事を絞り込み、クライアント側ページング付きで表示するPreactコンポーネント。
-// 検索ページ自体はAstroで静的生成されるため、入力値の反映とページ移動をブラウザー側で行う。
+// microCMSのqパラメータ検索をブラウザーから直接叩き、ページング付きで表示するPreactコンポーネント。
+// 検索ページ自体はAstroで静的生成されるため、入力値の反映とAPI呼び出しをブラウザー側で行う。
 import { useState } from "preact/hooks";
+import useSWR from "swr";
+import { createClient } from "microcms-js-sdk";
+
+// 検索はブラウザーからmicroCMSへ直接問い合わせるため、公開設定された環境変数を使う。
+const searchClient = createClient({
+  serviceDomain:
+    import.meta.env.MICROCMS_SERVICE_DOMAIN ??
+    import.meta.env.PUBLIC_MICROCMS_SERVICE_DOMAIN,
+  apiKey:
+    import.meta.env.MICROCMS_API_KEY ?? import.meta.env.PUBLIC_MICROCMS_API_KEY,
+});
 
 // microCMSのカテゴリ情報のうち、検索結果とリンク表示で使う項目だけを表す。
 type Category = {
@@ -10,6 +21,14 @@ type Category = {
 
 // 1ページに表示する検索結果の件数。トップページのページサイズとも合わせている。
 const LIMIT = 10;
+
+async function searchBlogs(q: string, offset: number) {
+  // microCMS本来のq検索を使い、ページングもoffset/limitでmicroCMS側に任せる。
+  return await searchClient.get({
+    endpoint: "blogs",
+    queries: { q, orders: "-publishedAt", limit: LIMIT, offset },
+  });
+}
 
 // 検索結果一覧で必要な記事データ。アイキャッチとカテゴリは未設定の場合がある。
 type Post = {
@@ -24,14 +43,14 @@ type Post = {
   categories?: Category[];
 };
 
-const SearchItems = ({ data, q, offset, limit }: any) => {
-  // offsetからlimit件だけを切り出す。検索結果全体は親で保持し、ページ移動では再取得しない。
+const SearchItems = ({ contents, q, totalCount }: any) => {
+  // microCMS側でoffset/limitに絞り込まれた1ページ分だけが渡される。
   return (
     <>
-      <h1 className="search-result-title">「{q}」の検索結果:{data.length}件</h1>
-      {data.length !== 0 ? (
+      <h1 className="search-result-title">「{q}」の検索結果:{totalCount}件</h1>
+      {contents.length !== 0 ? (
         <>
-          {data.slice(offset, offset + limit).map((post: Post) => (
+          {contents.map((post: Post) => (
             <div class="post" key={post.id}>
               {post.eyecatch && (
                 <a href={`/posts/${post.id}/`} aria-label="記事へ進む">
@@ -79,7 +98,7 @@ const SearchItems = ({ data, q, offset, limit }: any) => {
 };
 
 const Paginate = (props: any) => {
-  const { totalCount, setOffset, setCurrentPage, limit, url, params, currentPage } = props;
+  const { totalCount, setOffset, limit, url, params, currentPage } = props;
   // ページ番号は0始まりで管理し、画面表示とURLでは1始まりに変換する。
   const totalPageCount = Math.ceil(totalCount / limit);
   const currentPageLabel = `ページ ${currentPage + 1} / ${totalPageCount}`;
@@ -88,7 +107,6 @@ const Paginate = (props: any) => {
     // 表示位置とURLを同時に更新し、再読み込みなしでページを切り替える。
     const selectedPage = data.selected;
     setOffset(selectedPage * limit);
-    setCurrentPage(selectedPage);
 
     if (selectedPage === 0) {
       if (params.get("page")) {
@@ -160,39 +178,36 @@ const Paginate = (props: any) => {
   );
 };
 
-const BlogSearch = ({ posts = [] }: { posts?: Post[] }) => {
+const BlogSearch = () => {
   // URLを初期状態の情報源にすることで、検索結果URLを直接開いた場合も同じページを復元できる。
   const url = new URL(window.location.href);
   const params = url.searchParams;
   const q = params.get("q") ?? "";
   const pageNum = Number(params.get("page") ?? "1") - 1;
+  const [offset, setOffset] = useState(Math.max(0, pageNum) * LIMIT);
 
-  // タイトル、本文、カテゴリ名を一つの小文字文字列にして部分一致検索する。
-  // 検索語が空の場合は全件を対象にするが、画面では入力を促すメッセージを表示する。
-  const filteredPosts = (q.trim()
-    ? posts.filter((post) => {
-      const keyword = q.trim().toLowerCase();
-      const searchText = [
-        post.title,
-        post.content,
-        ...(post.categories ?? []).map((category) => category.name),
-      ]
-        .join(" ")
-        .toLowerCase();
-      return searchText.includes(keyword);
-    })
-    : [...posts]
-  ).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
-  const totalCount = filteredPosts.length;
-  // URLに存在しないページ番号が指定されても、存在する最後のページへ丸める。
-  const initialPage = Math.max(0, Math.min(pageNum, totalCount > 0 ? Math.ceil(totalCount / LIMIT) - 1 : 0));
-  const [offset, setOffset] = useState(initialPage * LIMIT);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  // qとoffsetの組でmicroCMSを検索する。qが空の間はキーをnullにしてフェッチさせない。
+  const { data, error } = useSWR(
+    q.trim() ? ["/search", q.trim(), offset] : null,
+    ([, q, offset]) => searchBlogs(q, offset),
+  );
+  // dataもerrorもまだ届いていない = リクエスト中とみなす。
+  const isLoading = !data && !error;
 
   if (!q.trim()) {
     return <div>検索キーワードを入力してください</div>;
   }
+
+  if (error) {
+    return <div>検索中にエラーが発生しました</div>;
+  }
+
+  if (isLoading) {
+    return <div>検索中...</div>;
+  }
+
+  const totalCount = data.totalCount;
+  const currentPage = offset / LIMIT;
 
   if (totalCount === 0) {
     return <div>検索結果はありません</div>;
@@ -200,12 +215,11 @@ const BlogSearch = ({ posts = [] }: { posts?: Post[] }) => {
 
   return (
     <>
-      <SearchItems data={filteredPosts} q={q} offset={offset} limit={LIMIT} />
+      <SearchItems contents={data.contents} q={q} totalCount={totalCount} />
       {totalCount > LIMIT && (
         <Paginate
           totalCount={totalCount}
           setOffset={setOffset}
-          setCurrentPage={setCurrentPage}
           limit={LIMIT}
           url={url}
           params={params}
